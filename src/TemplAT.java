@@ -2,7 +2,6 @@
  * Created on Sep 4, 2005
  */
 import java.io.IOException;
-import nu.mine.mosher.template.TemplateApp;
 import nu.mine.mosher.template.exception.TemplateLexingException;
 import nu.mine.mosher.template.exception.TemplateParsingException;
 

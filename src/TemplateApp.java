@@ -1,12 +1,10 @@
-/*
- * Created on Sep 4, 2005
- */
-package nu.mine.mosher.template;
+
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import nu.mine.mosher.template.Template;
 import nu.mine.mosher.template.exception.TemplateLexingException;
 import nu.mine.mosher.template.exception.TemplateParsingException;
 
