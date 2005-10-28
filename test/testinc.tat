@@ -1,0 +1,8 @@
+@template testinc(year,who,config)@
+This is a single include:
+@include copyright(Num.oneOrigin(Num.oneOrigin(Num.oneOrigin(year))),who,config)@
+and that's all there is to it.
+Ha ha ha. Not really. I forgot that
+the arguments could be expresstions
+themselves... very hard to parse!
+Hello, BYACC/J... it works very well.

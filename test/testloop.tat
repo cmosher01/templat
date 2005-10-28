@@ -1,0 +1,16 @@
+@template testloop(name,cr,cfg)@
+Here we go now, @name@.
+
+
+@if (cr.isEmpty())@
+    No copyrights found.
+@else@
+    This is a list of copyrights:
+	@loop i: cr.size()@
+        @Num.oneOrigin(i)@. @include copyright(cr[i].getYearBegun(),cr[i].getWhoWrote(),cfg)@
+	@end loop@
+    [Send any corrections to president@@whitehouse.gov]
+@end if@
+
+
+And here is the main page again.

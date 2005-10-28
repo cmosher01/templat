@@ -1,0 +1,8 @@
+@template copyright(year,who,config)@
+Copyright @year@, by @who@ (@Num.oneOrigin(config.getArray()[3])@)
+@if (true)@
+"@who.substring(6,10)@" @who.substring(6,8)@@who.substring(6,8)@ @who.substring(6,11)@.
+@config.getColor()@
+@config.getArray().length()@
+@end if@
+@Num.getAuthor()@.
