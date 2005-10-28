@@ -7,7 +7,7 @@ import nu.mine.mosher.template.TemplateParser;
 import nu.mine.mosher.template.TemplateParserContext;
 import nu.mine.mosher.template.exception.TemplateParsingException;
 
-public class EndLoopToken extends TemplateToken
+class EndLoopToken extends TemplateToken
 {
 	@Override
 	public String toString()

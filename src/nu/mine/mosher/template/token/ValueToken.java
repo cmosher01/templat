@@ -7,7 +7,7 @@ import nu.mine.mosher.template.TemplateParser;
 import nu.mine.mosher.template.exception.TemplateParsingException;
 import nu.mine.mosher.template.expr.Expression;
 
-public class ValueToken extends TemplateToken
+class ValueToken extends TemplateToken
 {
 	private final String tag;
 

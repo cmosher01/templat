@@ -3,7 +3,7 @@
  */
 package nu.mine.mosher.template.token;
 
-public enum LexerState
+enum LexerState
 {
 	IN_STRING,
 	IN_TAG,

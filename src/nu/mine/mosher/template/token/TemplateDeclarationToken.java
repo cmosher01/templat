@@ -9,7 +9,7 @@ import nu.mine.mosher.template.TemplateParser;
 import nu.mine.mosher.template.TemplateParserContext;
 import nu.mine.mosher.template.exception.TemplateParsingException;
 
-public class TemplateDeclarationToken extends TemplateToken
+class TemplateDeclarationToken extends TemplateToken
 {
 	private final String tag;
 

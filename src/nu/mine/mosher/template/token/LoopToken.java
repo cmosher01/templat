@@ -8,7 +8,7 @@ import nu.mine.mosher.template.TemplateParserContext;
 import nu.mine.mosher.template.exception.TemplateParsingException;
 import nu.mine.mosher.template.expr.Expression;
 
-public class LoopToken extends TemplateToken
+class LoopToken extends TemplateToken
 {
 	private final String tag;
 

@@ -9,7 +9,7 @@ import nu.mine.mosher.template.TemplateParserContext;
 import nu.mine.mosher.template.exception.TemplateParsingException;
 import nu.mine.mosher.template.expr.Expression;
 
-public class IfToken extends TemplateToken
+class IfToken extends TemplateToken
 {
 	private final String tag;
 

@@ -16,7 +16,7 @@ import nu.mine.mosher.template.expr.Include;
 import nu.mine.mosher.template.expr.TemplateIncludeExpression;
 
 
-public class IncludeToken extends TemplateToken
+class IncludeToken extends TemplateToken
 {
 	private final String tag;
 

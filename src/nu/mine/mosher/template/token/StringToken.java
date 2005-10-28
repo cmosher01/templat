@@ -7,7 +7,7 @@ import nu.mine.mosher.template.TemplateParser;
 import nu.mine.mosher.template.TemplateParserContext;
 import nu.mine.mosher.template.exception.TemplateParsingException;
 
-public class StringToken extends TemplateToken
+class StringToken extends TemplateToken
 {
 	private final String tag;
 

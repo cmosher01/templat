@@ -8,7 +8,7 @@ import nu.mine.mosher.template.TemplateParser;
 import nu.mine.mosher.template.TemplateParserContext;
 import nu.mine.mosher.template.exception.TemplateParsingException;
 
-public class ElseToken extends TemplateToken
+class ElseToken extends TemplateToken
 {
 	@Override
 	public String toString()
