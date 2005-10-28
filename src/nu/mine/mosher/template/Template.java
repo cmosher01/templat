@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.List;
 import nu.mine.mosher.template.exception.TemplateLexingException;
 import nu.mine.mosher.template.exception.TemplateParsingException;
+import nu.mine.mosher.template.token.TemplateLexer;
 import nu.mine.mosher.template.token.TemplateToken;
 
 public class Template

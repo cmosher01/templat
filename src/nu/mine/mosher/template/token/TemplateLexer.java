@@ -1,22 +1,12 @@
 /*
  * Created on Sep 4, 2005
  */
-package nu.mine.mosher.template;
+package nu.mine.mosher.template.token;
 
 import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import nu.mine.mosher.template.exception.TemplateLexingException;
-import nu.mine.mosher.template.token.ElseToken;
-import nu.mine.mosher.template.token.EndIfToken;
-import nu.mine.mosher.template.token.EndLoopToken;
-import nu.mine.mosher.template.token.IfToken;
-import nu.mine.mosher.template.token.IncludeToken;
-import nu.mine.mosher.template.token.LoopToken;
-import nu.mine.mosher.template.token.StringToken;
-import nu.mine.mosher.template.token.TemplateDeclarationToken;
-import nu.mine.mosher.template.token.TemplateToken;
-import nu.mine.mosher.template.token.ValueToken;
 
 public class TemplateLexer
 {
