@@ -20,12 +20,12 @@ public class TemplateParser
 	public static final String VAR_ARGS = "@args";
 	public static final String VAR_FILE = "@file";
 
-	private final Template template;
+	private final Templat template;
 
 	private final LinkedList<Integer> rPosParse = new LinkedList<Integer>();
 	private final ContextStack stackContext = new ContextStack();
 
-	public TemplateParser(final Template template)
+	public TemplateParser(final Templat template)
 	{
 		this.template = template;
 
@@ -77,7 +77,7 @@ public class TemplateParser
 		return this.stackContext;
 	}
 
-	public Template getTemplate()
+	public Templat getTemplate()
 	{
 		return this.template;
 	}

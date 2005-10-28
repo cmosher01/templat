@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import nu.mine.mosher.template.Template;
+import nu.mine.mosher.template.Templat;
 import nu.mine.mosher.template.exception.TemplateLexingException;
 import nu.mine.mosher.template.exception.TemplateParsingException;
 
@@ -15,6 +15,11 @@ import nu.mine.mosher.template.exception.TemplateParsingException;
  */
 public class TemplateApp
 {
+	public static void main(String[] args) throws IOException, TemplateLexingException, TemplateParsingException
+	{
+		new TemplateApp().run();
+	}
+
 	public static class Favorite
 	{
 		private final String name;
@@ -43,27 +48,27 @@ public class TemplateApp
 
 	public void run() throws IOException, TemplateLexingException, TemplateParsingException
 	{
-		final Template templateMinimal = new Template(new File("test/minimal.tat"));
+		final Templat templateMinimal = new Templat(new File("test/minimal.tat"));
 		showTemplate(templateMinimal);
 
-		final Template templateSimple = new Template(new File("test/simple.tat"));
+		final Templat templateSimple = new Templat(new File("test/simple.tat"));
 		templateSimple.addArg("Richard Roe");
 		templateSimple.addArg("defendant");
 		showTemplate(templateSimple);
 
-		final Template templateCopyright = new Template(new File("test/copyright.tat"));
+		final Templat templateCopyright = new Templat(new File("test/copyright.tat"));
 		templateCopyright.addArg(2005);
 		templateCopyright.addArg("Chris Mosher");
 		templateCopyright.addArg(new ConfigTest());
 		showTemplate(templateCopyright);
 
-		final Template templateTestInclude = new Template(new File("test/testinc.tat"));
+		final Templat templateTestInclude = new Templat(new File("test/testinc.tat"));
 		templateTestInclude.addArg(2005);
 		templateTestInclude.addArg("Chris Mosher");
 		templateTestInclude.addArg(new ConfigTest());
 		showTemplate(templateTestInclude);
 
-		final Template templateTestLoop = new Template(new File("test/testloop.tat"));
+		final Templat templateTestLoop = new Templat(new File("test/testloop.tat"));
 		templateTestLoop.addArg("John Q. Public");
 		final Collection<Copyright> cr = new ArrayList<Copyright>();
 		cr.add(new Copyright("Chris Mosher",2005));
@@ -74,7 +79,7 @@ public class TemplateApp
 
 
 
-		final Template templateHomepage = new Template(new File("test/homepage.tat"));
+		final Templat templateHomepage = new Templat(new File("test/homepage.tat"));
 
 		templateHomepage.addArg("Chris Mosher");
 
@@ -92,7 +97,7 @@ public class TemplateApp
 		showTemplate(templateHomepage);
 	}
 
-	private void showTemplate(final Template template) throws TemplateLexingException, IOException, TemplateParsingException
+	private void showTemplate(final Templat template) throws TemplateLexingException, IOException, TemplateParsingException
 	{
 		final StringBuilder sbResult = new StringBuilder();
 		template.lex();

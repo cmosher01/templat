@@ -18,7 +18,15 @@ import nu.mine.mosher.template.exception.TemplateParsingException;
 import nu.mine.mosher.template.token.TemplateLexer;
 import nu.mine.mosher.template.token.TemplateToken;
 
-public class Template
+/**
+ * TemplAT is a template processor, used in conjunction with Java.
+ * Templates contain processing instructions within at-signs, thus
+ * the name TemplAT. Processing instructions include if-then-else,
+ * loops, includes (with parameters), and (Java) method calls.
+ *
+ * @author Chris Mosher
+ */
+public class Templat
 {
 	private final File fileTemplate;
 	private final List<TemplateToken> rToken = new ArrayList<TemplateToken>();
@@ -26,7 +34,7 @@ public class Template
 
 
 
-	public Template(final File fileTemplate)
+	public Templat(final File fileTemplate)
 	{
 		this.fileTemplate = fileTemplate;
 	}

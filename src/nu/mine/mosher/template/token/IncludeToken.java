@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StreamTokenizer;
 import java.util.StringTokenizer;
-import nu.mine.mosher.template.Template;
+import nu.mine.mosher.template.Templat;
 import nu.mine.mosher.template.TemplateParser;
 import nu.mine.mosher.template.TemplateParserContext;
 import nu.mine.mosher.template.exception.TemplateLexingException;
@@ -59,7 +59,7 @@ class IncludeToken extends TemplateToken
 
 		final String nameInclude = inclusion.getTemplateName()+".tat";
 
-		final Template templateInclude = new Template(new File(parser.getTemplate().getFile().getParent(),nameInclude));
+		final Templat templateInclude = new Templat(new File(parser.getTemplate().getFile().getParent(),nameInclude));
 
 		for (final Object argument : inclusion.getArgs())
 		{
