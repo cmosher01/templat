@@ -5,7 +5,6 @@ package nu.mine.mosher.template.token;
 
 import nu.mine.mosher.template.exception.TemplateParsingException;
 import nu.mine.mosher.template.expr.Expression;
-import nu.mine.mosher.template.parser.ContextStack;
 import nu.mine.mosher.template.parser.TemplateParser;
 import nu.mine.mosher.template.parser.TemplateParserContext;
 
