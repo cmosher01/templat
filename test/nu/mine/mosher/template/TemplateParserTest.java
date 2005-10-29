@@ -3,8 +3,6 @@
  */
 package nu.mine.mosher.template;
 
-import nu.mine.mosher.template.exception.TemplateLexingException;
-import nu.mine.mosher.template.exception.TemplateParsingException;
 import junit.framework.TestCase;
 
 public class TemplateParserTest extends TestCase

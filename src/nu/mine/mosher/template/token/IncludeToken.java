@@ -3,7 +3,6 @@
  */
 package nu.mine.mosher.template.token;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import nu.mine.mosher.template.Templat;
