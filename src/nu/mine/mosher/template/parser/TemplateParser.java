@@ -30,7 +30,6 @@ public class TemplateParser
 		ctx.addVariable("true",true);
 		ctx.addVariable("false",false);
 		ctx.addVariable("null",null);
-		ctx.addVariable("if",true);
 		ctx.addVariable(VAR_ARGS,this.template.getArgs());
 
 		this.stackContext.push(ctx);
