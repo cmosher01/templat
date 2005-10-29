@@ -5,4 +5,4 @@ Copyright @year@, by @who@ (@Num.oneOrigin(config.getArray()[3])@)
 @config.getColor()@
 @config.getArray().length()@
 @end if@
-@Num.getAuthor()@.
+@TemplateApp.getAuthor()@.

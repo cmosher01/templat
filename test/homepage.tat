@@ -30,7 +30,7 @@
 @if (!!(!(isNothing)))@
 That sure is something!
 @end if@
-@Num.getYearWritten()@
+@TemplateApp.getYearWritten()@
 </p>
 </body>
 </html>

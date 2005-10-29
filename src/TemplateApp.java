@@ -20,6 +20,16 @@ public class TemplateApp
 		new TemplateApp().run();
 	}
 
+	public static int getYearWritten()
+	{
+		return 2005;
+	}
+
+	public static String getAuthor()
+	{
+		return "Chris Mosher";
+	}
+
 	public static class Favorite
 	{
 		private final String name;
