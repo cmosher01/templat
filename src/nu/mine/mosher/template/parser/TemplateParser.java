@@ -14,7 +14,6 @@ public class TemplateParser
 	public static final String VAR_LOOP_INDEX = "@index";
 	public static final String VAR_LOOP_TIMES = "@times";
 	public static final String VAR_ARGS = "@args";
-	public static final String VAR_FILE = "@file";
 
 	private final Templat template;
 
@@ -33,7 +32,6 @@ public class TemplateParser
 		ctx.addVariable("null",null);
 		ctx.addVariable("if",true);
 		ctx.addVariable(VAR_ARGS,this.template.getArgs());
-		ctx.addVariable(VAR_FILE,this.template.getFile());
 
 		this.stackContext.push(ctx);
 	}

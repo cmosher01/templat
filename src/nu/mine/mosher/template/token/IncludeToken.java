@@ -5,6 +5,7 @@ package nu.mine.mosher.template.token;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import nu.mine.mosher.template.Templat;
 import nu.mine.mosher.template.exception.TemplateLexingException;
 import nu.mine.mosher.template.exception.TemplateParsingException;
@@ -56,7 +57,7 @@ class IncludeToken extends TemplateToken
 
 		final String nameInclude = inclusion.getTemplateName()+".tat";
 
-		final Templat templateInclude = new Templat(new File(parser.getTemplate().getFile().getParent(),nameInclude));
+		final Templat templateInclude = new Templat(new URL(parser.getTemplate().getURL(),nameInclude));
 
 		for (final Object argument : inclusion.getArgs())
 		{

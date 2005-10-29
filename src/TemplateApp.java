@@ -58,27 +58,27 @@ public class TemplateApp
 
 	public void run() throws IOException, TemplateLexingException, TemplateParsingException
 	{
-		final Templat templateMinimal = new Templat(new File("test/minimal.tat"));
+		final Templat templateMinimal = new Templat(new File("test/minimal.tat").toURL());
 		showTemplate(templateMinimal);
 
-		final Templat templateSimple = new Templat(new File("test/simple.tat"));
+		final Templat templateSimple = new Templat(new File("test/simple.tat").toURL());
 		templateSimple.addArg("Richard Roe");
 		templateSimple.addArg("defendant");
 		showTemplate(templateSimple);
 
-		final Templat templateCopyright = new Templat(new File("test/copyright.tat"));
+		final Templat templateCopyright = new Templat(new File("test/copyright.tat").toURL());
 		templateCopyright.addArg(2005);
 		templateCopyright.addArg("Chris Mosher");
 		templateCopyright.addArg(new ConfigTest());
 		showTemplate(templateCopyright);
 
-		final Templat templateTestInclude = new Templat(new File("test/testinc.tat"));
+		final Templat templateTestInclude = new Templat(new File("test/testinc.tat").toURL());
 		templateTestInclude.addArg(2005);
 		templateTestInclude.addArg("Chris Mosher");
 		templateTestInclude.addArg(new ConfigTest());
 		showTemplate(templateTestInclude);
 
-		final Templat templateTestLoop = new Templat(new File("test/testloop.tat"));
+		final Templat templateTestLoop = new Templat(new File("test/testloop.tat").toURL());
 		templateTestLoop.addArg("John Q. Public");
 		final Collection<Copyright> cr = new ArrayList<Copyright>();
 		cr.add(new Copyright("Chris Mosher",2005));
@@ -89,7 +89,7 @@ public class TemplateApp
 
 
 
-		final Templat templateHomepage = new Templat(new File("test/homepage.tat"));
+		final Templat templateHomepage = new Templat(new File("test/homepage.tat").toURL());
 
 		templateHomepage.addArg("Chris Mosher");
 

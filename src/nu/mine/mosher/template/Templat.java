@@ -10,6 +10,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -29,15 +30,16 @@ import nu.mine.mosher.template.token.TemplateToken;
  */
 public class Templat
 {
-	private final File fileTemplate;
+	private static final int K = 1024;
+	private final URL url;
 	private final List<TemplateToken> rToken = new ArrayList<TemplateToken>();
 	private final List<Object> rArg = new ArrayList<Object>();
 
 
 
-	public Templat(final File fileTemplate)
+	public Templat(final URL url)
 	{
-		this.fileTemplate = fileTemplate;
+		this.url = url;
 	}
 
 	public void addArg(final Object arg)
@@ -53,8 +55,8 @@ public class Templat
 	 */
 	private void lex() throws TemplateLexingException, IOException
 	{
-		final StringBuilder sb = new StringBuilder((int)this.fileTemplate.length());
-		appendTemplate(this.fileTemplate,sb);
+		final StringBuilder sb = new StringBuilder(8*K);
+		appendTemplate(this.url,sb);
 		final TemplateLexer lexer = new TemplateLexer(sb,this.rToken);
 		lexer.lex();
 	}
@@ -66,9 +68,9 @@ public class Templat
 		parser.parse(appendTo);
 	}
 
-	private static void appendTemplate(final File file, final StringBuilder appendTo) throws IOException
+	private static void appendTemplate(final URL url, final StringBuilder appendTo) throws IOException
 	{
-		final BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+		final BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream(),"UTF-8"));
 
 		final StringWriter strBufTemplate = new StringWriter();
 		final BufferedWriter bufTemplate = new BufferedWriter(strBufTemplate);
@@ -80,6 +82,7 @@ public class Templat
 		}
 		bufTemplate.flush();
 		bufTemplate.close();
+		in.close();
 
 		appendTo.append(strBufTemplate.getBuffer());
 	}
@@ -89,9 +92,9 @@ public class Templat
 		return Collections.unmodifiableList(this.rArg);
 	}
 
-	public File getFile()
+	public URL getURL()
 	{
-		return this.fileTemplate;
+		return this.url;
 	}
 
 	public List<TemplateToken> getTokens()
