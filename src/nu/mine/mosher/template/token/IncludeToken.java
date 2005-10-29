@@ -6,11 +6,11 @@ package nu.mine.mosher.template.token;
 import java.io.File;
 import java.io.IOException;
 import nu.mine.mosher.template.Templat;
-import nu.mine.mosher.template.TemplateParser;
 import nu.mine.mosher.template.exception.TemplateLexingException;
 import nu.mine.mosher.template.exception.TemplateParsingException;
 import nu.mine.mosher.template.expr.Include;
 import nu.mine.mosher.template.expr.TemplateIncludeExpression;
+import nu.mine.mosher.template.parser.TemplateParser;
 
 
 class IncludeToken extends TemplateToken

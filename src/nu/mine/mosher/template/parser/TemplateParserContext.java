@@ -1,7 +1,7 @@
 /*
  * Created on Sep 6, 2005
  */
-package nu.mine.mosher.template;
+package nu.mine.mosher.template.parser;
 
 import java.util.HashMap;
 import java.util.Map;

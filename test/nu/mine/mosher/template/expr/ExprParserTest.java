@@ -8,8 +8,8 @@ import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import nu.mine.mosher.template.ContextStack;
-import nu.mine.mosher.template.TemplateParserContext;
+import nu.mine.mosher.template.parser.ContextStack;
+import nu.mine.mosher.template.parser.TemplateParserContext;
 
 /**
  * Command-line program that parses input lines.

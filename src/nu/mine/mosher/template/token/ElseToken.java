@@ -3,10 +3,10 @@
  */
 package nu.mine.mosher.template.token;
 
-import nu.mine.mosher.template.ContextStack;
-import nu.mine.mosher.template.TemplateParser;
-import nu.mine.mosher.template.TemplateParserContext;
 import nu.mine.mosher.template.exception.TemplateParsingException;
+import nu.mine.mosher.template.parser.ContextStack;
+import nu.mine.mosher.template.parser.TemplateParser;
+import nu.mine.mosher.template.parser.TemplateParserContext;
 
 class ElseToken extends TemplateToken
 {

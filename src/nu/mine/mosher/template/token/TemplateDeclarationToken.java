@@ -5,9 +5,9 @@ package nu.mine.mosher.template.token;
 
 import java.util.List;
 import java.util.StringTokenizer;
-import nu.mine.mosher.template.TemplateParser;
-import nu.mine.mosher.template.TemplateParserContext;
 import nu.mine.mosher.template.exception.TemplateParsingException;
+import nu.mine.mosher.template.parser.TemplateParser;
+import nu.mine.mosher.template.parser.TemplateParserContext;
 
 class TemplateDeclarationToken extends TemplateToken
 {

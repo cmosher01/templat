@@ -3,8 +3,8 @@
  */
 package nu.mine.mosher.template.token;
 
-import nu.mine.mosher.template.TemplateParser;
 import nu.mine.mosher.template.exception.TemplateParsingException;
+import nu.mine.mosher.template.parser.TemplateParser;
 
 public abstract class TemplateToken
 {

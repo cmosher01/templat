@@ -1,7 +1,7 @@
 /*
  * Created on Sep 5, 2005
  */
-package nu.mine.mosher.template;
+package nu.mine.mosher.template.parser;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import nu.mine.mosher.template.Templat;
 import nu.mine.mosher.template.exception.TemplateParsingException;
 import nu.mine.mosher.template.token.TemplateToken;
 
