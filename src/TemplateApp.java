@@ -100,8 +100,6 @@ public class TemplateApp
 	private void showTemplate(final Templat template) throws TemplateLexingException, IOException, TemplateParsingException
 	{
 		final StringBuilder sbResult = new StringBuilder();
-		template.lex();
-
 		boolean ok = false;
 		try
 		{

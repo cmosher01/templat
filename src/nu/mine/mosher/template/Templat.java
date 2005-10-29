@@ -50,7 +50,7 @@ public class Templat
 	 * @throws TemplateLexingException
 	 * @throws IOException
 	 */
-	public void lex() throws TemplateLexingException, IOException
+	private void lex() throws TemplateLexingException, IOException
 	{
 		final StringBuilder sb = new StringBuilder((int)this.fileTemplate.length());
 		appendTemplate(this.fileTemplate,sb);
@@ -60,6 +60,7 @@ public class Templat
 
 	public void parse(final StringBuilder appendTo) throws TemplateLexingException, TemplateParsingException, IOException
 	{
+		lex();
 		final TemplateParser parser = new TemplateParser(this);
 		parser.parse(appendTo);
 	}
@@ -92,7 +93,7 @@ public class Templat
 		return this.fileTemplate;
 	}
 
-	public List<TemplateToken> getTokens()
+	List<TemplateToken> getTokens()
 	{
 		return Collections.unmodifiableList(this.rToken);
 	}

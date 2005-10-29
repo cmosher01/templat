@@ -5,11 +5,8 @@ package nu.mine.mosher.template.token;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.StreamTokenizer;
-import java.util.StringTokenizer;
 import nu.mine.mosher.template.Templat;
 import nu.mine.mosher.template.TemplateParser;
-import nu.mine.mosher.template.TemplateParserContext;
 import nu.mine.mosher.template.exception.TemplateLexingException;
 import nu.mine.mosher.template.exception.TemplateParsingException;
 import nu.mine.mosher.template.expr.Include;
@@ -66,7 +63,6 @@ class IncludeToken extends TemplateToken
 			templateInclude.addArg(argument);
 		}
 
-		templateInclude.lex();
 		templateInclude.parse(appendTo);
 	}
 }
