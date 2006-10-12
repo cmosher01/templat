@@ -113,7 +113,15 @@ class MethodCall extends Selector
 		int iParam = 0;
 		for (final Object arg: rArg)
 		{
-			if (!argumentMatchesParameter(arg.getClass(),paramType[iParam]))
+			if (arg == null)
+			{
+				// null is OK for any parameter type except primitives
+				if (paramType[iParam].isPrimitive())
+				{
+					return false;
+				}
+			}
+			else if (!argumentMatchesParameter(arg.getClass(),paramType[iParam]))
 			{
 				return false;
 			}

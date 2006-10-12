@@ -65,6 +65,11 @@ public class TemplateParser
 		this.rPosParse.removeFirst();
 	}
 
+	public void forgetParsePosition()
+	{
+		this.rPosParse.remove(1);
+	}
+
 	public ContextStack getContext()
 	{
 		return this.stackContext;

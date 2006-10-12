@@ -42,8 +42,16 @@ class IfToken extends TemplateToken
 
 	private void tryParse(final TemplateParser parser) throws TemplateParsingException, ClassCastException
 	{
-		final Object objectCond = Expression.eval(this.tag,parser.getContext());
-		final boolean bCond = (Boolean)objectCond; // could throw ClassCastException
+		final boolean bCond;
+		if (parser.getContext().isEverEqual(TemplateParser.VAR_IF,false))
+		{
+			bCond = false;
+		}
+		else
+		{
+			final Object objectCond = Expression.eval(this.tag,parser.getContext());
+			bCond = (Boolean)objectCond; // could throw ClassCastException
+		}
 
 		final TemplateParserContext ctxNew = new TemplateParserContext();
 		ctxNew.addVariable(TemplateParser.VAR_IF,bCond);

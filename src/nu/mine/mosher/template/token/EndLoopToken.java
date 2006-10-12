@@ -34,6 +34,7 @@ class EndLoopToken extends TemplateToken
 		}
 		else
 		{
+			parser.forgetParsePosition();
 			parser.getContext().pop();
 		}
 	}

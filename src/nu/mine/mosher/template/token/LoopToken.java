@@ -44,9 +44,18 @@ class LoopToken extends TemplateToken
 		{
 			final String exprTimes = this.tag.substring(posColon+1).trim();
 	
-			final Number numTimes = (Number)Expression.eval(exprTimes,parser.getContext());
+			final Number numTimes;
+			if (parser.getContext().isEverEqual(TemplateParser.VAR_IF,false))
+			{
+				// NOT TESTED!!!
+				numTimes = 0;
+			}
+			else
+			{
+				numTimes = (Number)Expression.eval(exprTimes,parser.getContext());
+			}
 			final int times = numTimes.intValue();
-	
+
 			ctxNew.addVariable(TemplateParser.VAR_LOOP_TIMES,times);
 		}
 
