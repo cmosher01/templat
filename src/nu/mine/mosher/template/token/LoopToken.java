@@ -26,6 +26,10 @@ class LoopToken extends TemplateToken
 	@Override
 	public void parse(final TemplateParser parser, final StringBuilder appendTo) throws TemplateParsingException
 	{
+		/*
+		 * Parse the loop statement, which is in this format:
+		 * <index-variable> : <loop count>
+		 */
 		final int posColon = this.tag.indexOf(':');
 
 		if (posColon < 0)
@@ -47,7 +51,6 @@ class LoopToken extends TemplateToken
 			final Number numTimes;
 			if (parser.getContext().isEverEqual(TemplateParser.VAR_IF,false))
 			{
-				// NOT TESTED!!!
 				numTimes = 0;
 			}
 			else
@@ -57,6 +60,10 @@ class LoopToken extends TemplateToken
 			final int times = numTimes.intValue();
 
 			ctxNew.addVariable(TemplateParser.VAR_LOOP_TIMES,times);
+			if (times <= 0)
+			{
+				ctxNew.addVariable(TemplateParser.VAR_IF,false);
+			}
 		}
 
 		parser.getContext().push(ctxNew);
