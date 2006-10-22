@@ -2,7 +2,7 @@
 // yacc -J -Jclass=IncludeParser -Jsemantic=Object -Jpackage=nu.mine.mosher.template.expr -Jthrows="ExprLexingException, ExprParsingException, TemplateParsingException" -Jnorun -Jnoconstruct -Jnodebug include.yacc
 
 %{
-import nu.mine.mosher.template.ContextStack;
+import nu.mine.mosher.template.parser.ContextStack;
 import nu.mine.mosher.template.exception.TemplateParsingException;
 import nu.mine.mosher.template.expr.exception.ExprLexingException;
 import nu.mine.mosher.template.expr.exception.ExprParsingException;
@@ -20,6 +20,7 @@ import nu.mine.mosher.template.expr.exception.ExprParsingException;
 %token COMMA
 %token NUM
 %token ID
+%token WS
 
 
 
@@ -35,8 +36,8 @@ tmplname
     ;
 
 expression
-	: '!' expression { $$ = !(Boolean)$2; }
-	| '(' expression ')' { $$ = $2; }
+	: '!' S expression { $$ = !(Boolean)$3; }
+	| '(' S expression S ')' { $$ = $3; }
 	| literal
 	| name { $$ = act.applySelectors($1,act.createList()); }
 	| name selectors { $$ = act.applySelectors($1,$2); }
@@ -49,15 +50,15 @@ selectors
 
 selector
 	: DOT identifier args { $$ = act.createMethodCall($2,$3); }
-	| '[' expression ']' { $$ = act.createArraySubscript($2); }
+	| '[' S expression S ']' { $$ = act.createArraySubscript($3); }
 	;
 
 args
-	: '(' arg_list ')' { $$ = $2; }
+	: '(' S arg_list S ')' { $$ = $3; }
 	;
 
 arg_list
-	: arg_list COMMA expression { $$ = act.addToList($3,$1); }
+	: arg_list S COMMA S expression { $$ = act.addToList($5,$1); }
 	| expression { $$ = act.addToList($1,act.createList()); }
 	| /* empty */ { $$ = act.createList(); }
 	;
@@ -73,6 +74,11 @@ identifier
 
 literal
 	: NUM
+	;
+
+S
+	: WS
+	| /* empty */
 	;
 
 %%

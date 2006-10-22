@@ -19,7 +19,7 @@ class ExprLexer
 	private final Buffer buffer;
 
 	/**
-	 * Initializes this <code>ExprLexer</code> to stlit
+	 * Initializes this <code>ExprLexer</code> to split
 	 * the given string into tokens.
 	 * @param stringToLex
 	 */
@@ -82,6 +82,19 @@ class ExprLexer
 	        }
 	        this.buffer.ungetChar(c2);
 	        return new Token(ExprParser.ID,sb.toString());
+	    }
+
+	    if (Character.isWhitespace(c))
+	    {
+	        char c2 = c;
+	        final StringBuffer sb = new StringBuffer();
+	        while (Character.isWhitespace(c2))
+	        {
+	            sb.append(c2);
+	            c2 = this.buffer.getChar();
+	        }
+	        this.buffer.ungetChar(c2);
+	        return new Token(ExprParser.WS,sb.toString());
 	    }
 
 	    return new Token(c);
