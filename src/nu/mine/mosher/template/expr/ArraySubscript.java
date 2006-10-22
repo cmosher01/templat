@@ -38,7 +38,7 @@ class ArraySubscript extends Selector
 
 		if (var instanceof List)
 		{
-			final List r = (List)var;
+			final List<Object> r = (List<Object>)var;
 			return r.get(this.subscript);
 		}
 		throw new TemplateParsingException("error accessing array or list");
