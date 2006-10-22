@@ -1,3 +1,0 @@
-@template simple(name,type)@
-You are @name@.
-The type is @type@.

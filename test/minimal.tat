@@ -1,5 +1,0 @@
-[
-@loop i: 4@
-    (@i@)
-@end loop@
-]
