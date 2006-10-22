@@ -28,10 +28,6 @@ public class ContextStack
 			{
 				return ctxToCheck.getValue(varName);
 			}
-			if (ctxToCheck.isEclipsing())
-			{
-				throw new TemplateParsingException("variable not found: "+varName);
-			}
 		}
 		throw new TemplateParsingException("variable not found: "+varName);
 	}
@@ -44,10 +40,6 @@ public class ContextStack
 			{
 				return true;
 			}
-			if (ctxToCheck.isEclipsing())
-			{
-				return false;
-			}
 		}
 		return false;
 	}
@@ -57,7 +49,7 @@ public class ContextStack
 		return this.rCtx.getFirst();
 	}
 
-	public boolean isEverEqual(final String varName,final Object test)
+	public boolean isEverEqual(final String varName,final Object test) throws TemplateParsingException
 	{
 		for (final TemplateParserContext ctxToCheck : this.rCtx)
 		{
@@ -67,10 +59,6 @@ public class ContextStack
 				{
 					return true;
 				}
-			}
-			if (ctxToCheck.isEclipsing())
-			{
-				return false;
 			}
 		}
 		return false;
