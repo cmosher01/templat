@@ -7,9 +7,9 @@ import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import nu.mine.mosher.template.exception.TemplateParsingException;
@@ -55,13 +55,26 @@ class MethodCall extends Selector
 		final Class<?> clas = var instanceof Class ? (Class)var : var.getClass();
 
 		// Array.length is not reflected, so we check for it ourselves here
-		if (clas.isArray() && this.sNameMethod.equals("length"))
+		// Also, we allow length() or size() for arrays or Lists
+		// Note that our syntax requires parentheses when calling Array.length,
+		// such as "r.length()" instead of "r.length"
+		if ((this.sNameMethod.equals("length") || this.sNameMethod.equals("size")) &&
+			(clas.isArray() || var instanceof List) &&
+			this.rArg.size() == 0)
 		{
-			if (this.rArg.size() > 0)
+			if (clas.isArray())
 			{
-				throw new TemplateParsingException("cannot find method with matching parameter types");
+				return Array.getLength(var);
 			}
-			return Array.getLength(var);
+			else if (var instanceof List)
+			{
+				return ((List)var).size();
+			}
+		}
+
+		if (this.sNameMethod.equals("getClass") && this.rArg.size() == 0)
+		{
+			throw new TemplateParsingException("Calling method getClass() is not supported.");
 		}
 
 		final Map<String,Set<Method>> mapMethods = new HashMap<String,Set<Method>>();
@@ -75,7 +88,16 @@ class MethodCall extends Selector
 	{
 		if (!mapMethods.containsKey(this.sNameMethod))
 		{
-			throw new TemplateParsingException("cannot find method with that name");
+			final StringBuilder sb = new StringBuilder(256);
+			sb.append("cannot find method ");
+			sb.append(this.sNameMethod);
+			sb.append("; known method names: ");
+			for (final String name : mapMethods.keySet())
+			{
+				sb.append(name);
+				sb.append(" ");
+			}
+			throw new TemplateParsingException(sb.toString());
 		}
 
 		for (final Method method : mapMethods.get(this.sNameMethod))
@@ -92,7 +114,7 @@ class MethodCall extends Selector
 	private static void getMethods(final Class<?> clas, Map<String,Set<Method>> mapMethod)
 	{
 		final Method[] rMethod = clas.getMethods();
-		for (final Method method: Arrays.asList(rMethod))
+		for (final Method method : rMethod)
 		{
 			final String nameMethod = method.getName();
 			if (!mapMethod.containsKey(nameMethod))
