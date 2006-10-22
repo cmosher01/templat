@@ -31,7 +31,11 @@ class ValueToken extends TemplateToken
 			{
 				return;
 			}
-			appendTo.append(Expression.eval(this.tag,parser.getContext()));
+			final Object value = Expression.eval(this.tag.trim(),parser.getContext());
+			if (value != null)
+			{
+				appendTo.append(value.toString());
+			}
 		}
 		catch (final TemplateParsingException e)
 		{
