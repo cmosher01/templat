@@ -21,7 +21,15 @@ public class TemplateLexer
 
 	private final StringBuilder template;
 
+	private static enum LexerState
+	{
+		/** in a regular part of the file (outside of a tag */ IN_STRING,
+		/** in a tag (flanked by at signs) */ IN_TAG,
+		/** at the end of the file */ END,
+	}
+
 	private LexerState state = LexerState.IN_STRING;
+
 	private int pos = 0;
 
 	private StringBuilder strCurrent = new StringBuilder();
@@ -93,11 +101,6 @@ public class TemplateLexer
 						this.strCurrent.append(c);
 						this.state = LexerState.IN_STRING;
 					}
-//					else if (peek() == '@')
-//					{
-//						this.strCurrent.append(c);
-//						advance();
-//					}
 					else
 					{
 						final String tag = this.strCurrent.toString();
