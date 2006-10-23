@@ -3,7 +3,7 @@
  */
 package nu.mine.mosher.template.token;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import nu.mine.mosher.template.exception.TemplateLexingException;
@@ -34,21 +34,18 @@ public class TemplateLexer
 
 	private StringBuilder strCurrent = new StringBuilder();
 
-	private final Collection<TemplateToken> rToken;
 
 
-
-	public TemplateLexer(final StringBuilder template, final Collection<TemplateToken> rToken)
+	public TemplateLexer(final StringBuilder template)
 	{
 		this.template = template;
-		this.rToken = rToken;
 	}
 
-	public void lex() throws TemplateLexingException
+	public void lex(final List<TemplateToken> rToken) throws TemplateLexingException
 	{
 		while (this.state != LexerState.END)
 		{
-			transition();
+			transition(rToken);
 			advance();
 		}
 		this.state = LexerState.IN_STRING;
@@ -56,7 +53,7 @@ public class TemplateLexer
 		this.strCurrent.setLength(0);
 	}
 
-	private void transition() throws TemplateLexingException
+	private void transition(final List<TemplateToken> rToken) throws TemplateLexingException
 	{
 		char c = getCurrent();
 
@@ -68,7 +65,7 @@ public class TemplateLexer
 				{
 					if (this.strCurrent.length() > 0)
 					{
-						this.rToken.add(new StringToken(this.strCurrent.toString()));
+						rToken.add(new StringToken(this.strCurrent.toString()));
 						this.strCurrent.setLength(0);
 					}
 					this.state = LexerState.IN_TAG;
@@ -77,7 +74,7 @@ public class TemplateLexer
 				{
 					if (this.strCurrent.length() > 0)
 					{
-						this.rToken.add(new StringToken(this.strCurrent.toString()));
+						rToken.add(new StringToken(this.strCurrent.toString()));
 						this.strCurrent.setLength(0);
 					}
 					this.state = LexerState.END;
@@ -105,9 +102,9 @@ public class TemplateLexer
 					{
 						final String tag = this.strCurrent.toString();
 
-						if (!matchKeyword(tag))
+						if (!matchKeyword(tag,rToken))
 						{
-							this.rToken.add(new ValueToken(tag));
+							rToken.add(new ValueToken(tag));
 						}
 						this.state = LexerState.IN_STRING;
 						this.strCurrent.setLength(0);
@@ -154,56 +151,56 @@ public class TemplateLexer
 		--this.pos;
 	}
 
-	private boolean matchKeyword(final String tag)
+	private boolean matchKeyword(final String tag, final List<TemplateToken> rToken)
 	{
 		Matcher matcher;
 
 		matcher = patTEMPLATE.matcher(tag);
 		if (matcher.matches())
 		{
-			this.rToken.add(new TemplateDeclarationToken(matcher.group(1)));
+			rToken.add(new TemplateDeclarationToken(matcher.group(1)));
 			return true;
 		}
 
 		matcher = patIF.matcher(tag);
 		if (matcher.matches())
 		{
-			this.rToken.add(new IfToken(matcher.group(1)));
+			rToken.add(new IfToken(matcher.group(1)));
 			return true;
 		}
 
 		matcher = patELSE.matcher(tag);
 		if (matcher.matches())
 		{
-			this.rToken.add(new ElseToken());
+			rToken.add(new ElseToken());
 			return true;
 		}
 
 		matcher = patENDIF.matcher(tag);
 		if (matcher.matches())
 		{
-			this.rToken.add(new EndIfToken());
+			rToken.add(new EndIfToken());
 			return true;
 		}
 
 		matcher = patLOOP.matcher(tag);
 		if (matcher.matches())
 		{
-			this.rToken.add(new LoopToken(matcher.group(1)));
+			rToken.add(new LoopToken(matcher.group(1)));
 			return true;
 		}
 
 		matcher = patENDLOOP.matcher(tag);
 		if (matcher.matches())
 		{
-			this.rToken.add(new EndLoopToken());
+			rToken.add(new EndLoopToken());
 			return true;
 		}
 
 		matcher = patINCLUDE.matcher(tag);
 		if (matcher.matches())
 		{
-			this.rToken.add(new IncludeToken(matcher.group(1)));
+			rToken.add(new IncludeToken(matcher.group(1)));
 			return true;
 		}
 

@@ -7,7 +7,7 @@ import nu.mine.mosher.template.exception.TemplateParsingException;
 import nu.mine.mosher.template.expr.Expression;
 import nu.mine.mosher.template.parser.TemplateParser;
 
-class ValueToken extends TemplateToken
+class ValueToken implements TemplateToken
 {
 	private final String tag;
 
@@ -22,7 +22,6 @@ class ValueToken extends TemplateToken
 		return "VALUE: "+this.tag;
 	}
 
-	@Override
 	public void parse(final TemplateParser parser, final StringBuilder appendTo) throws TemplateParsingException
 	{
 		try

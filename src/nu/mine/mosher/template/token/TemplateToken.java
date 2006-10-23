@@ -6,7 +6,7 @@ package nu.mine.mosher.template.token;
 import nu.mine.mosher.template.exception.TemplateParsingException;
 import nu.mine.mosher.template.parser.TemplateParser;
 
-public abstract class TemplateToken
+public interface TemplateToken
 {
-	public abstract void parse(final TemplateParser parser, final StringBuilder appendTo) throws TemplateParsingException;
+	void parse(TemplateParser parser, StringBuilder appendTo) throws TemplateParsingException;
 }

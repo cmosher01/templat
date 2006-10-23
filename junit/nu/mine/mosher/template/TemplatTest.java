@@ -655,13 +655,9 @@ public class TemplatTest
 			file = buildTemplateFile(template,args.length);
 
 			final Templat templat = new Templat(file.toURL());
-			for (final Object arg : args)
-			{
-				templat.addArg(arg);
-			}
-	
+
 			final StringBuilder sb = new StringBuilder(256);
-			templat.parse(sb);
+			templat.parse(sb,args);
 	
 			assertEquals(expected,sb.toString());
 		}
@@ -687,13 +683,9 @@ public class TemplatTest
 			file = buildTemplateFile(template.replaceFirst("include XXX","include "+uuidname),args.length);
 
 			final Templat templat = new Templat(file.toURL());
-			for (final Object arg : args)
-			{
-				templat.addArg(arg);
-			}
 	
 			final StringBuilder sb = new StringBuilder(256);
-			templat.parse(sb);
+			templat.parse(sb,args);
 	
 			for (int i = 0; i < NEWLINELENGTH; ++i)
 			{

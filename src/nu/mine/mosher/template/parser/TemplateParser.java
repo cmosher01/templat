@@ -3,8 +3,11 @@
  */
 package nu.mine.mosher.template.parser;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedList;
-import nu.mine.mosher.template.Templat;
+import java.util.List;
 import nu.mine.mosher.template.exception.TemplateParsingException;
 import nu.mine.mosher.template.token.TemplateToken;
 
@@ -14,15 +17,16 @@ public class TemplateParser
 	public static final String VAR_LOOP_INDEX = "@index";
 	public static final String VAR_LOOP_TIMES = "@times";
 	public static final String VAR_ARGS = "@args";
+	public static final String VAR_URL = "@url";
 
-	private final Templat template;
+	private final List<TemplateToken> rToken = new ArrayList<TemplateToken>();
 
 	private final LinkedList<Integer> rPosParse = new LinkedList<Integer>();
 	private final ContextStack stackContext = new ContextStack();
 
-	public TemplateParser(final Templat template)
+	public TemplateParser(final Collection<TemplateToken> rToken, final List<Object> rArg, final URL url)
 	{
-		this.template = template;
+		this.rToken.addAll(rToken);
 
 		this.rPosParse.addFirst(0);
 
@@ -30,14 +34,15 @@ public class TemplateParser
 		ctx.addVariable("true",true);
 		ctx.addVariable("false",false);
 		ctx.addVariable("null",null);
-		ctx.addVariable(VAR_ARGS,this.template.getArgs());
+		ctx.addVariable(VAR_ARGS,rArg);
+		ctx.addVariable(VAR_URL,url);
 
 		this.stackContext.push(ctx);
 	}
 
 	public void parse(final StringBuilder appendTo) throws TemplateParsingException
 	{
-		while (this.rPosParse.getFirst() < this.template.getTokens().size())
+		while (this.rPosParse.getFirst() < this.rToken.size())
 		{
 			final TemplateToken token = nextToken();
 			token.parse(this,appendTo);
@@ -46,7 +51,7 @@ public class TemplateParser
 
 	private TemplateToken nextToken()
 	{
-		final TemplateToken token = this.template.getTokens().get(this.rPosParse.getFirst());
+		final TemplateToken token = this.rToken.get(this.rPosParse.getFirst());
 
 		int pos = this.rPosParse.removeFirst();
 		++pos;
@@ -73,10 +78,5 @@ public class TemplateParser
 	public ContextStack getContext()
 	{
 		return this.stackContext;
-	}
-
-	public Templat getTemplate()
-	{
-		return this.template;
 	}
 }

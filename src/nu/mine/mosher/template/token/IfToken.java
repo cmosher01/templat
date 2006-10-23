@@ -8,7 +8,7 @@ import nu.mine.mosher.template.expr.Expression;
 import nu.mine.mosher.template.parser.TemplateParser;
 import nu.mine.mosher.template.parser.TemplateParserContext;
 
-class IfToken extends TemplateToken
+class IfToken implements TemplateToken
 {
 	private final String tag;
 
@@ -23,7 +23,6 @@ class IfToken extends TemplateToken
 		return "IF: "+this.tag;
 	}
 
-	@Override
 	public void parse(final TemplateParser parser, final StringBuilder appendTo) throws TemplateParsingException
 	{
 		try

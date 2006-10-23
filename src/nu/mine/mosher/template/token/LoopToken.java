@@ -8,7 +8,7 @@ import nu.mine.mosher.template.expr.Expression;
 import nu.mine.mosher.template.parser.TemplateParser;
 import nu.mine.mosher.template.parser.TemplateParserContext;
 
-class LoopToken extends TemplateToken
+class LoopToken implements TemplateToken
 {
 	private final String tag;
 
@@ -23,7 +23,6 @@ class LoopToken extends TemplateToken
 		return "LOOP: "+this.tag;
 	}
 
-	@Override
 	public void parse(final TemplateParser parser, final StringBuilder appendTo) throws TemplateParsingException
 	{
 		/*

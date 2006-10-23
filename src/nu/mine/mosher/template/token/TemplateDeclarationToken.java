@@ -9,7 +9,7 @@ import nu.mine.mosher.template.exception.TemplateParsingException;
 import nu.mine.mosher.template.parser.TemplateParser;
 import nu.mine.mosher.template.parser.TemplateParserContext;
 
-class TemplateDeclarationToken extends TemplateToken
+class TemplateDeclarationToken implements TemplateToken
 {
 	private final String tag;
 
@@ -24,7 +24,6 @@ class TemplateDeclarationToken extends TemplateToken
 		return "TEMPLATE DECLARATION: "+this.tag;
 	}
 
-	@Override
 	public void parse(final TemplateParser parser, final StringBuilder appendTo) throws TemplateParsingException
 	{
 		final int posLeftParen = this.tag.indexOf('(');

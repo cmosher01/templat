@@ -6,7 +6,7 @@ package nu.mine.mosher.template.token;
 import nu.mine.mosher.template.exception.TemplateParsingException;
 import nu.mine.mosher.template.parser.TemplateParser;
 
-class StringToken extends TemplateToken
+class StringToken implements TemplateToken
 {
 	private final String tag;
 
@@ -15,7 +15,6 @@ class StringToken extends TemplateToken
 		this.tag = tag;
 	}
 
-	@Override
 	public String toString()
 	{
 		return "STRING: "+this.tag;

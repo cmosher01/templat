@@ -6,7 +6,7 @@ package nu.mine.mosher.template.token;
 import nu.mine.mosher.template.exception.TemplateParsingException;
 import nu.mine.mosher.template.parser.TemplateParser;
 
-class ElseToken extends TemplateToken
+class ElseToken implements TemplateToken
 {
 	@Override
 	public String toString()
@@ -14,7 +14,6 @@ class ElseToken extends TemplateToken
 		return "ELSE";
 	}
 
-	@Override
 	public void parse(final TemplateParser parser, final StringBuilder appendTo) throws TemplateParsingException
 	{
 		try

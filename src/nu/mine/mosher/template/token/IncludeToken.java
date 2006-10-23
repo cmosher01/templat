@@ -13,7 +13,7 @@ import nu.mine.mosher.template.expr.TemplateIncludeExpression;
 import nu.mine.mosher.template.parser.TemplateParser;
 
 
-class IncludeToken extends TemplateToken
+class IncludeToken implements TemplateToken
 {
 	private final String tag;
 
@@ -28,7 +28,6 @@ class IncludeToken extends TemplateToken
 		return "INCLUDE: "+this.tag;
 	}
 
-	@Override
 	public void parse(final TemplateParser parser, final StringBuilder appendTo) throws TemplateParsingException
 	{
 		try
@@ -51,18 +50,10 @@ class IncludeToken extends TemplateToken
 		{
 			return;
 		}
-
 		final TemplateIncludeExpression inclusion = Include.eval(this.tag,parser.getContext());
-
 		final String nameInclude = inclusion.getTemplateName()+".tat";
-
-		final Templat templateInclude = new Templat(new URL(parser.getTemplate().getURL(),nameInclude));
-
-		for (final Object argument : inclusion.getArgs())
-		{
-			templateInclude.addArg(argument);
-		}
-
-		templateInclude.parse(appendTo);
+		final URL url = (URL)parser.getContext().getValue(TemplateParser.VAR_URL);
+		final Templat templateInclude = new Templat(new URL(url,nameInclude));
+		templateInclude.parse(appendTo,inclusion.getArgs().toArray());
 	}
 }

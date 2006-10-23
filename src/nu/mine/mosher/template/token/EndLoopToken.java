@@ -6,7 +6,7 @@ package nu.mine.mosher.template.token;
 import nu.mine.mosher.template.exception.TemplateParsingException;
 import nu.mine.mosher.template.parser.TemplateParser;
 
-class EndLoopToken extends TemplateToken
+class EndLoopToken implements TemplateToken
 {
 	@Override
 	public String toString()
@@ -14,7 +14,6 @@ class EndLoopToken extends TemplateToken
 		return "END LOOP";
 	}
 
-	@Override
 	public void parse(final TemplateParser parser, final StringBuilder appendTo) throws TemplateParsingException
 	{
 		final Number numTimes = (Number)parser.getContext().getValue(TemplateParser.VAR_LOOP_TIMES);
