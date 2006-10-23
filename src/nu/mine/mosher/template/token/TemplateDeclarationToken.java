@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 import nu.mine.mosher.template.exception.TemplateParsingException;
 import nu.mine.mosher.template.parser.TemplateParser;
-import nu.mine.mosher.template.parser.TemplateParserContext;
+import nu.mine.mosher.template.parser.context.TemplateParserContext;
 
 class TemplateDeclarationToken implements TemplateToken
 {

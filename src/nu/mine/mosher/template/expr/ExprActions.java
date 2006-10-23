@@ -5,7 +5,7 @@ package nu.mine.mosher.template.expr;
 
 import java.util.ArrayList;
 import nu.mine.mosher.template.exception.TemplateParsingException;
-import nu.mine.mosher.template.parser.ContextStack;
+import nu.mine.mosher.template.parser.context.ContextStack;
 
 /**
  * Actions for <code>ExprParser</code> and <code>IncludeParser</code>.

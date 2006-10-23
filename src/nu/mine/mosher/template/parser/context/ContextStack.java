@@ -1,7 +1,7 @@
 /*
  * Created on Sep 9, 2005
  */
-package nu.mine.mosher.template.parser;
+package nu.mine.mosher.template.parser.context;
 
 import java.util.LinkedList;
 import nu.mine.mosher.template.exception.TemplateParsingException;
