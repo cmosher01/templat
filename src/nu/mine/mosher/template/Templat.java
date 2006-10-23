@@ -14,9 +14,9 @@ import java.util.Arrays;
 import java.util.List;
 import nu.mine.mosher.template.exception.TemplateLexingException;
 import nu.mine.mosher.template.exception.TemplateParsingException;
+import nu.mine.mosher.template.lexer.TemplateLexer;
+import nu.mine.mosher.template.lexer.TemplateToken;
 import nu.mine.mosher.template.parser.TemplateParser;
-import nu.mine.mosher.template.token.TemplateLexer;
-import nu.mine.mosher.template.token.TemplateToken;
 
 /**
  * <code>TemplAT</code> is a template processor, used in conjunction with Java.

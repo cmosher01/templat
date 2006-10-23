@@ -1,7 +1,7 @@
 /*
  * Created on Sep 5, 2005
  */
-package nu.mine.mosher.template.token;
+package nu.mine.mosher.template.lexer;
 
 import java.io.IOException;
 import java.net.URL;

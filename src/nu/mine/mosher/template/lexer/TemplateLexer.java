@@ -1,7 +1,7 @@
 /*
  * Created on Sep 4, 2005
  */
-package nu.mine.mosher.template.token;
+package nu.mine.mosher.template.lexer;
 
 import java.util.List;
 import java.util.regex.Matcher;

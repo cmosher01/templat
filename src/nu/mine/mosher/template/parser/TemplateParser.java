@@ -9,9 +9,9 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import nu.mine.mosher.template.exception.TemplateParsingException;
+import nu.mine.mosher.template.lexer.TemplateToken;
 import nu.mine.mosher.template.parser.context.ContextStack;
 import nu.mine.mosher.template.parser.context.TemplateParserContext;
-import nu.mine.mosher.template.token.TemplateToken;
 
 public class TemplateParser
 {
