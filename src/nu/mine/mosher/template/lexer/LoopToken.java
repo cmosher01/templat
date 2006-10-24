@@ -12,6 +12,9 @@ class LoopToken implements TemplateToken
 {
 	private final String tag;
 
+	/**
+	 * @param tag
+	 */
 	public LoopToken(final String tag)
 	{
 		this.tag = tag;

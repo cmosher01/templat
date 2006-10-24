@@ -29,6 +29,7 @@ class ExprLexer
 		this.buffer = new Buffer(stringToLex);
 	}
 
+	@Override
 	public String toString()
 	{
 		return this.stringToLex;
@@ -149,7 +150,7 @@ class ExprLexer
 			this.reader = new PushbackReader(new StringReader(source));
 		}
 
-		char getChar() throws ExprLexingException
+		private char getChar() throws ExprLexingException
 		{
 		    try
 			{
@@ -161,7 +162,7 @@ class ExprLexer
 			}
 		}
 
-		void ungetChar(final char c) throws ExprLexingException
+		private void ungetChar(final char c) throws ExprLexingException
 		{
 	        try
 			{

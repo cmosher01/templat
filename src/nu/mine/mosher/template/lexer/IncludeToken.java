@@ -17,6 +17,9 @@ class IncludeToken implements TemplateToken
 {
 	private final String tag;
 
+	/**
+	 * @param tag
+	 */
 	public IncludeToken(final String tag)
 	{
 		this.tag = tag;

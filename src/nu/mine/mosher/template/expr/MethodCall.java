@@ -14,31 +14,22 @@ import java.util.Map;
 import java.util.Set;
 import nu.mine.mosher.template.exception.TemplateParsingException;
 
-
-
-class MethodCall extends Selector
+class MethodCall implements Selector
 {
 	private final String sNameMethod;
 	private final ArrayList<Object> rArg;
 
-	MethodCall(final String sNameMethod, final ArrayList<Object> rArg)
+	/**
+	 * @param sNameMethod
+	 * @param rArg
+	 */
+	public MethodCall(final String sNameMethod, final ArrayList<Object> rArg)
 	{
 		this.sNameMethod = sNameMethod;
 		this.rArg = rArg;
 	}
 
-	private String getMethodName()
-	{
-		return this.sNameMethod;
-	}
-
-	private ArrayList<Object> getArgs()
-	{
-		return this.rArg;
-	}
-
-	@Override
-	Object apply(final Object var) throws TemplateParsingException
+	public Object apply(final Object var) throws TemplateParsingException
 	{
 		try
 		{

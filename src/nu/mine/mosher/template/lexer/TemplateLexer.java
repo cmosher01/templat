@@ -1,5 +1,5 @@
 /*
- * Created on Sep 4, 2005
+ * Created on 2005-09-04
  */
 package nu.mine.mosher.template.lexer;
 
@@ -8,6 +8,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import nu.mine.mosher.template.exception.TemplateLexingException;
 
+/**
+ * Lexer to analyze a given template and fully tokenize its contents.
+ *
+ * @author Chris Mosher
+ */
 public class TemplateLexer
 {
 	private static final char EOF = '\uFFFF';
@@ -36,11 +41,21 @@ public class TemplateLexer
 
 
 
+	/**
+	 * Initializes the lexer to read from the given template.
+	 * @param template the contents of the template
+	 */
 	public TemplateLexer(final StringBuilder template)
 	{
 		this.template = template;
 	}
 
+	/**
+	 * Lexigraphically analyzes this lexer's template into tokens.
+	 * The resulting tokens are appended to the given <code>List</code>.
+	 * @param rToken <code>List</code> to append the tokens to
+	 * @throws TemplateLexingException
+	 */
 	public void lex(final List<TemplateToken> rToken) throws TemplateLexingException
 	{
 		while (this.state != LexerState.END)
@@ -120,6 +135,9 @@ public class TemplateLexer
 				}
 			}
 			break;
+
+			case END:
+				throw new IllegalStateException();
 		}
 	}
 
@@ -136,19 +154,9 @@ public class TemplateLexer
 		return this.template.charAt(posToGet);
 	}
 
-	private char peek()
-	{
-		return getChar(this.pos+1);
-	}
-
 	private void advance()
 	{
 		++this.pos;
-	}
-
-	private void backup()
-	{
-		--this.pos;
 	}
 
 	private boolean matchKeyword(final String tag, final List<TemplateToken> rToken)

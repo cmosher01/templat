@@ -1,5 +1,5 @@
 /*
- * Created on Oct 26, 2005
+ * Created on 2005-10-26
  */
 package nu.mine.mosher.template.expr;
 
@@ -7,7 +7,7 @@ import java.lang.reflect.Array;
 import java.util.List;
 import nu.mine.mosher.template.exception.TemplateParsingException;
 
-class ArraySubscript extends Selector
+class ArraySubscript implements Selector
 {
 	private final int subscript;
 
@@ -16,13 +16,7 @@ class ArraySubscript extends Selector
 		this.subscript = subscript;
 	}
 
-	int getSubscript()
-	{
-		return this.subscript;
-	}
-
-	@Override
-	Object apply(final Object var) throws TemplateParsingException
+	public Object apply(final Object var) throws TemplateParsingException
 	{
 		if (var.getClass().isArray())
 		{
@@ -38,7 +32,7 @@ class ArraySubscript extends Selector
 
 		if (var instanceof List)
 		{
-			final List<Object> r = (List<Object>)var;
+			final List r = (List)var;
 			return r.get(this.subscript);
 		}
 		throw new TemplateParsingException("error accessing array or list");

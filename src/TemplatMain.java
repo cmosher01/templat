@@ -14,6 +14,7 @@ import nu.mine.mosher.template.exception.TemplateParsingException;
 
 /**
  * Main command-line program for the <code>Templat</code> class.
+ * Calling the template engine from the command line is only marginally useful.
  *
  * @author Chris Mosher
  */

@@ -56,7 +56,9 @@ public class Templat
 
 
 	/**
-	 * Parses this template.
+	 * Parses this template. The arguments, if any, are passed to the template itself,
+	 * and bound to the parameters specified in the template definition. The result of
+	 * parsing the template is appended to the given <code>StringBuilder</code>.
 	 * 
 	 * @param appendTo the <code>StringBuilder</code> to append the result to
 	 * @param rArg optional argument(s) to pass to the template

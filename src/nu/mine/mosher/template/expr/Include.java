@@ -10,8 +10,22 @@ import nu.mine.mosher.template.parser.context.ContextStack;
 
 
 
+/**
+ * Contains a static method to evaluate an include statement in
+ * a template.
+ *
+ * @author Chris Mosher
+ */
 public class Include
 {
+	/**
+	 * Parses the given include statement, evaluating any arguments, and returning an
+	 * object containing the name of the include file and the results of each argument.
+	 * @param incl
+	 * @param stackContext
+	 * @return include file name, and arguments
+	 * @throws TemplateParsingException
+	 */
 	public static TemplateIncludeExpression eval(final String incl, final ContextStack stackContext) throws TemplateParsingException
 	{
 		try

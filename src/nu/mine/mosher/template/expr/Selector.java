@@ -1,11 +1,17 @@
 /*
- * Created on Oct 26, 2005
+ * Created on 2005-10-26
  */
 package nu.mine.mosher.template.expr;
 
 import nu.mine.mosher.template.exception.TemplateParsingException;
 
-abstract class Selector
+interface Selector
 {
-	abstract Object apply(Object var) throws TemplateParsingException;
+	/**
+	 * Applies this selector to the given variable.
+	 * @param var variable to apply this selector to
+	 * @return the result of applying this selector to the given variable
+	 * @throws TemplateParsingException
+	 */
+	Object apply(Object var) throws TemplateParsingException;
 }

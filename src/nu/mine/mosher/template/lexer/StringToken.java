@@ -10,11 +10,15 @@ class StringToken implements TemplateToken
 {
 	private final String tag;
 
+	/**
+	 * @param tag
+	 */
 	public StringToken(final String tag)
 	{
 		this.tag = tag;
 	}
 
+	@Override
 	public String toString()
 	{
 		return "STRING: "+this.tag;

@@ -10,8 +10,21 @@ import nu.mine.mosher.template.parser.context.ContextStack;
 
 
 
+/**
+ * Contains static methods to evaluate an expression within a
+ * template statement.
+ *
+ * @author Chris Mosher
+ */
 public class Expression
 {
+	/**
+	 * Evaluates the given expression, using the given context stack.
+	 * @param expr expression to evaluate
+	 * @param stackContext context stack
+	 * @return the result of evaluating the expression
+	 * @throws TemplateParsingException
+	 */
 	public static Object eval(final String expr, final ContextStack stackContext) throws TemplateParsingException
 	{
 		try

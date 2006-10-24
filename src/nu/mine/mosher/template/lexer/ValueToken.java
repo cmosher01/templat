@@ -11,6 +11,9 @@ class ValueToken implements TemplateToken
 {
 	private final String tag;
 
+	/**
+	 * @param tag
+	 */
 	public ValueToken(final String tag)
 	{
 		this.tag = tag;

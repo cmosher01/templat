@@ -13,6 +13,9 @@ class TemplateDeclarationToken implements TemplateToken
 {
 	private final String tag;
 
+	/**
+	 * @param tag
+	 */
 	public TemplateDeclarationToken(final String tag)
 	{
 		this.tag = tag;

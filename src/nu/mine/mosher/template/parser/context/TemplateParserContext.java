@@ -1,5 +1,5 @@
 /*
- * Created on Sep 6, 2005
+ * Created on 2005-09-06
  */
 package nu.mine.mosher.template.parser.context;
 
