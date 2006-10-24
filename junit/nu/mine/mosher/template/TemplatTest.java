@@ -281,7 +281,7 @@ public class TemplatTest
 		assertTemplate(buildFile("ABCDEFGHIJ"),buildFile("@arg0@@arg1@@arg2@@arg3@@arg4@@arg5@@arg6@@arg7@@arg8@@arg9@"),"A","B","C","D","E","F","G","H","I","J");
 	}
 
-	public static class X { public String get() { return "A"; } };
+	public static class X { public String get() { return "A"; } }
 	@Test
 	public void testExprMethod() throws IOException, TemplateLexingException, TemplateParsingException
 	{
@@ -312,21 +312,21 @@ public class TemplatTest
 		assertTemplate(buildFile("A"),buildFile("@arg0[1]@"),(Object)new String[]{"A"});
 	}
 
-	public static class Y { public X get() { return new X(); } };
+	public static class Y { public X get() { return new X(); } }
 	@Test
 	public void testExprMethodMethod() throws IOException, TemplateLexingException, TemplateParsingException
 	{
 		assertTemplate(buildFile("A"),buildFile("@arg0.get().get()@"),new Y());
 	}
 
-	public static class Z { public String[] get() { return new String[] {"A"}; } };
+	public static class Z { public String[] get() { return new String[] {"A"}; } }
 	@Test
 	public void testExprMethodArray() throws IOException, TemplateLexingException, TemplateParsingException
 	{
 		assertTemplate(buildFile("A"),buildFile("@arg0.get()[0]@"),new Z());
 	}
 
-	public static class W { public List<String> get() { return Collections.<String>singletonList("A"); } };
+	public static class W { public List<String> get() { return Collections.<String>singletonList("A"); } }
 	@Test
 	public void testExprMethodList() throws IOException, TemplateLexingException, TemplateParsingException
 	{
@@ -369,7 +369,7 @@ public class TemplatTest
 		assertTemplate(buildFile("A"),buildFile("@arg0[0][0]@"),Collections.<List<String>>singletonList(Collections.<String>singletonList("A")));
 	}
 
-	public static class Y2 { public Y get() { return new Y(); } };
+	public static class Y2 { public Y get() { return new Y(); } }
 	@Test
 	public void testExprMethodMethodMethod() throws IOException, TemplateLexingException, TemplateParsingException
 	{
@@ -430,7 +430,7 @@ public class TemplatTest
 		assertTemplate(buildFile(""),buildFile("@arg0.size(0)@"),(Object)Collections.<String>nCopies(3,"A"));
 	}
 
-	public static class Q { public String toString() { return "A"; } };
+	public static class Q { @Override public String toString() { return "A"; } }
 	@Test
 	public void testToString() throws IOException, TemplateLexingException, TemplateParsingException
 	{
