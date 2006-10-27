@@ -3,7 +3,7 @@
  */
 package nu.mine.mosher.template;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -14,15 +14,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 import nu.mine.mosher.template.exception.TemplateLexingException;
 import nu.mine.mosher.template.exception.TemplateParsingException;
-import nu.mine.mosher.uuid.UUIDFactory;
 import org.junit.Ignore;
 import org.junit.Test;
 
 public class TemplatTest
 {
-	private static final UUIDFactory uuid = new UUIDFactory();
 	private static final int NEWLINELENGTH;
 	static
 	{
@@ -708,7 +707,7 @@ public class TemplatTest
 
 	private File buildTemplateFile(final String template, final int cArg) throws IOException
 	{
-		final String name = "TEMPLATE"+uuid.createUUID().toString().replace("-","_");
+		final String name = "TEMPLATE"+UUID.randomUUID().toString().replace("-","_");
 		final File file = new File(name+".tat").getCanonicalFile();
 		file.deleteOnExit();
 
