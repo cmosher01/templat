@@ -4,13 +4,19 @@
 <options buildIfNeeded="true" compress="true" descriptionLocation="/templat/templat.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
 <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
 <selectedProjects/>
-<manifest generateManifest="true" mainClassHandleIdentifier="=templat/src&lt;{TemplatMain.java[TemplatMain" manifestLocation="/templat/template.mf" manifestVersion="1.0" reuseManifest="false" saveManifest="true" usesManifest="true">
+<manifest generateManifest="true" manifestLocation="/templat/template.mf" manifestVersion="1.0" reuseManifest="false" saveManifest="true" usesManifest="true">
 <sealing sealJar="false">
 <packagesToSeal/>
 <packagesToUnSeal/>
 </sealing>
 </manifest>
 <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
-<javaElement handleIdentifier="=templat/src"/>
+<javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template"/>
+<javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template.expr"/>
+<javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template.parser"/>
+<javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template.lexer"/>
+<javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template.expr.exception"/>
+<javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template.parser.context"/>
+<javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template.exception"/>
 </selectedElements>
 </jardesc>
