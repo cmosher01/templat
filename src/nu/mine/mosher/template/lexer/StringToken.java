@@ -24,13 +24,20 @@ class StringToken implements TemplateToken
 		return "STRING: "+this.tag;
 	}
 
-	public void parse(final TemplateParser parser, final StringBuilder appendTo) throws TemplateParsingException
+	public void parse(final TemplateParser parser, final Appendable appendTo) throws TemplateParsingException
 	{
 		if (parser.getContext().isEverEqual(TemplateParser.VAR_IF,false))
 		{
 			return;
 		}
 
-		appendTo.append(this.tag);
+		try
+		{
+			appendTo.append(this.tag);
+		}
+		catch (final Throwable e)
+		{
+			throw new TemplateParsingException(e);
+		}
 	}
 }

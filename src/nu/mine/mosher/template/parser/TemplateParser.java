@@ -59,11 +59,11 @@ public class TemplateParser
 	}
 
 	/**
-	 * Parses this template and appends the rendered result to the given <code>StringBuilder</code>.
-	 * @param appendTo <code>StringBuilder</code> to append the result to
+	 * Parses this template and appends the rendered result to the given <code>Appendable</code>.
+	 * @param appendTo <code>Appendable</code> to append the result to
 	 * @throws TemplateParsingException
 	 */
-	public void parse(final StringBuilder appendTo) throws TemplateParsingException
+	public void parse(final Appendable appendTo) throws TemplateParsingException
 	{
 		while (this.rPosParse.getFirst() < this.rToken.size())
 		{

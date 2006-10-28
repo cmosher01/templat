@@ -31,7 +31,7 @@ class IncludeToken implements TemplateToken
 		return "INCLUDE: "+this.tag;
 	}
 
-	public void parse(final TemplateParser parser, final StringBuilder appendTo) throws TemplateParsingException
+	public void parse(final TemplateParser parser, final Appendable appendTo) throws TemplateParsingException
 	{
 		try
 		{
@@ -47,7 +47,7 @@ class IncludeToken implements TemplateToken
 		}
 	}
 
-	private void tryParse(final TemplateParser parser, final StringBuilder appendTo) throws TemplateParsingException, TemplateLexingException, IOException
+	private void tryParse(final TemplateParser parser, final Appendable appendTo) throws TemplateParsingException, TemplateLexingException, IOException
 	{
 		if (parser.getContext().isEverEqual(TemplateParser.VAR_IF,false))
 		{

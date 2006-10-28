@@ -58,15 +58,15 @@ public class Templat
 	/**
 	 * Parses this template. The arguments, if any, are passed to the template itself,
 	 * and bound to the parameters specified in the template definition. The result of
-	 * parsing the template is appended to the given <code>StringBuilder</code>.
+	 * parsing the template is appended to the given <code>Appendable</code>.
 	 * 
-	 * @param appendTo the <code>StringBuilder</code> to append the result to
+	 * @param appendTo the <code>Appendable</code> to append the result to
 	 * @param rArg optional argument(s) to pass to the template
 	 * @throws TemplateLexingException
 	 * @throws TemplateParsingException
 	 * @throws IOException
 	 */
-	public void parse(final StringBuilder appendTo, final Object... rArg) throws TemplateLexingException, TemplateParsingException, IOException
+	public void parse(final Appendable appendTo, final Object... rArg) throws TemplateLexingException, TemplateParsingException, IOException
 	{
 		final StringBuilder sb = new StringBuilder(8192);
 		appendTemplate(this.url,sb);
@@ -83,12 +83,12 @@ public class Templat
 
 	/**
 	 * Appends the contents of the given <code>URL</code> to
-	 * the given <code>StringBuilder</code>.
+	 * the given <code>Appendable</code>.
 	 * @param url
 	 * @param appendTo
 	 * @throws IOException
 	 */
-	private static void appendTemplate(final URL url, final StringBuilder appendTo) throws IOException
+	private static void appendTemplate(final URL url, final Appendable appendTo) throws IOException
 	{
 		final BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream(),"UTF-8"));
 

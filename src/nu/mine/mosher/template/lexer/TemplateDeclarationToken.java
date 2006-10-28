@@ -27,7 +27,7 @@ class TemplateDeclarationToken implements TemplateToken
 		return "TEMPLATE DECLARATION: "+this.tag;
 	}
 
-	public void parse(final TemplateParser parser, final StringBuilder appendTo) throws TemplateParsingException
+	public void parse(final TemplateParser parser, final Appendable appendTo) throws TemplateParsingException
 	{
 		final int posLeftParen = this.tag.indexOf('(');
 		if (posLeftParen < 0)

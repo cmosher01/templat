@@ -25,7 +25,7 @@ class ValueToken implements TemplateToken
 		return "VALUE: "+this.tag;
 	}
 
-	public void parse(final TemplateParser parser, final StringBuilder appendTo) throws TemplateParsingException
+	public void parse(final TemplateParser parser, final Appendable appendTo) throws TemplateParsingException
 	{
 		try
 		{

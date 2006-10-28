@@ -26,7 +26,7 @@ class LoopToken implements TemplateToken
 		return "LOOP: "+this.tag;
 	}
 
-	public void parse(final TemplateParser parser, final StringBuilder appendTo) throws TemplateParsingException
+	public void parse(final TemplateParser parser, final Appendable appendTo) throws TemplateParsingException
 	{
 		/*
 		 * Parse the loop statement, which is in this format:

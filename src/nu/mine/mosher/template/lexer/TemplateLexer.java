@@ -24,7 +24,7 @@ public class TemplateLexer
 	private static final Pattern patENDLOOP = Pattern.compile("end\\s+loop");
 	private static final Pattern patINCLUDE = Pattern.compile("include\\s+(.+)");
 
-	private final StringBuilder template;
+	private final CharSequence template;
 
 	private static enum LexerState
 	{
@@ -45,7 +45,7 @@ public class TemplateLexer
 	 * Initializes the lexer to read from the given template.
 	 * @param template the contents of the template
 	 */
-	public TemplateLexer(final StringBuilder template)
+	public TemplateLexer(final CharSequence template)
 	{
 		this.template = template;
 	}
