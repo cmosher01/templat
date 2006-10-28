@@ -2,7 +2,7 @@
 // yacc -J -Jclass=IncludeParser -Jsemantic=Object -Jpackage=nu.mine.mosher.template.expr -Jthrows="ExprLexingException, ExprParsingException, TemplateParsingException" -Jnorun -Jnoconstruct -Jnodebug include.yacc
 
 %{
-import nu.mine.mosher.template.parser.ContextStack;
+import nu.mine.mosher.template.parser.context.ContextStack;
 import nu.mine.mosher.template.exception.TemplateParsingException;
 import nu.mine.mosher.template.expr.exception.ExprLexingException;
 import nu.mine.mosher.template.expr.exception.ExprParsingException;
