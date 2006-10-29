@@ -121,6 +121,30 @@ public class TemplatTest
 	}
 
 	@Test
+	public void testIfSpace1() throws IOException, TemplateLexingException, TemplateParsingException
+	{
+		assertTemplate(buildFile("A"),buildFile("@if ( true)@A@else@B@end if@"));
+	}
+
+	@Test
+	public void testIfSpace2() throws IOException, TemplateLexingException, TemplateParsingException
+	{
+		assertTemplate(buildFile("A"),buildFile("@if (true )@A@else@B@end if@"));
+	}
+
+	@Test
+	public void testIfSpace3() throws IOException, TemplateLexingException, TemplateParsingException
+	{
+		assertTemplate(buildFile("A"),buildFile("@if (true) @A@else@B@end if@"));
+	}
+
+	@Test
+	public void testIfSpace4() throws IOException, TemplateLexingException, TemplateParsingException
+	{
+		assertTemplate(buildFile("A"),buildFile("@ if (true)@A@else@B@end if@"));
+	}
+
+	@Test
 	public void testLoopIf() throws IOException, TemplateLexingException, TemplateParsingException
 	{
 		assertTemplate(buildFile("AABGABGD"),buildFile("A@loop i: 2@A@if (true)@B@else@C@if (true)@D@else@E@end if@F@end if@G@end loop@D"));
@@ -619,9 +643,67 @@ public class TemplatTest
 	}
 
 	@Test
+	public void testIncludeArg1Space1() throws IOException, TemplateLexingException, TemplateParsingException
+	{
+		assertTemplateInclude(buildFile("A"),buildFile("@include XXX (arg0)@"),buildFile("@arg0@"),1,"A");
+	}
+
+	@Test
+	public void testIncludeArg1Space2() throws IOException, TemplateLexingException, TemplateParsingException
+	{
+		assertTemplateInclude(buildFile("A"),buildFile("@include XXX( arg0)@"),buildFile("@arg0@"),1,"A");
+	}
+
+	@Test
+	public void testIncludeArg1Space3() throws IOException, TemplateLexingException, TemplateParsingException
+	{
+		assertTemplateInclude(buildFile("A"),buildFile("@include XXX(arg0 )@"),buildFile("@arg0@"),1,"A");
+	}
+
+	@Test
+	public void testIncludeArg1Space4() throws IOException, TemplateLexingException, TemplateParsingException
+	{
+		assertTemplateInclude(buildFile("A"),buildFile("@include XXX(arg0) @"),buildFile("@arg0@"),1,"A");
+	}
+
+	@Test
+	public void testIncludeArg2() throws IOException, TemplateLexingException, TemplateParsingException
+	{
+		assertTemplateInclude(buildFile("AB"),buildFile("@include XXX(arg0,arg1)@"),buildFile("@arg0@@arg1@"),2,"A","B");
+	}
+
+	@Test
+	public void testIncludeArg2Spaces() throws IOException, TemplateLexingException, TemplateParsingException
+	{
+		assertTemplateInclude(buildFile("AB"),buildFile("@  include XXX  (  arg0  ,  arg1  )  @"),buildFile("@arg0@@arg1@"),2,"A","B");
+	}
+
+	@Test
 	public void testInclMethodMethodMethod() throws IOException, TemplateLexingException, TemplateParsingException
 	{
 		assertTemplateInclude(buildFile("A"),buildFile("@include XXX(arg0.get().get().get())@"),buildFile("@arg0@"),1,new Y2());
+	}
+	public class Xyz2
+	{
+		public int x(int a, int b) { return a+b; }
+		public int y() { return 3; }
+		public int z() { return 4; }
+		public int get(int a) { return a; }
+		public int[] r() { return new int[]{0,1,2,3,4,5,6,7}; }
+	}
+
+	@Test
+	public void testIncludeArg3Complex() throws IOException, TemplateLexingException, TemplateParsingException
+	{
+		final Xyz2 xyz = new Xyz2();
+		assertTemplateInclude(buildFile("377"),buildFile("@include XXX(arg0.get(arg0.y()),arg1.x(arg1.y(),arg1.z()),arg2.get(arg2.x(arg2.y(),arg2.z())))@"),buildFile("@arg0@@arg1@@arg2@"),3,xyz,xyz,xyz);
+	}
+
+	@Test
+	public void testIncludeArg3Braces() throws IOException, TemplateLexingException, TemplateParsingException
+	{
+		final Xyz2 xyz = new Xyz2();
+		assertTemplateInclude(buildFile("777"),buildFile("@include XXX(arg0.r()[arg0.x(arg0.y(),arg0.z())],arg1.x(arg1.y(),arg1.z()),arg2.get(arg2.x(arg2.y(),arg2.z())))@"),buildFile("@arg0@@arg1@@arg2@"),3,xyz,xyz,xyz);
 	}
 
 

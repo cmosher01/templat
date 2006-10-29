@@ -17,7 +17,7 @@ class IfToken implements TemplateToken
 	 */
 	public IfToken(final String tag)
 	{
-		this.tag = tag;
+		this.tag = tag.trim();
 	}
 
 	@Override

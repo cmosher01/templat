@@ -16,13 +16,13 @@ import nu.mine.mosher.template.exception.TemplateLexingException;
 public class TemplateLexer
 {
 	private static final char EOF = '\uFFFF';
-	private static final Pattern patTEMPLATE = Pattern.compile("template\\s+(.+)");
-	private static final Pattern patIF = Pattern.compile("if\\s+\\((.+)\\)");
-	private static final Pattern patELSE = Pattern.compile("else");
-	private static final Pattern patENDIF = Pattern.compile("end\\s+if");
-	private static final Pattern patLOOP = Pattern.compile("loop\\s+(.+)");
-	private static final Pattern patENDLOOP = Pattern.compile("end\\s+loop");
-	private static final Pattern patINCLUDE = Pattern.compile("include\\s+(.+)");
+	private static final Pattern patTEMPLATE = Pattern.compile("\\s*template\\s+(.+)\\s*");
+	private static final Pattern patIF = Pattern.compile("\\s*if\\s+\\((.+)\\)\\s*");
+	private static final Pattern patELSE = Pattern.compile("\\s*else\\s*");
+	private static final Pattern patENDIF = Pattern.compile("\\s*end\\s+if\\s*");
+	private static final Pattern patLOOP = Pattern.compile("\\s*loop\\s+(.+)\\s*");
+	private static final Pattern patENDLOOP = Pattern.compile("\\s*end\\s+loop\\s*");
+	private static final Pattern patINCLUDE = Pattern.compile("\\s*include\\s+([^\\(]+)\\((.*)\\)\\s*");
 
 	private final CharSequence template;
 
@@ -208,7 +208,7 @@ public class TemplateLexer
 		matcher = patINCLUDE.matcher(tag);
 		if (matcher.matches())
 		{
-			rToken.add(new IncludeToken(matcher.group(1)));
+			rToken.add(new IncludeToken(matcher.group(1),matcher.group(2)));
 			return true;
 		}
 

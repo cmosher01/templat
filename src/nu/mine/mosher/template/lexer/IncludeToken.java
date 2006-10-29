@@ -5,30 +5,36 @@ package nu.mine.mosher.template.lexer;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.CharacterIterator;
+import java.text.StringCharacterIterator;
+import java.util.ArrayList;
 import nu.mine.mosher.template.Templat;
 import nu.mine.mosher.template.exception.TemplateLexingException;
 import nu.mine.mosher.template.exception.TemplateParsingException;
-import nu.mine.mosher.template.expr.Include;
-import nu.mine.mosher.template.expr.TemplateIncludeExpression;
+import nu.mine.mosher.template.expr.Expression;
 import nu.mine.mosher.template.parser.TemplateParser;
+import nu.mine.mosher.template.parser.context.ContextStack;
 
 
 class IncludeToken implements TemplateToken
 {
-	private final String tag;
+	private final String template;
+	private final String args;
 
 	/**
-	 * @param tag
+	 * @param template 
+	 * @param args 
 	 */
-	public IncludeToken(final String tag)
+	public IncludeToken(final String template, final String args)
 	{
-		this.tag = tag;
+		this.template = template.trim();
+		this.args = args;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "INCLUDE: "+this.tag;
+		return "INCLUDE: "+this.template+" ("+this.args+")";
 	}
 
 	public void parse(final TemplateParser parser, final Appendable appendTo) throws TemplateParsingException
@@ -53,10 +59,63 @@ class IncludeToken implements TemplateToken
 		{
 			return;
 		}
-		final TemplateIncludeExpression inclusion = Include.eval(this.tag,parser.getContext());
-		final String nameInclude = inclusion.getTemplateName()+".tat";
+
+		final String nameInclude = this.template+".tat";
 		final URL url = (URL)parser.getContext().getValue(TemplateParser.VAR_URL);
 		final Templat templateInclude = new Templat(new URL(url,nameInclude));
-		templateInclude.parse(appendTo,inclusion.getArgs().toArray());
+		templateInclude.parse(appendTo,splitArgs(parser.getContext()).toArray());
+	}
+
+	private ArrayList<Object> splitArgs(final ContextStack ctx) throws TemplateParsingException
+	{
+		final ArrayList<Object> rArg = new ArrayList<Object>();
+
+		int parens = 0;
+		final StringBuilder cur = new StringBuilder();
+
+		final StringCharacterIterator iter = new StringCharacterIterator(this.args);
+		for (char c = iter.first(); c != CharacterIterator.DONE; c = iter.next())
+		{
+			if (parens == 0)
+			{
+				if (c == '(')
+				{
+					++parens;
+					cur.append(c);
+				}
+				else if (c == ',')
+				{
+					eval(ctx,rArg,cur);
+				}
+				else
+				{
+					cur.append(c);
+				}
+			}
+			else
+			{
+				if (c == '(')
+				{
+					++parens;
+				}
+				else if (c == ')')
+				{
+					--parens;
+				}
+				cur.append(c);
+			}
+		}
+		eval(ctx,rArg,cur);
+		return rArg;
+	}
+
+	private static void eval(final ContextStack ctx, final ArrayList<Object> rArg, final StringBuilder cur) throws TemplateParsingException
+	{
+		final String arg = cur.toString().trim();
+		if (arg.length() > 0)
+		{
+			rArg.add(Expression.eval(arg,ctx));
+		}
+		cur.setLength(0);
 	}
 }

@@ -84,11 +84,4 @@ class ExprActions
 			throw new TemplateParsingException(e);
 		}
 	}
-
-
-
-	TemplateIncludeExpression createInclude(final Object tmplname, final Object arglist)
-	{
-		return new TemplateIncludeExpression(tmplname.toString(),(ArrayList<Object>)arglist);
-	}
 }
