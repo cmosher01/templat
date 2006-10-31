@@ -14,30 +14,30 @@ import nu.mine.mosher.template.parser.context.ContextStack;
  */
 class ExprActions
 {
-	final ContextStack ctx;
+	private final ContextStack ctx;
 
 
 
-	ExprActions(final ContextStack stackContext)
+	public ExprActions(final ContextStack stackContext)
 	{
 		this.ctx = stackContext;
 	}
 
 
 
-	ArrayList<Object> createList()
+	public ArrayList<Object> createList()
 	{
 	    return new ArrayList<Object>();
 	}
 
-	ArrayList<Object> addToList(final Object arg, final Object arglist)
+	public ArrayList<Object> addToList(final Object arg, final Object arglist)
 	{
 	    final ArrayList<Object> rArg = (ArrayList<Object>)arglist;
 	    rArg.add(arg);
 	    return rArg;
 	}
 
-	ArraySubscript createArraySubscript(final Object subscript) throws TemplateParsingException
+	public ArraySubscript createArraySubscript(final Object subscript) throws TemplateParsingException
 	{
 		try
 		{
@@ -49,12 +49,12 @@ class ExprActions
 		}
 	}
 
-	MethodCall createMethodCall(final Object nameMethod, final Object arglist)
+	public MethodCall createMethodCall(final Object nameMethod, final Object arglist)
 	{
 		return new MethodCall(nameMethod.toString(),(ArrayList<Object>)arglist);
 	}
 
-	Object applySelectors(final Object name, final Object selectors) throws TemplateParsingException
+	public Object applySelectors(final Object name, final Object selectors) throws TemplateParsingException
 	{
 		final String sVarName = name.toString();
 		final ArrayList<Object> rSelector = (ArrayList<Object>)selectors;
@@ -74,6 +74,7 @@ class ExprActions
 		{
 			return this.ctx.getValue(name);
 		}
+		// not a variable, so continue
 
 		try
 		{
@@ -81,7 +82,9 @@ class ExprActions
 		}
 		catch (final ClassNotFoundException e)
 		{
-			throw new TemplateParsingException(e);
+			// not a class, either, so continue
 		}
+
+		throw new TemplateParsingException( "Unknown variable: "+name);
 	}
 }
