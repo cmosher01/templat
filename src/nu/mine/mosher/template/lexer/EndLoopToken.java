@@ -16,10 +16,10 @@ class EndLoopToken implements TemplateToken
 
 	public void parse(final TemplateParser parser, final Appendable appendTo) throws TemplateParsingException
 	{
-		final Number numTimes = (Number)parser.getContext().getValue(TemplateParser.VAR_LOOP_TIMES);
+		final Number numTimes = (Number)parser.getContext().current().getValue(TemplateParser.VAR_LOOP_TIMES);
 		final int times = numTimes.intValue();
 
-		final String varIndex = (String)parser.getContext().getValue(TemplateParser.VAR_LOOP_INDEX);
+		final String varIndex = (String)parser.getContext().current().getValue(TemplateParser.VAR_LOOP_INDEX);
 		int i = (Integer)parser.getContext().getValue(varIndex);
 
 		++i;
