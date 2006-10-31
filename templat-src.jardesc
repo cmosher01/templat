@@ -11,18 +11,15 @@
 <javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template.expr.exception"/>
 <javaElement handleIdentifier="=templat/junit"/>
 <file path="/templat/.project"/>
-<javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template.expr{Include.java"/>
-<javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template.parser.context"/>
 <javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template.exception"/>
-<javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template.expr{TemplateIncludeExpression.java"/>
+<javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template.parser.context"/>
 <javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template"/>
-<file path="/templat/src/nu/mine/mosher/template/expr/include.yacc"/>
 <javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template.expr{ExprLexer.java"/>
 <javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template.expr{Selector.java"/>
 <javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template.expr{Expression.java"/>
 <file path="/templat/.classpath"/>
-<file path="/templat/src/nu/mine/mosher/template/expr/expr.yacc"/>
 <javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template.lexer"/>
+<file path="/templat/src/nu/mine/mosher/template/expr/expr.yacc"/>
 <javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template.expr{ExprActions.java"/>
 </selectedElements>
 </jardesc>
