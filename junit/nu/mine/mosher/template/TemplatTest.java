@@ -515,6 +515,12 @@ public class TemplatTest
 	}
 
 	@Test(expected=TemplateParsingException.class)
+	public void testSimpleSyntaxError2() throws IOException, TemplateLexingException, TemplateParsingException
+	{
+		assertTemplate(buildFile(""),buildFile("@x y z@"));
+	}
+
+	@Test(expected=TemplateParsingException.class)
 	public void testGetClassNotSupported() throws IOException, TemplateLexingException, TemplateParsingException
 	{
 		assertTemplate(buildFile(""),buildFile("@arg0.getClass()@"),new X());
