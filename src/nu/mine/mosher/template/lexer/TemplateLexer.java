@@ -28,7 +28,7 @@ public class TemplateLexer
 
 	private static enum LexerState
 	{
-		/** in a regular part of the file (outside of a tag */ IN_STRING,
+		/** in a regular part of the file (outside of a tag) */ IN_STRING,
 		/** in a tag (flanked by at signs) */ IN_TAG,
 		/** at the end of the file */ END,
 	}
@@ -37,7 +37,7 @@ public class TemplateLexer
 
 	private int pos = 0;
 
-	private StringBuilder strCurrent = new StringBuilder();
+	private final StringBuilder strCurrent = new StringBuilder();
 
 
 
@@ -143,15 +143,11 @@ public class TemplateLexer
 
 	private char getCurrent()
 	{
-		return getChar(this.pos);
-	}
-	private char getChar(final int posToGet)
-	{
-		if (posToGet >= this.template.length())
+		if (this.pos >= this.template.length())
 		{
 			return EOF;
 		}
-		return this.template.charAt(posToGet);
+		return this.template.charAt(this.pos);
 	}
 
 	private void advance()
