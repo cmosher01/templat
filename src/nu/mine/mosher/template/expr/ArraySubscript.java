@@ -11,7 +11,7 @@ class ArraySubscript implements Selector
 {
 	private final int subscript;
 
-	ArraySubscript(final int subscript)
+	public ArraySubscript(final int subscript)
 	{
 		this.subscript = subscript;
 	}
