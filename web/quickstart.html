@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>TemplAT Quick Start</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="templat.css" type="text/css" media="all" />
+</head>
+<body>
+
+
+
+<div class="level0">
+<div class="level1">
+
+
+
+<div>
+<h1>Quick Start</h1>
+<h2>Overview</h2>
+<div class="paragraph">
+TemplAT is a general purpose text file template engine. It allows a Java developer to construct templates of text files (HTML, SQL, etc.) with a simple programming language, and use the TemplAT API to render text files from the templates.
+</div>
+<h2>Simple Example</h2>
+<div class="paragraph">
+Once you have <strong>downloaded</strong> the <strong>templat.jar</strong> file and put it into your <strong>classpath</strong>,
+you can make a simple example program to demonstrate how TemplAT works.
+For example, <strong>create a text file</strong> called <strong>displayBooks.tat</strong>; this will be our <strong>template</strong>.
+</div>
+
+<div class="file_figure">
+<div class="file_caption">displayBooks.tat</div>
+<div class="file"><span class="directive">@<span class="keyword">template</span> displayBooks(books)@</span><br />
+We have the following books:<br />
+<span class="directive">@<span class="keyword">loop</span> b : books.size()@</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="directive">@books.get(b).getTitle()@</span> by <span class="directive">@books.get(b).getAuthor()@</span>.<br />
+<span class="directive">@<span class="keyword">end loop</span>@</span><br />
+</div>
+</div>
+
+<div class="paragraph">
+The <span class="directive">highlighted regions</span> represent tags that will be parsed by the <span class="java_em">Templat</span> class.
+Tags are surrounded by at-signs (<span class="directive">@</span>).
+The <span class="directive"><span class="keyword">template</span></span> tag defines this file as a template, and specifies its parameters.
+The <span class="directive"><span class="keyword">loop</span></span> tag starts a loop block, and identifies the loop counter variable and the number of times the loop block will be expanded.
+The expressions in the next line will be parsed by the <span class="java_em">Templat</span> class, and the returned values expanded into the resulting text.
+The <span class="directive"><span class="keyword">end loop</span></span> tag ends the loop block.
+</div>
+
+<div class="paragraph">
+Then <strong>create a Java program</strong> (JDK >= 5.0) that parses the template, given a list of books, and prints the results.
+</div>
+
+<div class="file_figure">
+<div class="file_caption">PrintBooks.java</div>
+<div class="file"><span class="keyword">import</span> java.io.IOException;<br />
+<span class="keyword">import</span> java.util.ArrayList;<br />
+<span class="keyword">import</span> java.util.List;<br />
+<span class="keyword">import</span> net.sourceforge.templat.Templat;<br />
+<span class="keyword">import</span> net.sourceforge.templat.exception.TemplateLexingException;<br />
+<span class="keyword">import</span> net.sourceforge.templat.exception.TemplateParsingException;<br />
+<br />
+<span class="keyword">public class</span> PrintBooks<br />
+{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// A simplified structure that represents one book</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public static class</span> Book<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">private final</span> String author;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">private final</span> String title;<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span> Book(String a, String t) { author = a; title = t; }<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span> String getAuthor() { <span class="keyword">return</span> this.author;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span> String getTitle() { <span class="keyword">return</span> this.title;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public static void</span> main(String[] arg)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throws</span> TemplateLexingException, TemplateParsingException, IOException<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// This is our inventory of books:</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Book&gt; books = <span class="keyword">new</span> ArrayList&lt;Book&gt;();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;books.add(<span class="keyword">new</span> Book("Rudyard Kipling","The Jungle Book"));<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;books.add(<span class="keyword">new</span> Book("Mary Shelley","Frankenstein"));<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;books.add(<span class="keyword">new</span> Book("Oscar Wilde","The Picture of Dorian Gray"));<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Get our displayBooks template:</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="java_em">Templat tat = <span class="keyword">new</span> Templat(PrintBooks.<span class="keyword">class</span>.getResource("displayBooks.tat"));</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/*<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * Render the template, passing our array of books for<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * the argument, and put the result into the StringBuilder.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Appendable result = <span class="keyword">new</span> StringBuilder();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="java_em">tat.parse(result,books);</span><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Print out the result</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(result);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+}<br />
+</div>
+</div>
+
+<div class="paragraph">
+Compiling and running the program produces the following output:
+</div>
+<div class="file_figure">
+<div class="file_caption">java -cp .;templat.jar PrintBooks</div>
+<div class="file">
+We have the following books:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;The Jungle Book by Rudyard Kipling.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Frankenstein by Mary Shelley.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;The Picture of Dorian Gray by Oscar Wilde.<br />
+</div>
+</div>
+
+</div>
+
+
+
+
+</div>
+
+<div class="menu">
+<a href="index.html">TemplAT Home</a><br />
+Quick Start<br />
+<a href="quickref.html">Quick Reference</a><br />
+<a href="manual.html">Manual</a><br />
+<a href="http://sourceforge.net/projects/templat">Sourceforge</a><br />
+</div>
+
+</div>
+
+<div>
+<a href="http://validator.w3.org/check?uri=referer" title="Check this page">
+<img src="http://www.w3.org/Icons/valid-xhtml11" alt="Valid XHTML 1.1" height="31" width="88" />
+</a>
+</div>
+
+
+
+</body>
+</html>

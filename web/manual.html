@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>TemplAT</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="templat.css" type="text/css" media="all" />
+</head>
+<body>
+
+<div class="level0">
+<div class="level1">
+
+
+
+<div>
+
+<h1>Manual</h1>
+
+<h2>TemplAT File Syntax</h2>
+
+<h3>template</h3>
+<div style="position:relative; left: 2em">
+&nbsp;&nbsp;&nbsp;<span class="directive">@&nbsp;<span class="keyword">template</span>&nbsp;<span class="var">template-name</span>(&nbsp;<span class="var">parameter1</span>,&nbsp;<span class="var">parameter2</span>,&nbsp;<span class="var">...</span>&nbsp;)&nbsp;@</span><br />
+<span class="var">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;template-body</span><br />
+</div>
+<div class="paragraph">
+The <span class="directive"><span class="keyword">template</span></span> tag defines the file as a
+template to be parsed by the <span class="java_em">Templat</span> class. It must be at the start of
+every template file. <span class="directive"><span class="var">template-name</span></span>
+is the name of this template. This name must be the
+same as the name of the file containing this template, without the ".tat" filetype.
+Following the name, in parentheses, is an optional comma-delimited list of
+<span class="directive"><span class="var">parameter</span></span>s for this template.
+Following the <span class="directive"><span class="keyword">template</span></span> tag
+is the <span class="var">template-body</span> (the rest of the file), which may contain other tags (ifs, loops, includes, or expressions).
+Areas of the template that are not within any tag will be passed through verbatim to the output.
+</div>
+
+<h3>expression</h3>
+<div style="position:relative; left: 2em">
+&nbsp;&nbsp;&nbsp;<span class="directive">@&nbsp;<span class="var">expression</span>&nbsp;@</span>
+</div>
+<div class="paragraph">
+Any tag that does not start with one of TemplAT's keywords will be treated as an expression.
+An expression can be a variable name, a class name, or an integer literal. Classes or variables
+may futher have method calls or subscripts (for arrays or Lists). Further details are available in
+the <a href="expression.html">expression</a> reference.
+</div>
+
+<h3>if</h3>
+<div style="position:relative; left: 2em">
+&nbsp;&nbsp;&nbsp;<span class="directive">@&nbsp;<span class="keyword">if</span>&nbsp;(&nbsp;<span class="var">boolean-expression</span>&nbsp;)&nbsp;@</span><br />
+<span class="var">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if-body</span><br />
+[&nbsp;&nbsp;<span class="directive">@&nbsp;<span class="keyword">else</span>&nbsp;@</span><br />
+<span class="var">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else-body</span>&nbsp;&nbsp;]<br />
+&nbsp;&nbsp;&nbsp;<span class="directive">@&nbsp;<span class="keyword">end&nbsp;if</span>&nbsp;@</span>
+</div>
+<div class="paragraph">
+The <span class="directive"><span class="keyword">if</span></span> and <span class="directive"><span class="keyword">end if</span></span> tags,
+and optional <span class="directive"><span class="keyword">else</span></span> tag, define a conditional expansion.
+The <span class="directive"><span class="var">boolean-expression</span></span> is evaluated; if the result is true,
+the <span class="var">if-body</span> is (parsed and) expanded to the output. Otherwise,
+the <span class="var">else-body</span>, if it exists, is (parsed and) expanded to the
+output. Note that either body (or both) may contain template tags and/or plain text areas.
+</div>
+
+<h3>loop</h3>
+<div style="position:relative; left: 2em">
+&nbsp;&nbsp;&nbsp;<span class="directive">@&nbsp;<span class="keyword">loop</span>&nbsp;<span class="var">variable</span>&nbsp;:&nbsp;<span class="var">count-expression</span>&nbsp;@</span><br />
+<span class="var">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;loop-body</span><br />
+&nbsp;&nbsp;&nbsp;<span class="directive">@&nbsp;<span class="keyword">end&nbsp;loop</span>&nbsp;@</span>
+</div>
+<div class="paragraph">
+The <span class="directive"><span class="keyword">loop</span></span> and <span class="directive"><span class="keyword">end loop</span></span> tags
+define a repeated expansion. The <span class="directive"><span class="var">count-expression</span></span> is evaluated, and
+the <span class="var">loop-body</span> is (parsed and) expanded that many times to the output. If the count is less than or equal to zero, then
+the <span class="var">loop-body</span> will not be expanded. Within the <span class="var">loop-body</span>, the
+<span class="directive"><span class="var">variable</span></span> may be referenced within any expression in any tag. The
+<span class="directive"><span class="var">variable</span></span> will be a Java Integer. It will hold the value
+zero on the first iteration of the loop, one on the next iteration, etc., up to count minus 1 on the final interation.
+</div>
+
+<h3>include</h3>
+<div style="position:relative; left: 2em">
+&nbsp;&nbsp;&nbsp;<span class="directive">@&nbsp;<span class="keyword">include</span>&nbsp;<span class="var">template-path</span>(&nbsp;<span class="var">argument1</span>,&nbsp;<span class="var">argument2</span>,&nbsp;<span class="var">...</span>&nbsp;)&nbsp;@</span>
+</div>
+<div class="paragraph">
+The <span class="directive"><span class="keyword">include</span></span> tag parses and expands
+another template file.
+<span class="directive"><span class="var">template-path</span></span> is the (optional path and) name
+of the template to be included. The path is interpreted relative to the including template. The
+file name of the included template will be the specified name followed by ".tat" filetype. Following
+the <span class="directive"><span class="var">template-path</span></span>, within parentheses, you must specify
+the <span class="directive"><span class="var">argument</span></span>s required by the included template. These
+<span class="directive"><span class="var">argument</span></span>s will be bound to the
+<span class="directive"><span class="var">parameter</span></span>s defined
+by the included template when it is parsed.
+</div>
+
+<h2>TemplAT API</h2>
+<div class="paragraph">
+Parsing templates is accomplished by the developer writing a Java application (or servlet) and
+using the TemplAT API. The TemplAT API is very simple and straightforward, consisting of basically one
+class and one method.
+</div>
+<div class="paragraph">
+The class to use is:
+<div style="font-family:monospace; text-indent:4em;">nu.mine.mosher.template.Templat</div>
+</div>
+<div class="paragraph">
+Create an instance of this class, and pass the template's URL to the constructor:
+<div style="font-family:monospace; text-indent:4em;">Templat(URL template)</div>
+</div>
+<div class="paragraph">
+To actually parse the template, process the instructions, and generate the output, call the parse method:
+<div style="font-family:monospace; text-indent:4em;">void parse(Appendable result, Object... arguments)</div>
+</div>
+
+
+
+
+</div>
+
+
+
+</div>
+
+<div class="menu">
+<a href="index.html">TemplAT Home</a><br />
+<a href="quickstart.html">Quick Start</a><br />
+<a href="quickref.html">Quick Reference</a><br />
+Manual<br />
+<a href="http://sourceforge.net/projects/templat">Sourceforge</a><br />
+</div>
+
+</div>
+
+<div>
+<a href="http://validator.w3.org/check?uri=referer" title="Check this page">
+<img src="http://www.w3.org/Icons/valid-xhtml11" alt="Valid XHTML 1.1" height="31" width="88" />
+</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+body
+{
+	font-family: sans-serif;
+}
+.paragraph
+{
+    margin-top: 1em;
+}
+.file_figure
+{
+    font-family: monospace;
+    font-size: smaller;
+    margin-top: 1em;
+    margin-right: 4em;
+    margin-bottom: 1em;
+    margin-left: 4em;
+}
+.file_caption
+{
+    padding-left: 3px;
+}
+.file
+{
+    border: thin solid gray;
+	color: inherit;
+    background-color: #F5FFFA;
+    padding: 3px;
+    line-height: 140%;
+}
+.directive
+{
+    font-family: monospace;
+	color: inherit;
+    background-color: #FFDEAD;
+}
+.java_em
+{
+    font-weight: bold;
+}
+.keyword
+{
+    color: blue;
+    background-color: inherit;
+}
+.comment
+{
+    color: green;
+    background-color: inherit;
+}
+.var
+{
+	font-family: serif;
+	font-style: italic;
+	font-size: smaller;
+	color: #808080;
+    background-color: inherit;
+}
+h1
+{
+	color: white;
+	background-color: #708090;
+}
+h2
+{
+}
+.menu
+{
+	position: absolute;
+	top: 1em;
+	padding: 1em;
+	width: 10em;
+	line-height: 150%;
+	font-size: smaller;
+}
+.level0
+{
+	color: inherit;
+	background: #CCFFCC;
+}
+.level1
+{
+	margin-left: 10em;
+	padding-left: 1em;
+	color: inherit;
+	background: white;
+}
+a img
+{
+	border: none;
+}

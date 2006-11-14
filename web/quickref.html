@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>TemplAT</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="templat.css" type="text/css" media="all" />
+</head>
+<body>
+
+<div class="level0">
+<div class="level1">
+
+
+
+<div>
+
+<h1>Quick Reference</h1>
+
+<h2>Template File Syntax</h2>
+
+<h3>template</h3>
+<div style="position:relative; left: 2em">
+&nbsp;&nbsp;&nbsp;<span class="directive">@&nbsp;<span class="keyword">template</span>&nbsp;<span class="var">template-name</span>(&nbsp;<span class="var">parameter1</span>,&nbsp;<span class="var">parameter2</span>,&nbsp;<span class="var">...</span>&nbsp;)&nbsp;@</span><br />
+<span class="var">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;template-body</span><br />
+</div>
+
+<h3>expression</h3>
+<div style="position:relative; left: 2em">
+&nbsp;&nbsp;&nbsp;<span class="directive">@&nbsp;<span class="var">expression</span>&nbsp;@</span>
+</div>
+
+<h3>if</h3>
+<div style="position:relative; left: 2em">
+&nbsp;&nbsp;&nbsp;<span class="directive">@&nbsp;<span class="keyword">if</span>&nbsp;(&nbsp;<span class="var">boolean-expression</span>&nbsp;)&nbsp;@</span><br />
+<span class="var">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if-body</span><br />
+[&nbsp;&nbsp;<span class="directive">@&nbsp;<span class="keyword">else</span>&nbsp;@</span><br />
+<span class="var">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else-body</span>&nbsp;&nbsp;]<br />
+&nbsp;&nbsp;&nbsp;<span class="directive">@&nbsp;<span class="keyword">end&nbsp;if</span>&nbsp;@</span>
+</div>
+
+<h3>loop</h3>
+<div style="position:relative; left: 2em">
+&nbsp;&nbsp;&nbsp;<span class="directive">@&nbsp;<span class="keyword">loop</span>&nbsp;<span class="var">variable</span>&nbsp;:&nbsp;<span class="var">count-expression</span>&nbsp;@</span><br />
+<span class="var">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;loop-body</span><br />
+&nbsp;&nbsp;&nbsp;<span class="directive">@&nbsp;<span class="keyword">end&nbsp;loop</span>&nbsp;@</span>
+</div>
+
+<h3>include</h3>
+<div style="position:relative; left: 2em">
+&nbsp;&nbsp;&nbsp;<span class="directive">@&nbsp;<span class="keyword">include</span>&nbsp;<span class="var">template-path</span>(&nbsp;<span class="var">argument1</span>,&nbsp;<span class="var">argument2</span>,&nbsp;<span class="var">...</span>&nbsp;)&nbsp;@</span>
+</div>
+
+<h2>Calling from Java</h2>
+
+<div class="file_figure">
+<div class="file">
+<span class="keyword">include</span> net.sourceforge.templat.Templat;<br />
+<br />
+Templat tat = <span class="keyword">new</span> Templat( <span class="var">template-file-URL</span> );<br />
+<br />
+Appendable result = <span class="keyword">new</span> StringBuilder();<br />
+tat.parse(result, <span class="var">argument1</span>, <span class="var">argument2</span>, <span class="var">...</span> );
+</div>
+</div>
+
+</div>
+
+
+
+</div>
+
+<div class="menu">
+<a href="index.html">TemplAT Home</a><br />
+<a href="quickstart.html">Quick Start</a><br />
+Quick Reference<br />
+<a href="manual.html">Manual</a><br />
+<a href="http://sourceforge.net/projects/templat">Sourceforge</a><br />
+</div>
+
+</div>
+
+<div>
+<a href="http://validator.w3.org/check?uri=referer" title="Check this page">
+<img src="http://www.w3.org/Icons/valid-xhtml11" alt="Valid XHTML 1.1" height="31" width="88" />
+</a>
+</div>
+
+</body>
+</html>
