@@ -1,7 +1,7 @@
 /*
  * Created on Oct 11, 2006
  */
-package nu.mine.mosher.template;
+package net.sourceforge.templat;
 
 import static org.junit.Assert.assertEquals;
 import java.io.BufferedWriter;
@@ -15,8 +15,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
-import nu.mine.mosher.template.exception.TemplateLexingException;
-import nu.mine.mosher.template.exception.TemplateParsingException;
+import net.sourceforge.templat.Templat;
+import net.sourceforge.templat.exception.TemplateLexingException;
+import net.sourceforge.templat.exception.TemplateParsingException;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -712,6 +713,11 @@ public class TemplatTest
 		assertTemplateInclude(buildFile("777"),buildFile("@include XXX(arg0.r()[arg0.x(arg0.y(),arg0.z())],arg1.x(arg1.y(),arg1.z()),arg2.get(arg2.x(arg2.y(),arg2.z())))@"),buildFile("@arg0@@arg1@@arg2@"),3,xyz,xyz,xyz);
 	}
 
+	@Test(expected=TemplateParsingException.class)
+	public void testYyerror() throws IOException, TemplateLexingException, TemplateParsingException
+	{
+		assertTemplate(buildFile(""),buildFile("line1","line2","line3","line4","@x12345678.()@"));
+	}
 
 
 
