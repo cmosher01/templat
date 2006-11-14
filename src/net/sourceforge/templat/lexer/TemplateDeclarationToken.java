@@ -1,0 +1,65 @@
+/*
+ * Created on Sep 4, 2005
+ */
+package net.sourceforge.templat.lexer;
+
+import java.util.List;
+import java.util.StringTokenizer;
+import net.sourceforge.templat.exception.TemplateParsingException;
+import net.sourceforge.templat.parser.TemplateParser;
+import net.sourceforge.templat.parser.context.TemplateParserContext;
+
+class TemplateDeclarationToken implements TemplateToken
+{
+	private final String tag;
+
+	/**
+	 * @param tag
+	 */
+	public TemplateDeclarationToken(final String tag)
+	{
+		this.tag = tag;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "TEMPLATE DECLARATION: "+this.tag;
+	}
+
+	public void parse(final TemplateParser parser, final Appendable appendTo) throws TemplateParsingException
+	{
+		final int posLeftParen = this.tag.indexOf('(');
+		if (posLeftParen < 0)
+		{
+			throw new TemplateParsingException("Expecting ( in template definition: "+this.tag);
+		}
+		final int posRightParen = this.tag.indexOf(')');
+		if (posRightParen < 0)
+		{
+			throw new TemplateParsingException("Expecting ) in template definition: "+this.tag);
+		}
+
+		final List<Object> rArgs = (List<Object>)parser.getContext().getValue(TemplateParser.VAR_ARGS);
+
+		final TemplateParserContext ctxNew = new TemplateParserContext();
+
+		final String sArgList = this.tag.substring(posLeftParen+1,posRightParen);
+		final StringTokenizer st = new StringTokenizer(sArgList,", ");
+
+		if (st.countTokens() != rArgs.size())
+		{
+			throw new TemplateParsingException("Wrong number of arguments; got "+rArgs.size()+", expected "+st.countTokens());
+		}
+
+		int iArg = 0;
+		while (st.hasMoreTokens())
+		{
+			final String argName = st.nextToken();
+			ctxNew.addVariable(argName,rArgs.get(iArg));
+			++iArg;
+		}
+
+		parser.getContext().push(ctxNew);
+	}
+}

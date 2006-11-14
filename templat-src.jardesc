@@ -5,21 +5,21 @@
 <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
 <selectedProjects/>
 <selectedElements exportClassFiles="false" exportJavaFiles="true" exportOutputFolder="false">
-<javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template.expr{ArraySubscript.java"/>
-<javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template.parser"/>
-<javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template.expr{MethodCall.java"/>
-<javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template.expr.exception"/>
+<javaElement handleIdentifier="=templat/src&lt;net.sourceforge.templat.expr{ArraySubscript.java"/>
+<javaElement handleIdentifier="=templat/src&lt;net.sourceforge.templat.parser"/>
+<javaElement handleIdentifier="=templat/src&lt;net.sourceforge.templat.expr{MethodCall.java"/>
+<javaElement handleIdentifier="=templat/src&lt;net.sourceforge.templat.expr.exception"/>
 <javaElement handleIdentifier="=templat/junit"/>
 <file path="/templat/.project"/>
-<javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template.exception"/>
-<javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template.parser.context"/>
-<javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template"/>
-<javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template.expr{ExprLexer.java"/>
-<javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template.expr{Selector.java"/>
-<javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template.expr{Expression.java"/>
+<javaElement handleIdentifier="=templat/src&lt;net.sourceforge.templat.exception"/>
+<javaElement handleIdentifier="=templat/src&lt;net.sourceforge.templat.parser.context"/>
+<javaElement handleIdentifier="=templat/src&lt;net.sourceforge.templat"/>
+<javaElement handleIdentifier="=templat/src&lt;net.sourceforge.templat.expr{ExprLexer.java"/>
+<javaElement handleIdentifier="=templat/src&lt;net.sourceforge.templat.expr{Selector.java"/>
+<javaElement handleIdentifier="=templat/src&lt;net.sourceforge.templat.expr{Expression.java"/>
 <file path="/templat/.classpath"/>
-<javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template.lexer"/>
+<javaElement handleIdentifier="=templat/src&lt;net.sourceforge.templat.lexer"/>
 <file path="/templat/src/nu/mine/mosher/template/expr/expr.yacc"/>
-<javaElement handleIdentifier="=templat/src&lt;nu.mine.mosher.template.expr{ExprActions.java"/>
+<javaElement handleIdentifier="=templat/src&lt;net.sourceforge.templat.expr{ExprActions.java"/>
 </selectedElements>
 </jardesc>

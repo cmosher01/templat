@@ -8,9 +8,9 @@ import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import nu.mine.mosher.template.Templat;
-import nu.mine.mosher.template.exception.TemplateLexingException;
-import nu.mine.mosher.template.exception.TemplateParsingException;
+import net.sourceforge.templat.Templat;
+import net.sourceforge.templat.exception.TemplateLexingException;
+import net.sourceforge.templat.exception.TemplateParsingException;
 
 /**
  * Main command-line program for the <code>Templat</code> class.
