@@ -131,7 +131,7 @@ public Object parse() throws ExprLexingException, ExprParsingException, Template
 
 private void yyerror(final String s) throws ExprParsingException
 {
-    throw new ExprParsingException(s+" while parsing string: "+this.lexer);
+    throw new ExprParsingException(s+" at \'"+getCharForMessage()+"\' while parsing expression: "+this.lexer);
 }
 
 private int yylex() throws ExprLexingException
@@ -144,4 +144,39 @@ private int yylex() throws ExprLexingException
 		return 0;
 	}
 	return token.getTokenType();
+}
+
+private String getCharForMessage()
+{
+	if (yychar < 0x100)
+	{
+		return Character.toString((char)yychar);
+	}
+
+	if (yychar == EOF)
+	{
+		return "(EOF)";
+	}
+
+	if (yychar == DOT)
+	{
+		return ".";
+	}
+
+	if (yychar == COMMA)
+	{
+		return ",";
+	}
+
+	if (yychar == NUM)
+	{
+		return "(NUMBER)";
+	}
+
+	if (yychar == EOF)
+	{
+		return "(IDENT)";
+	}
+
+	return "(unknown)";
 }
