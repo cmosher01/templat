@@ -16,6 +16,7 @@ import net.sourceforge.templat.exception.TemplateLexingException;
 public class TemplateLexer
 {
 	private static final char EOF = '\uFFFF';
+
 	private static final Pattern patTEMPLATE = Pattern.compile("\\s*template\\s+(.+)\\s*");
 	private static final Pattern patIF = Pattern.compile("\\s*if\\s+\\((.+)\\)\\s*");
 	private static final Pattern patELSE = Pattern.compile("\\s*else\\s*");
@@ -24,7 +25,11 @@ public class TemplateLexer
 	private static final Pattern patENDLOOP = Pattern.compile("\\s*end\\s+loop\\s*");
 	private static final Pattern patINCLUDE = Pattern.compile("\\s*include\\s+([^\\(]+)\\((.*)\\)\\s*");
 
+
+
 	private final CharSequence template;
+
+
 
 	private static enum LexerState
 	{
@@ -61,7 +66,7 @@ public class TemplateLexer
 		while (this.state != LexerState.END)
 		{
 			transition(rToken);
-			advance();
+			++this.pos;
 		}
 		this.state = LexerState.IN_STRING;
 		this.pos = 0;
@@ -70,7 +75,7 @@ public class TemplateLexer
 
 	private void transition(final List<TemplateToken> rToken) throws TemplateLexingException
 	{
-		char c = getCurrent();
+		final char c = getCurrent();
 
 		switch (this.state)
 		{
@@ -78,20 +83,12 @@ public class TemplateLexer
 			{
 				if (c == '@')
 				{
-					if (this.strCurrent.length() > 0)
-					{
-						rToken.add(new StringToken(this.strCurrent.toString()));
-						this.strCurrent.setLength(0);
-					}
+					rToken.add(tokenizeString());
 					this.state = LexerState.IN_TAG;
 				}
 				else if (c == EOF)
 				{
-					if (this.strCurrent.length() > 0)
-					{
-						rToken.add(new StringToken(this.strCurrent.toString()));
-						this.strCurrent.setLength(0);
-					}
+					rToken.add(tokenizeString());
 					this.state = LexerState.END;
 				}
 				else
@@ -111,19 +108,12 @@ public class TemplateLexer
 					if (this.strCurrent.length() == 0)
 					{
 						this.strCurrent.append(c);
-						this.state = LexerState.IN_STRING;
 					}
 					else
 					{
-						final String tag = this.strCurrent.toString();
-
-						if (!matchKeyword(tag,rToken))
-						{
-							rToken.add(new ValueToken(tag));
-						}
-						this.state = LexerState.IN_STRING;
-						this.strCurrent.setLength(0);
+						rToken.add(tokenizeTag());
 					}
+					this.state = LexerState.IN_STRING;
 				}
 				else if (c == EOF)
 				{
@@ -137,77 +127,72 @@ public class TemplateLexer
 			break;
 
 			case END:
+			{
 				throw new IllegalStateException();
+			}
 		}
 	}
 
 	private char getCurrent()
 	{
-		if (this.pos >= this.template.length())
+		try
+		{
+			return this.template.charAt(this.pos);
+		}
+		catch (final IndexOutOfBoundsException e)
 		{
 			return EOF;
 		}
-		return this.template.charAt(this.pos);
 	}
 
-	private void advance()
+	private TemplateToken tokenizeString()
 	{
-		++this.pos;
-	}
+		final TemplateToken ret = new StringToken(this.strCurrent.toString());
 
-	private boolean matchKeyword(final String tag, final List<TemplateToken> rToken)
+		this.strCurrent.setLength(0);
+
+		return ret;
+	}
+	private TemplateToken tokenizeTag()
 	{
+		final TemplateToken ret;
 		Matcher matcher;
 
-		matcher = patTEMPLATE.matcher(tag);
-		if (matcher.matches())
+		if ((matcher = patTEMPLATE.matcher(this.strCurrent)).matches())
 		{
-			rToken.add(new TemplateDeclarationToken(matcher.group(1)));
-			return true;
+			ret = new TemplateDeclarationToken(matcher.group(1));
+		}
+		else if ((matcher = patIF.matcher(this.strCurrent)).matches())
+		{
+			ret = new IfToken(matcher.group(1));
+		}
+		else if ((matcher = patELSE.matcher(this.strCurrent)).matches())
+		{
+			ret = new ElseToken();
+		}
+		else if ((matcher = patENDIF.matcher(this.strCurrent)).matches())
+		{
+			ret = new EndIfToken();
+		}
+		else if ((matcher = patLOOP.matcher(this.strCurrent)).matches())
+		{
+			ret = new LoopToken(matcher.group(1));
+		}
+		else if ((matcher = patENDLOOP.matcher(this.strCurrent)).matches())
+		{
+			ret = new EndLoopToken();
+		}
+		else if ((matcher = patINCLUDE.matcher(this.strCurrent)).matches())
+		{
+			ret = new IncludeToken(matcher.group(1),matcher.group(2));
+		}
+		else
+		{
+			ret = new ValueToken(this.strCurrent.toString());
 		}
 
-		matcher = patIF.matcher(tag);
-		if (matcher.matches())
-		{
-			rToken.add(new IfToken(matcher.group(1)));
-			return true;
-		}
+		this.strCurrent.setLength(0);
 
-		matcher = patELSE.matcher(tag);
-		if (matcher.matches())
-		{
-			rToken.add(new ElseToken());
-			return true;
-		}
-
-		matcher = patENDIF.matcher(tag);
-		if (matcher.matches())
-		{
-			rToken.add(new EndIfToken());
-			return true;
-		}
-
-		matcher = patLOOP.matcher(tag);
-		if (matcher.matches())
-		{
-			rToken.add(new LoopToken(matcher.group(1)));
-			return true;
-		}
-
-		matcher = patENDLOOP.matcher(tag);
-		if (matcher.matches())
-		{
-			rToken.add(new EndLoopToken());
-			return true;
-		}
-
-		matcher = patINCLUDE.matcher(tag);
-		if (matcher.matches())
-		{
-			rToken.add(new IncludeToken(matcher.group(1),matcher.group(2)));
-			return true;
-		}
-
-		return false;
+		return ret;
 	}
 }
