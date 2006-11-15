@@ -65,7 +65,7 @@ class MethodCall implements Selector
 
 		if (this.sNameMethod.equals("getClass") && this.rArg.size() == 0)
 		{
-			throw new TemplateParsingException("Calling method getClass() is not supported.");
+			throw new TemplateParsingException("calling method getClass is not supported.");
 		}
 
 		final Map<String,Set<Method>> mapMethods = new HashMap<String,Set<Method>>();
@@ -79,16 +79,7 @@ class MethodCall implements Selector
 	{
 		if (!mapMethods.containsKey(this.sNameMethod))
 		{
-			final StringBuilder sb = new StringBuilder(256);
-			sb.append("cannot find method ");
-			sb.append(this.sNameMethod);
-			sb.append("; known method names: ");
-			for (final String name : mapMethods.keySet())
-			{
-				sb.append(name);
-				sb.append(" ");
-			}
-			throw new TemplateParsingException(sb.toString());
+			throw new TemplateParsingException("cannot find method "+this.sNameMethod);
 		}
 
 		for (final Method method : mapMethods.get(this.sNameMethod))
@@ -100,7 +91,7 @@ class MethodCall implements Selector
 			}
 		}
 
-		throw new TemplateParsingException("cannot find method with matching parameter types");
+		throw new TemplateParsingException("cannot find method "+this.sNameMethod+" with matching parameter types");
 	}
 
 	private static void getMethods(final Class<?> clas, Map<String,Set<Method>> mapMethod)
