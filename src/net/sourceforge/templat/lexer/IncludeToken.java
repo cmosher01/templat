@@ -63,7 +63,7 @@ class IncludeToken implements TemplateToken
 		final String nameInclude = this.template+".tat";
 		final URL url = (URL)parser.getContext().getValue(TemplateParser.VAR_URL);
 		final Templat templateInclude = new Templat(new URL(url,nameInclude));
-		templateInclude.parse(appendTo,splitArgs(parser.getContext()).toArray());
+		templateInclude.render(appendTo,splitArgs(parser.getContext()).toArray());
 	}
 
 	private ArrayList<Object> splitArgs(final ContextStack ctx) throws TemplateParsingException

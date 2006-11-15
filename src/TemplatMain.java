@@ -37,7 +37,7 @@ public class TemplatMain
 		final Templat templat = new Templat(fileTemplat.toURL());
 
 		final StringBuilder sbResult = new StringBuilder();
-		templat.parse(sbResult);
+		templat.render(sbResult);
 
 		final BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(FileDescriptor.out),"UTF-8"));
 		out.write(sbResult.toString());

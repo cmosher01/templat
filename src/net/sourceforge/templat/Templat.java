@@ -56,7 +56,7 @@ public class Templat
 
 
 	/**
-	 * Parses this template. The arguments, if any, are passed to the template itself,
+	 * Renders this template. The arguments, if any, are passed to the template itself,
 	 * and bound to the parameters specified in the template definition. The result of
 	 * parsing the template is appended to the given <code>Appendable</code>.
 	 * 
@@ -66,7 +66,7 @@ public class Templat
 	 * @throws TemplateParsingException
 	 * @throws IOException
 	 */
-	public void parse(final Appendable appendTo, final Object... rArg) throws TemplateLexingException, TemplateParsingException, IOException
+	public void render(final Appendable appendTo, final Object... rArg) throws TemplateLexingException, TemplateParsingException, IOException
 	{
 		final StringBuilder sb = new StringBuilder(8192);
 		appendTemplate(this.url,sb);

@@ -47,7 +47,7 @@ The <span class="directive"><span class="keyword">end loop</span></span> tag end
 </div>
 
 <div class="paragraph">
-Then <strong>create a Java program</strong> (JDK >= 5.0) that parses the template, given a list of books, and prints the results.
+Then <strong>create a Java program</strong> (JDK >= 5.0) that renders the template (given a list of books), and prints the results.
 </div>
 
 <div class="file_figure">
@@ -90,7 +90,7 @@ Then <strong>create a Java program</strong> (JDK >= 5.0) that parses the templat
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * the argument, and put the result into the StringBuilder.<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Appendable result = <span class="keyword">new</span> StringBuilder();<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="java_em">tat.parse(result,books);</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="java_em">tat.render(result,books);</span><br />
 <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Print out the result</span><br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(result);<br />

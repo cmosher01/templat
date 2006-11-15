@@ -750,7 +750,7 @@ public class TemplatTest
 			final Templat templat = new Templat(file.toURL());
 
 			final StringBuilder sb = new StringBuilder(256);
-			templat.parse(sb,args);
+			templat.render(sb,args);
 	
 			assertEquals(expected,sb.toString());
 		}
@@ -778,7 +778,7 @@ public class TemplatTest
 			final Templat templat = new Templat(file.toURL());
 	
 			final StringBuilder sb = new StringBuilder(256);
-			templat.parse(sb,args);
+			templat.render(sb,args);
 	
 			for (int i = 0; i < NEWLINELENGTH; ++i)
 			{
