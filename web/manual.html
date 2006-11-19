@@ -33,7 +33,6 @@ Following the name, in parentheses, is an optional comma-delimited list of
 <span class="directive"><span class="var">parameter</span></span>s for this template.
 Following the <span class="directive"><span class="keyword">template</span></span> tag
 is the <span class="var">template-body</span> (the rest of the file), which may contain other tags (ifs, loops, includes, or expressions).
-Areas of the template that are not within any tag will be passed through verbatim to the output.
 </div>
 
 <h3>expression</h3>
@@ -95,6 +94,15 @@ the <span class="directive"><span class="var">argument</span></span>s required b
 <span class="directive"><span class="var">argument</span></span>s will be bound to the
 <span class="directive"><span class="var">parameter</span></span>s defined
 by the included template when it is parsed.
+</div>
+
+<h3>text</h3>
+<div class="paragraph">
+Areas of the template that are not within any tag will be passed through verbatim to the output.
+The one exception is that text cannot contain an at-sign by itself (because an at-sign defines the
+start of a tag). Use two at-signs in a row ("@@") in text to indicate a single at-sign in the rendered output.
+For example, "john@@example.com" in text within a template would be rendered as "john@example.com" in the
+output. However, "john@example.com" in the text would result in a syntax error at render-time.
 </div>
 
 <h2>TemplAT API</h2>
