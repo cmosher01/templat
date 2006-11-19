@@ -1,0 +1,49 @@
+body
+{
+	font-family: sans-serif;
+	font-size: 10pt;
+}
+
+h1
+{
+	font-size: 145%
+}
+
+/* Table colors */
+.TableHeadingColor     { color: #FFFFFF; background-color: #708090 }
+.TableSubHeadingColor  { background-color: #EEEEFF }
+.TableRowColor         { background-color: #FFFFFF }
+
+/* Font used in left-hand frame lists */
+.FrameTitleFont   { font-size: 100%; }
+.FrameHeadingFont { font-size:  90%; }
+.FrameItemFont    { font-size:  90%; }
+
+/* Navigation bar fonts and colors */
+.NavBarCell1    { background-color:#EEEEFF;}
+.NavBarCell1Rev { background-color:#00008B;}
+.NavBarFont1    { color:#000000;}
+.NavBarFont1Rev { color:#FFFFFF;}
+
+.NavBarCell2    { }
+.NavBarCell3    { }
+
+.directive
+{
+    font-family: monospace;
+	color: inherit;
+    background-color: #FFDEAD;
+}
+.keyword
+{
+    color: blue;
+    background-color: inherit;
+}
+.var
+{
+	font-family: serif;
+	font-style: italic;
+	font-size: smaller;
+	color: #808080;
+    background-color: inherit;
+}

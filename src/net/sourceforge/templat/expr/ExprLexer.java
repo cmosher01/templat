@@ -1,5 +1,5 @@
 /*
- * Created on Sep 26, 2005
+ * Created on 2005-09-26
  */
 package net.sourceforge.templat.expr;
 
@@ -29,6 +29,10 @@ class ExprLexer
 		this.buffer = new Buffer(stringToLex);
 	}
 
+	/**
+	 * Gets the string being lexed, as passed into the constructor.
+	 * @return the string being lexed
+	 */
 	@Override
 	public String toString()
 	{

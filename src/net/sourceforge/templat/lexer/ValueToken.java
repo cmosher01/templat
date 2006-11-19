@@ -7,6 +7,11 @@ import net.sourceforge.templat.exception.TemplateParsingException;
 import net.sourceforge.templat.expr.Expression;
 import net.sourceforge.templat.parser.TemplateParser;
 
+/**
+ * <span class="directive">@&nbsp;<span class="var">expression</span>&nbsp;@</span>
+ *
+ * @author Chris Mosher
+ */
 class ValueToken implements TemplateToken
 {
 	private final String tag;

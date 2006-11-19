@@ -8,6 +8,11 @@ import net.sourceforge.templat.expr.Expression;
 import net.sourceforge.templat.parser.TemplateParser;
 import net.sourceforge.templat.parser.context.TemplateParserContext;
 
+/**
+ * <span class="directive">@&nbsp;<span class="keyword">if</span>&nbsp;(&nbsp;<span class="var">boolean-expression</span>&nbsp;)&nbsp;@</span>
+ *
+ * @author Chris Mosher
+ */
 class IfToken implements TemplateToken
 {
 	private final String tag;

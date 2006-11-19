@@ -6,6 +6,11 @@ package net.sourceforge.templat.lexer;
 import net.sourceforge.templat.exception.TemplateParsingException;
 import net.sourceforge.templat.parser.TemplateParser;
 
+/**
+ * <span class="directive">@&nbsp;<span class="keyword">else</span>&nbsp;@</span>
+ *
+ * @author Chris Mosher
+ */
 class ElseToken implements TemplateToken
 {
 	@Override

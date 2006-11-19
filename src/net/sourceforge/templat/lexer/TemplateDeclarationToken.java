@@ -9,6 +9,11 @@ import net.sourceforge.templat.exception.TemplateParsingException;
 import net.sourceforge.templat.parser.TemplateParser;
 import net.sourceforge.templat.parser.context.TemplateParserContext;
 
+/**
+ * <span class="directive">@&nbsp;<span class="keyword">template</span>&nbsp;<span class="var">template-name</span>(&nbsp;<span class="var">parameter1</span>,&nbsp;<span class="var">parameter2</span>,&nbsp;<span class="var">...</span>&nbsp;)&nbsp;@</span>
+ *
+ * @author Chris Mosher
+ */
 class TemplateDeclarationToken implements TemplateToken
 {
 	private final String tag;

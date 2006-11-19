@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="javadoc">
+	<target name="javadoc">
+		<javadoc
+			packagenames="net.sourceforge.templat,net.sourceforge.templat.exception,net.sourceforge.templat.expr,net.sourceforge.templat.lexer,net.sourceforge.templat.expr.exception,net.sourceforge.templat.parser,net.sourceforge.templat.parser.context"
+			sourcepath="src"
+			overview="src/net/sourceforge/templat/overview.html"
+			stylesheetfile="src/net/sourceforge/templat/stylesheet.css"
+			access="package"
+			author="true"
+			destdir="web/javadoc"
+			doctitle="TemplAT"
+			nodeprecated="false"
+			nodeprecatedlist="false"
+			noindex="false"
+			nonavbar="false"
+			notree="false"
+			source="1.5"
+			splitindex="true"
+			use="true"
+			version="true"
+		>
+			<link href="http://java.sun.com/j2se/1.5/docs/api/" />
+		</javadoc>
+		<tar tarfile="web.tar" basedir="web" />
+		<gzip zipfile="web.tar.gz" src="web.tar" />
+	</target>
+</project>

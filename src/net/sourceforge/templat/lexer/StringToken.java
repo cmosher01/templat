@@ -6,6 +6,11 @@ package net.sourceforge.templat.lexer;
 import net.sourceforge.templat.exception.TemplateParsingException;
 import net.sourceforge.templat.parser.TemplateParser;
 
+/**
+ * Represents areas of the template that are outside of any tag.
+ *
+ * @author Chris Mosher
+ */
 class StringToken implements TemplateToken
 {
 	private final String tag;

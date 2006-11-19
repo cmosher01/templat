@@ -10,6 +10,9 @@ import net.sourceforge.templat.exception.TemplateLexingException;
 
 /**
  * Lexer to analyze a given template and fully tokenize its contents.
+ * Pass the template to be lexed, as a {@link java.lang.CharSequence},
+ * into the constructor. Then call {@link TemplateLexer#lex lex} to perform
+ * the lexing.
  *
  * @author Chris Mosher
  */

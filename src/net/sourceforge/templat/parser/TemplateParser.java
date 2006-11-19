@@ -14,6 +14,9 @@ import net.sourceforge.templat.parser.context.TemplateParserContext;
 
 /**
  * Parser to render a (tokenized) template, given optional arguments.
+ * The {@link TemplateParser#parse parse} method performs this action. The other methods
+ * are for use by the tokens, who manipulate the context and parse position
+ * of this parser.
  *
  * @author Chris Mosher
  */
@@ -60,6 +63,9 @@ public class TemplateParser
 
 	/**
 	 * Parses this template and appends the rendered result to the given <code>Appendable</code>.
+	 * This method calls each token's <code>parse</code> method to have that token perform
+	 * its action. This parser maintains the context (variables and their values) for
+	 * use by the tokens.
 	 * @param appendTo <code>Appendable</code> to append the result to
 	 * @throws TemplateParsingException
 	 */
@@ -113,7 +119,7 @@ public class TemplateParser
 	}
 
 	/**
-	 * Gets the stack of contexts used by this parser.
+	 * Gets this parser's stack of contexts.
 	 * @return the context stack
 	 */
 	public ContextStack getContext()

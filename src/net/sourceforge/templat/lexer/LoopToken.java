@@ -8,6 +8,11 @@ import net.sourceforge.templat.expr.Expression;
 import net.sourceforge.templat.parser.TemplateParser;
 import net.sourceforge.templat.parser.context.TemplateParserContext;
 
+/**
+ * <span class="directive">@&nbsp;<span class="keyword">loop</span>&nbsp;<span class="var">variable</span>&nbsp;:&nbsp;<span class="var">count-expression</span>&nbsp;@</span>
+ *
+ * @author Chris Mosher
+ */
 class LoopToken implements TemplateToken
 {
 	private final String tag;

@@ -15,7 +15,11 @@ import net.sourceforge.templat.expr.Expression;
 import net.sourceforge.templat.parser.TemplateParser;
 import net.sourceforge.templat.parser.context.ContextStack;
 
-
+/**
+ * <span class="directive">@&nbsp;<span class="keyword">include</span>&nbsp;<span class="var">template-path</span>(&nbsp;<span class="var">argument1</span>,&nbsp;<span class="var">argument2</span>,&nbsp;<span class="var">...</span>&nbsp;)&nbsp;@</span>
+ *
+ * @author Chris Mosher
+ */
 class IncludeToken implements TemplateToken
 {
 	private final String template;
