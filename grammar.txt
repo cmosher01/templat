@@ -1,0 +1,8 @@
+template : template-definition body
+body : [text] [statement] ...
+statement : if | include | loop | expr
+if : @ if ( boolean-expr ) @ body @ end if @
+include : @ include template-path ( [expr [, expr [, ... ] ] ])@
+loop : @ loop var : count-expr @ body @ end loop @
+expr : obj selectors
+selectors : [array-or-list-index] [method-call] ...
