@@ -16,6 +16,7 @@ class ArraySubscript implements Selector
 		this.subscript = subscript;
 	}
 
+	@Override
 	public Object apply(final Object var) throws TemplateParsingException
 	{
 		if (var.getClass().isArray())
@@ -32,7 +33,7 @@ class ArraySubscript implements Selector
 
 		if (var instanceof List)
 		{
-			final List r = (List)var;
+			final List<?> r = (List<?>)var;
 			return r.get(this.subscript);
 		}
 		throw new TemplateParsingException("error accessing array or list");

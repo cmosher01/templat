@@ -29,6 +29,7 @@ class MethodCall implements Selector
 		this.rArg = rArg;
 	}
 
+	@Override
 	public Object apply(final Object var) throws TemplateParsingException
 	{
 		try
@@ -43,7 +44,7 @@ class MethodCall implements Selector
 
 	private Object tryApply(final Object var) throws TemplateParsingException, IllegalArgumentException, IllegalAccessException, InvocationTargetException
 	{
-		final Class<?> clas = var instanceof Class ? (Class)var : var.getClass();
+		final Class<?> clas = var instanceof Class ? (Class<?>)var : var.getClass();
 
 		// Array.length is not reflected, so we check for it ourselves here
 		// Also, we allow length() or size() for arrays or Lists
@@ -55,11 +56,11 @@ class MethodCall implements Selector
 		{
 			if (clas.isArray())
 			{
-				return Array.getLength(var);
+				return Integer.valueOf(Array.getLength(var));
 			}
 			else if (var instanceof List)
 			{
-				return ((List)var).size();
+				return Integer.valueOf(((List<?>)var).size());
 			}
 		}
 
@@ -135,7 +136,7 @@ class MethodCall implements Selector
 		return true;
 	}
 
-	private static Map<Class,Class> mapPrimitiveToWrapper = new HashMap<Class,Class>();
+	private static Map<Class<?>,Class<?>> mapPrimitiveToWrapper = new HashMap<Class<?>,Class<?>>();
 	static
 	{
 		MethodCall.mapPrimitiveToWrapper.put(Integer.TYPE,Integer.class);

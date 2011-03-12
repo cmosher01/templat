@@ -23,6 +23,7 @@ class ExprLexer
 	 * the given string into tokens.
 	 * @param stringToLex
 	 */
+	@SuppressWarnings("synthetic-access")
 	public ExprLexer(final String stringToLex)
 	{
 		this.stringToLex = stringToLex;
@@ -44,6 +45,7 @@ class ExprLexer
 	 * @return the next <code>Token</code>
 	 * @throws ExprLexingException
 	 */
+	@SuppressWarnings("synthetic-access")
 	public Token getNextToken() throws ExprLexingException
 	{
 	    final char c = this.buffer.getChar();
@@ -118,7 +120,7 @@ class ExprLexer
 		Token(final char c)
 		{
 			this.tokenType = (short)c;
-			this.tokenValue = c;
+			this.tokenValue = Character.valueOf(c);
 		}
 
 		Token(final short tokenType, final Object tokenValue)

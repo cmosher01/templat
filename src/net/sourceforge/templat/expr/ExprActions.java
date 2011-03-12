@@ -32,7 +32,8 @@ class ExprActions
 
 	public ArrayList<Object> addToList(final Object arg, final Object arglist)
 	{
-	    final ArrayList<Object> rArg = (ArrayList<Object>)arglist;
+	    @SuppressWarnings("unchecked")
+		final ArrayList<Object> rArg = (ArrayList<Object>)arglist;
 	    rArg.add(arg);
 	    return rArg;
 	}
@@ -41,7 +42,7 @@ class ExprActions
 	{
 		try
 		{
-			return new ArraySubscript((Integer)subscript);
+			return new ArraySubscript(((Integer)subscript).intValue());
 		}
 		catch (final Throwable e)
 		{
@@ -49,6 +50,7 @@ class ExprActions
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public MethodCall createMethodCall(final Object nameMethod, final Object arglist)
 	{
 		return new MethodCall(nameMethod.toString(),(ArrayList<Object>)arglist);
@@ -57,6 +59,7 @@ class ExprActions
 	public Object applySelectors(final Object name, final Object selectors) throws TemplateParsingException
 	{
 		final String sVarName = name.toString();
+		@SuppressWarnings("unchecked")
 		final ArrayList<Object> rSelector = (ArrayList<Object>)selectors;
 
 		Object var = getVariableOrClass(sVarName);
