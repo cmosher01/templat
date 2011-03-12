@@ -29,9 +29,10 @@ class StringToken implements TemplateToken
 		return "STRING: "+this.tag;
 	}
 
+	@Override
 	public void parse(final TemplateParser parser, final Appendable appendTo) throws TemplateParsingException
 	{
-		if (parser.getContext().isEverEqual(TemplateParser.VAR_IF,false))
+		if (parser.getContext().isEverEqual(TemplateParser.VAR_IF,Boolean.FALSE))
 		{
 			return;
 		}

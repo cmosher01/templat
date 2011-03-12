@@ -30,11 +30,12 @@ class ValueToken implements TemplateToken
 		return "VALUE: "+this.tag;
 	}
 
+	@Override
 	public void parse(final TemplateParser parser, final Appendable appendTo) throws TemplateParsingException
 	{
 		try
 		{
-			if (parser.getContext().isEverEqual(TemplateParser.VAR_IF,false))
+			if (parser.getContext().isEverEqual(TemplateParser.VAR_IF,Boolean.FALSE))
 			{
 				return;
 			}

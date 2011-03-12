@@ -32,6 +32,7 @@ class TemplateDeclarationToken implements TemplateToken
 		return "TEMPLATE DECLARATION: "+this.tag;
 	}
 
+	@Override
 	public void parse(final TemplateParser parser, final Appendable appendTo) throws TemplateParsingException
 	{
 		final int posLeftParen = this.tag.indexOf('(');
@@ -45,6 +46,7 @@ class TemplateDeclarationToken implements TemplateToken
 			throw new TemplateParsingException("Expecting ) in template definition: "+this.tag);
 		}
 
+		@SuppressWarnings("unchecked")
 		final List<Object> rArgs = (List<Object>)parser.getContext().getValue(TemplateParser.VAR_ARGS);
 
 		final TemplateParserContext ctxNew = new TemplateParserContext();

@@ -172,7 +172,7 @@ public class TemplatTest
 	@Test
 	public void testLoopNegative() throws IOException, TemplateLexingException, TemplateParsingException
 	{
-		assertTemplate(buildFile("AD"),buildFile("A@loop i: arg0@C@end loop@D"),-1);
+		assertTemplate(buildFile("AD"),buildFile("A@loop i: arg0@C@end loop@D"),Integer.valueOf(-1));
 	}
 
 	@Test(expected=TemplateParsingException.class)
@@ -290,13 +290,13 @@ public class TemplatTest
 	@Test
 	public void test1() throws IOException, TemplateLexingException, TemplateParsingException
 	{
-		assertTemplate(buildFile("1"),buildFile("@arg0@"),1);
+		assertTemplate(buildFile("1"),buildFile("@arg0@"),Integer.valueOf(1));
 	}
 
 	@Test
 	public void testNegative1() throws IOException, TemplateLexingException, TemplateParsingException
 	{
-		assertTemplate(buildFile("-1"),buildFile("@arg0@"),-1);
+		assertTemplate(buildFile("-1"),buildFile("@arg0@"),Integer.valueOf(-1));
 	}
 
 	@Test
@@ -625,10 +625,11 @@ public class TemplatTest
 
 	public static class Overload
 	{
-		public String a(Object x) { return "a(Object)"; }
-		public String a(String x) { return "a(String)"; }
+		public String a(Object x) { Object y = x; Object z = y; y = z; return "a(Object)"; }
+		public String a(String x) { String y = x; String z = y; y = z; return "a(String)"; }
 	}
-	public class A { public A() {} public String toString() { return "a"; } }
+	public class A { public A() { /**/ } @Override
+	public String toString() { return "a"; } }
 
 	@Ignore("It is undefined which overloaded method will be called.")
 	@Test
@@ -747,7 +748,7 @@ public class TemplatTest
 		{
 			file = buildTemplateFile(template,args.length);
 
-			final Templat templat = new Templat(file.toURL());
+			final Templat templat = new Templat(file.toURI().toURL());
 
 			final StringBuilder sb = new StringBuilder(256);
 			templat.render(sb,args);
@@ -775,7 +776,7 @@ public class TemplatTest
 
 			file = buildTemplateFile(template.replaceFirst("include XXX","include "+uuidname),args.length);
 
-			final Templat templat = new Templat(file.toURL());
+			final Templat templat = new Templat(file.toURI().toURL());
 	
 			final StringBuilder sb = new StringBuilder(256);
 			templat.render(sb,args);

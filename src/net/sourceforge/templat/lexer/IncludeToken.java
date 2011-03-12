@@ -41,6 +41,7 @@ class IncludeToken implements TemplateToken
 		return "INCLUDE: "+this.template+" ("+this.args+")";
 	}
 
+	@Override
 	public void parse(final TemplateParser parser, final Appendable appendTo) throws TemplateParsingException
 	{
 		try
@@ -59,7 +60,7 @@ class IncludeToken implements TemplateToken
 
 	private void tryParse(final TemplateParser parser, final Appendable appendTo) throws TemplateParsingException, TemplateLexingException, IOException
 	{
-		if (parser.getContext().isEverEqual(TemplateParser.VAR_IF,false))
+		if (parser.getContext().isEverEqual(TemplateParser.VAR_IF,Boolean.FALSE))
 		{
 			return;
 		}

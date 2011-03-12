@@ -19,6 +19,7 @@ class EndIfToken implements TemplateToken
 		return "END IF";
 	}
 
+	@Override
 	public void parse(final TemplateParser parser, final Appendable appendTo) throws TemplateParsingException
 	{
 		parser.getContext().current().getValue(TemplateParser.VAR_IF); // make sure we're in an if-block

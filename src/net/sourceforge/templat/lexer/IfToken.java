@@ -31,6 +31,7 @@ class IfToken implements TemplateToken
 		return "IF: "+this.tag;
 	}
 
+	@Override
 	public void parse(final TemplateParser parser, final Appendable appendTo) throws TemplateParsingException
 	{
 		try
@@ -49,10 +50,10 @@ class IfToken implements TemplateToken
 
 	private void tryParse(final TemplateParser parser) throws TemplateParsingException, ClassCastException
 	{
-		final boolean bCond;
-		if (parser.getContext().isEverEqual(TemplateParser.VAR_IF,false))
+		final Boolean bCond;
+		if (parser.getContext().isEverEqual(TemplateParser.VAR_IF,Boolean.FALSE))
 		{
-			bCond = false;
+			bCond = Boolean.FALSE;
 		}
 		else
 		{

@@ -19,6 +19,7 @@ class ElseToken implements TemplateToken
 		return "ELSE";
 	}
 
+	@Override
 	public void parse(final TemplateParser parser, final Appendable appendTo) throws TemplateParsingException
 	{
 		try
@@ -37,7 +38,7 @@ class ElseToken implements TemplateToken
 
 	private void tryParse(final TemplateParser parser) throws TemplateParsingException, ClassCastException
 	{
-		boolean conditionIf = (Boolean)parser.getContext().current().getValue(TemplateParser.VAR_IF);
-		parser.getContext().current().addVariable(TemplateParser.VAR_IF,!conditionIf);
+		boolean conditionIf = ((Boolean)parser.getContext().current().getValue(TemplateParser.VAR_IF)).booleanValue();
+		parser.getContext().current().addVariable(TemplateParser.VAR_IF,Boolean.valueOf(!conditionIf));
 	}
 }

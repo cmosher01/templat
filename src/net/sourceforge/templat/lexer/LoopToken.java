@@ -31,6 +31,7 @@ class LoopToken implements TemplateToken
 		return "LOOP: "+this.tag;
 	}
 
+	@Override
 	public void parse(final TemplateParser parser, final Appendable appendTo) throws TemplateParsingException
 	{
 		/*
@@ -49,16 +50,16 @@ class LoopToken implements TemplateToken
 		{
 			final String varIndex = this.tag.substring(0,posColon).trim();
 			ctxNew.addVariable(TemplateParser.VAR_LOOP_INDEX,varIndex);
-			ctxNew.addVariable(varIndex,0);
+			ctxNew.addVariable(varIndex,Integer.valueOf(0));
 		}
 
 		{
 			final String exprTimes = this.tag.substring(posColon+1).trim();
 	
 			final Number numTimes;
-			if (parser.getContext().isEverEqual(TemplateParser.VAR_IF,false))
+			if (parser.getContext().isEverEqual(TemplateParser.VAR_IF,Boolean.FALSE))
 			{
-				numTimes = 0;
+				numTimes = Integer.valueOf(0);
 			}
 			else
 			{
@@ -66,10 +67,10 @@ class LoopToken implements TemplateToken
 			}
 			final int times = numTimes.intValue();
 
-			ctxNew.addVariable(TemplateParser.VAR_LOOP_TIMES,times);
+			ctxNew.addVariable(TemplateParser.VAR_LOOP_TIMES,Integer.valueOf(times));
 			if (times <= 0)
 			{
-				ctxNew.addVariable(TemplateParser.VAR_IF,false);
+				ctxNew.addVariable(TemplateParser.VAR_IF,Boolean.FALSE);
 			}
 		}
 
