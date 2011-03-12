@@ -22,6 +22,7 @@ class EndIfToken implements TemplateToken
 	@Override
 	public void parse(final TemplateParser parser, final Appendable appendTo) throws TemplateParsingException
 	{
+		appendTo.getClass(); // nothing to append here
 		parser.getContext().current().getValue(TemplateParser.VAR_IF); // make sure we're in an if-block
 		parser.getContext().pop();
 	}

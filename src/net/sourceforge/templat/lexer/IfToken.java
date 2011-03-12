@@ -34,6 +34,7 @@ class IfToken implements TemplateToken
 	@Override
 	public void parse(final TemplateParser parser, final Appendable appendTo) throws TemplateParsingException
 	{
+		appendTo.getClass(); // nothing to append here
 		try
 		{
 			tryParse(parser);

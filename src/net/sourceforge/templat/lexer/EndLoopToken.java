@@ -22,6 +22,7 @@ class EndLoopToken implements TemplateToken
 	@Override
 	public void parse(final TemplateParser parser, final Appendable appendTo) throws TemplateParsingException
 	{
+		appendTo.getClass(); // nothing to append here
 		final Number numTimes = (Number)parser.getContext().current().getValue(TemplateParser.VAR_LOOP_TIMES);
 		final int times = numTimes.intValue();
 
