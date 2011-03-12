@@ -15,8 +15,8 @@ public class Util
 	 * @param object the reference to check
 	 * @return <code>true</code> if the reference is <code>null</code>.
 	 */
-	public static Boolean isNull(final Object object)
+	public static <T> Boolean isNull(final T object)
 	{
-		return object == null;
+		return Boolean.valueOf(object == null);
 	}
 }

@@ -49,11 +49,11 @@ public class TemplateParser
 	{
 		this.rToken.addAll(rToken);
 
-		this.rPosParse.addFirst(0);
+		this.rPosParse.addFirst(Integer.valueOf(0));
 
 		final TemplateParserContext ctx = new TemplateParserContext();
-		ctx.addVariable("true",true);
-		ctx.addVariable("false",false);
+		ctx.addVariable("true",Boolean.TRUE);
+		ctx.addVariable("false",Boolean.FALSE);
 		ctx.addVariable("null",null);
 		ctx.addVariable(VAR_ARGS,rArg);
 		ctx.addVariable(VAR_URL,url);
@@ -71,7 +71,7 @@ public class TemplateParser
 	 */
 	public void parse(final Appendable appendTo) throws TemplateParsingException
 	{
-		while (this.rPosParse.getFirst() < this.rToken.size())
+		while (this.rPosParse.getFirst().intValue() < this.rToken.size())
 		{
 			final TemplateToken token = nextToken();
 			token.parse(this,appendTo);
@@ -80,11 +80,11 @@ public class TemplateParser
 
 	private TemplateToken nextToken()
 	{
-		final TemplateToken token = this.rToken.get(this.rPosParse.getFirst());
+		final TemplateToken token = this.rToken.get(this.rPosParse.getFirst().intValue());
 
-		int pos = this.rPosParse.removeFirst();
+		int pos = this.rPosParse.removeFirst().intValue();
 		++pos;
-		this.rPosParse.addFirst(pos);
+		this.rPosParse.addFirst(Integer.valueOf(pos));
 
 		return token;
 	}

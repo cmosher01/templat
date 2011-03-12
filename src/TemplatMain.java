@@ -34,7 +34,7 @@ public class TemplatMain
 		}
 
 		final File fileTemplat = new File(rArg[0]).getCanonicalFile();
-		final Templat templat = new Templat(fileTemplat.toURL());
+		final Templat templat = new Templat(fileTemplat.toURI().toURL());
 
 		final StringBuilder sbResult = new StringBuilder();
 		templat.render(sbResult);
