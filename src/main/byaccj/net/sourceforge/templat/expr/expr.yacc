@@ -32,18 +32,18 @@ expression
 	: '!' S expression { $$ = !(Boolean)$3; }
 	| '(' S expression S ')' { $$ = $3; }
 	| literal
-	| name { $$ = act.applySelectors($1,act.createList()); }
-	| name selectors { $$ = act.applySelectors($1,$2); }
+	| name { $$ = helper.actions().applySelectors($1,helper.actions().createList()); }
+	| name selectors { $$ = helper.actions().applySelectors($1,$2); }
 	;
 
 selectors
-	: selectors selector { $$ = act.addToList($2,$1); }
-	| selector { $$ = act.addToList($1,act.createList()); }
+	: selectors selector { $$ = helper.actions().addToList($2,$1); }
+	| selector { $$ = helper.actions().addToList($1,helper.actions().createList()); }
 	;
 
 selector
-	: DOT identifier args { $$ = act.createMethodCall($2,$3); }
-	| '[' S expression S ']' { $$ = act.createArraySubscript($3); }
+	: DOT identifier args { $$ = helper.actions().createMethodCall($2,$3); }
+	| '[' S expression S ']' { $$ = helper.actions().createArraySubscript($3); }
 	;
 
 args
@@ -51,9 +51,9 @@ args
 	;
 
 arg_list
-	: arg_list S COMMA S expression { $$ = act.addToList($5,$1); }
-	| expression { $$ = act.addToList($1,act.createList()); }
-	| /* empty */ { $$ = act.createList(); }
+	: arg_list S COMMA S expression { $$ = helper.actions().addToList($5,$1); }
+	| expression { $$ = helper.actions().addToList($1,helper.actions().createList()); }
+	| /* empty */ { $$ = helper.actions().createList(); }
 	;
 
 name
@@ -77,107 +77,24 @@ S
 %%
 
 
-private final ExprLexer lexer;
-private final ExprActions act;
+private final ExprParserHelper helper;
 
-/**
- * @param input the input string to parse and evaluate
- * @param stackContext the current context stack
- */
 public ExprParser(final String input, final ContextStack stackContext)
 {
-    this.lexer = new ExprLexer(input);
-    this.act = new ExprActions(stackContext);
+    this.helper = new ExprParserHelper(input,stackContext);
 }
 
-/**
- * Parses the given string, using the grammar
- * specified in the expr.yacc source file.
- * @return the resulting object
- * @throws ExprLexingException
- * @throws ExprParsingException
- * @throws TemplateParsingException
- */
 public Object parse() throws ExprLexingException, ExprParsingException, TemplateParsingException
 {
-    try
-    {
-        final int err = yyparse();
-        if (err != 0)
-        {
-            throw new ExprParsingException();
-        }
-    }
-    catch (final ExprLexingException e)
-    {
-    	throw e;
-   	}
-    catch (final ExprParsingException e)
-    {
-    	throw e;
-   	}
-    catch (final TemplateParsingException e)
-    {
-    	throw e;
-   	}
-    catch (final Throwable e)
-    {
-        throw new ExprParsingException(e);
-    }
-
-    return this.yyval;
+	return this.helper.parse(this);
 }
-
-
 
 private void yyerror(final String s) throws ExprParsingException
 {
-    throw new ExprParsingException(s+" at \'"+getCharForMessage()+"\' while parsing expression: "+this.lexer);
+	this.helper.yyerror(s, this.yychar);
 }
 
 private int yylex() throws ExprLexingException
 {
-	final ExprLexer.Token token = this.lexer.getNextToken();
-
-	this.yylval = token.getTokenValue();
-	if (token.getTokenType() == EOF)
-	{
-		return 0;
-	}
-	return token.getTokenType();
-}
-
-private String getCharForMessage()
-{
-	if (yychar < 0x100)
-	{
-		return Character.toString((char)yychar);
-	}
-
-	if (yychar == EOF)
-	{
-		return "(EOF)";
-	}
-
-	if (yychar == DOT)
-	{
-		return ".";
-	}
-
-	if (yychar == COMMA)
-	{
-		return ",";
-	}
-
-	if (yychar == NUM)
-	{
-		return "(NUMBER)";
-	}
-
-	if (yychar == EOF)
-	{
-		return "(IDENT)";
-	}
-
-	return "(unknown)";
+	return this.helper.yylex(this);
 }
