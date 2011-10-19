@@ -19,8 +19,8 @@ public class TemplateLexingException extends Exception
 	}
 
 	/**
-	 * @param message
-	 * @param cause
+	 * @param message error text
+	 * @param cause wrapped exception
 	 */
 	public TemplateLexingException(String message, Throwable cause)
 	{
@@ -28,7 +28,7 @@ public class TemplateLexingException extends Exception
 	}
 
 	/**
-	 * @param message
+	 * @param message error text
 	 */
 	public TemplateLexingException(String message)
 	{
@@ -36,7 +36,7 @@ public class TemplateLexingException extends Exception
 	}
 
 	/**
-	 * @param cause
+	 * @param cause wrapped exception
 	 */
 	public TemplateLexingException(Throwable cause)
 	{

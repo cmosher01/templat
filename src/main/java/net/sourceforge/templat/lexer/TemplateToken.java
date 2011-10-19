@@ -14,7 +14,7 @@ import net.sourceforge.templat.parser.TemplateParser;
 public interface TemplateToken
 {
 	/**
-	 * Parses this token. Each token that implements the this
+	 * Parses this token. Each token that implements this
 	 * interface will perform their primary action in this method.
 	 * @param parser the parser that is parsing the template
 	 * @param appendTo the <code>Appendable</code> to append the result of the parsing to

@@ -17,7 +17,7 @@ class ValueToken implements TemplateToken
 	private final String tag;
 
 	/**
-	 * @param tag
+	 * @param tag expression-type tag value: "@ tag @"
 	 */
 	public ValueToken(final String tag)
 	{

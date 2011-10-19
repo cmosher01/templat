@@ -19,7 +19,7 @@ class TemplateDeclarationToken implements TemplateToken
 	private final String tag;
 
 	/**
-	 * @param tag
+	 * @param tag template definition after template keyword: "name(args)"
 	 */
 	public TemplateDeclarationToken(final String tag)
 	{

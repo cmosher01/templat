@@ -18,7 +18,7 @@ class LoopToken implements TemplateToken
 	private final String tag;
 
 	/**
-	 * @param tag
+	 * @param tag text after loop token: "variable : count"
 	 */
 	public LoopToken(final String tag)
 	{

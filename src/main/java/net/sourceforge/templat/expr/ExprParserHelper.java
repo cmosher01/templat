@@ -5,6 +5,11 @@ import net.sourceforge.templat.expr.exception.ExprLexingException;
 import net.sourceforge.templat.expr.exception.ExprParsingException;
 import net.sourceforge.templat.parser.context.ContextStack;
 
+/**
+ * Superclass for yacc-generated ExprParser class.
+ * 
+ * @author christopher_mosher
+ */
 public abstract class ExprParserHelper {
 	private final ExprLexer lexer;
 	private final ExprActions act;

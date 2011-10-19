@@ -12,6 +12,7 @@ public class Util
 {
 	/**
 	 * Checks to see if the given reference is <code>null</code>.
+	 * @param <T> data-type of object
 	 * @param object the reference to check
 	 * @return <code>true</code> if the reference is <code>null</code>.
 	 */

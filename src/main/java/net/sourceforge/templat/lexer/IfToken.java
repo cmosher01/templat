@@ -19,6 +19,7 @@ class IfToken implements TemplateToken
 
 	/**
 	 * @param tag
+	 *            text inside the parentheses: "if (tag)"
 	 */
 	public IfToken(final String tag)
 	{

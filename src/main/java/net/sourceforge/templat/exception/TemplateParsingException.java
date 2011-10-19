@@ -19,16 +19,8 @@ public class TemplateParsingException extends Exception
 	}
 
 	/**
-	 * @param message
-	 */
-	public TemplateParsingException(String message)
-	{
-		super(message);
-	}
-
-	/**
-	 * @param message
-	 * @param cause
+	 * @param message error text
+	 * @param cause wrapped exception
 	 */
 	public TemplateParsingException(String message, Throwable cause)
 	{
@@ -36,7 +28,15 @@ public class TemplateParsingException extends Exception
 	}
 
 	/**
-	 * @param cause
+	 * @param message error text
+	 */
+	public TemplateParsingException(String message)
+	{
+		super(message);
+	}
+
+	/**
+	 * @param cause wrapped exception
 	 */
 	public TemplateParsingException(Throwable cause)
 	{

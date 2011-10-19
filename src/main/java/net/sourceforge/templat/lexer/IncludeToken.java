@@ -26,8 +26,8 @@ class IncludeToken implements TemplateToken
 	private final String args;
 
 	/**
-	 * @param template 
-	 * @param args 
+	 * @param template name of template: "include template(args)"
+	 * @param args args to template: "include template(args)"
 	 */
 	public IncludeToken(final String template, final String args)
 	{

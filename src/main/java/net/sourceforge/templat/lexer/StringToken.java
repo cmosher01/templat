@@ -16,7 +16,7 @@ class StringToken implements TemplateToken
 	private final String tag;
 
 	/**
-	 * @param tag
+	 * @param tag text in template (outside of TemplAT @ tags)
 	 */
 	public StringToken(final String tag)
 	{
