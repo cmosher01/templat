@@ -5,36 +5,7 @@ import net.sourceforge.templat.expr.exception.ExprLexingException;
 import net.sourceforge.templat.expr.exception.ExprParsingException;
 import net.sourceforge.templat.parser.context.ContextStack;
 
-class ExprParserHelper {
-	/**
-	 * Parses the given string, using the grammar specified in the expr.yacc
-	 * source file.
-	 * 
-	 * @return the resulting object
-	 * @throws ExprLexingException
-	 * @throws ExprParsingException
-	 * @throws TemplateParsingException
-	 */
-	public static Object parse(final ExprParser parser) throws ExprLexingException, ExprParsingException,
-			TemplateParsingException {
-		try {
-			final int err = parser.yyparse();
-			if (err != 0) {
-				throw new ExprParsingException();
-			}
-		} catch (final ExprLexingException e) {
-			throw e;
-		} catch (final ExprParsingException e) {
-			throw e;
-		} catch (final TemplateParsingException e) {
-			throw e;
-		} catch (final Throwable e) {
-			throw new ExprParsingException(e);
-		}
-
-		return parser.yyval;
-	}
-
+public abstract class ExprParserHelper {
 	private final ExprLexer lexer;
 	private final ExprActions act;
 
@@ -49,21 +20,57 @@ class ExprParserHelper {
 		this.act = new ExprActions(stackContext);
 	}
 
-	public void yyerror(final String s, final int yychar) throws ExprParsingException {
-		throw new ExprParsingException(s + " at \'" + getCharForMessage(yychar) + "\' while parsing expression: " + this.lexer);
+	abstract int yyparse() throws ExprLexingException, ExprParsingException, TemplateParsingException;
+
+	abstract protected int getYychar();
+
+	abstract protected Object getYyval();
+
+	abstract protected void setYylval(final Object yylval);
+
+	/**
+	 * Parses the given string, using the grammar specified in the expr.yacc
+	 * source file.
+	 * 
+	 * @return the resulting object
+	 * @throws ExprLexingException
+	 * @throws ExprParsingException
+	 * @throws TemplateParsingException
+	 */
+	public Object parse() throws ExprLexingException, ExprParsingException, TemplateParsingException {
+		try {
+			final int err = yyparse();
+			if (err != 0) {
+				throw new ExprParsingException();
+			}
+		} catch (final ExprLexingException e) {
+			throw e;
+		} catch (final ExprParsingException e) {
+			throw e;
+		} catch (final TemplateParsingException e) {
+			throw e;
+		} catch (final Throwable e) {
+			throw new ExprParsingException(e);
+		}
+
+		return getYyval();
 	}
 
-	public int yylex(final ExprParser parser) throws ExprLexingException {
+	protected void yyerror(final String s) throws ExprParsingException {
+		throw new ExprParsingException(s + " at \'" + getCharForMessage(getYychar()) + "\' while parsing expression: " + this.lexer);
+	}
+
+	protected int yylex() throws ExprLexingException {
 		final ExprLexer.Token token = this.lexer.getNextToken();
 
-		parser.yylval = token.getTokenValue();
+		setYylval(token.getTokenValue());
 		if (token.getTokenType() == ExprParser.EOF) {
 			return 0;
 		}
 		return token.getTokenType();
 	}
 
-	public ExprActions actions() {
+	protected ExprActions actions() {
 		return this.act;
 	}
 

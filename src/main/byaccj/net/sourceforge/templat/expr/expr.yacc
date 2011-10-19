@@ -1,5 +1,5 @@
 // This file needs to be compiled with BYACC/J using the following command:
-// yacc -J -Jclass=ExprParser -Jsemantic=Object -Jpackage=net.sourceforge.templat.expr -Jthrows="ExprLexingException, ExprParsingException, TemplateParsingException" -Jnorun -Jnoconstruct -Jnodebug expr.yacc
+// yacc -J -Jclass=ExprParser -Jextends=ExprParserHelper -Jsemantic=Object -Jpackage=net.sourceforge.templat.expr -Jthrows="ExprLexingException, ExprParsingException, TemplateParsingException" -Jnorun -Jnoconstruct -Jnodebug -l expr.yacc
 
 %{
 import net.sourceforge.templat.parser.context.ContextStack;
@@ -32,18 +32,18 @@ expression
 	: '!' S expression { $$ = !(Boolean)$3; }
 	| '(' S expression S ')' { $$ = $3; }
 	| literal
-	| name { $$ = helper.actions().applySelectors($1,helper.actions().createList()); }
-	| name selectors { $$ = helper.actions().applySelectors($1,$2); }
+	| name { $$ = actions().applySelectors($1,actions().createList()); }
+	| name selectors { $$ = actions().applySelectors($1,$2); }
 	;
 
 selectors
-	: selectors selector { $$ = helper.actions().addToList($2,$1); }
-	| selector { $$ = helper.actions().addToList($1,helper.actions().createList()); }
+	: selectors selector { $$ = actions().addToList($2,$1); }
+	| selector { $$ = actions().addToList($1,actions().createList()); }
 	;
 
 selector
-	: DOT identifier args { $$ = helper.actions().createMethodCall($2,$3); }
-	| '[' S expression S ']' { $$ = helper.actions().createArraySubscript($3); }
+	: DOT identifier args { $$ = actions().createMethodCall($2,$3); }
+	| '[' S expression S ']' { $$ = actions().createArraySubscript($3); }
 	;
 
 args
@@ -51,9 +51,9 @@ args
 	;
 
 arg_list
-	: arg_list S COMMA S expression { $$ = helper.actions().addToList($5,$1); }
-	| expression { $$ = helper.actions().addToList($1,helper.actions().createList()); }
-	| /* empty */ { $$ = helper.actions().createList(); }
+	: arg_list S COMMA S expression { $$ = actions().addToList($5,$1); }
+	| expression { $$ = actions().addToList($1,actions().createList()); }
+	| /* empty */ { $$ = actions().createList(); }
 	;
 
 name
@@ -76,25 +76,21 @@ S
 
 %%
 
-
-private final ExprParserHelper helper;
-
-public ExprParser(final String input, final ContextStack stackContext)
-{
-    this.helper = new ExprParserHelper(input,stackContext);
+public ExprParser(final String input, final ContextStack stackContext) {
+	super(input, stackContext);
 }
 
-public Object parse() throws ExprLexingException, ExprParsingException, TemplateParsingException
-{
-	return this.helper.parse(this);
+@Override
+protected void setYylval(Object yylval) {
+	this.yylval = yylval;
 }
 
-private void yyerror(final String s) throws ExprParsingException
-{
-	this.helper.yyerror(s, this.yychar);
+@Override
+protected int getYychar() {
+	return this.yychar;
 }
 
-private int yylex() throws ExprLexingException
-{
-	return this.helper.yylex(this);
+@Override
+protected Object getYyval() {
+	return this.yyval;
 }
