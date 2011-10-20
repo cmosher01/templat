@@ -31,7 +31,7 @@ import net.sourceforge.templat.expr.exception.ExprParsingException;
 
 
 
-
+@SuppressWarnings("all")
 public class ExprParser
              extends ExprParserHelper
 {
