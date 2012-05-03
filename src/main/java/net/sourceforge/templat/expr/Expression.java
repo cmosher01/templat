@@ -3,8 +3,9 @@
  */
 package net.sourceforge.templat.expr;
 
+import java.io.StringReader;
+
 import net.sourceforge.templat.exception.TemplateParsingException;
-import net.sourceforge.templat.expr.exception.ExprLexingException;
 import net.sourceforge.templat.expr.exception.ExprParsingException;
 import net.sourceforge.templat.parser.context.ContextStack;
 
@@ -37,10 +38,14 @@ public class Expression
 		}
 	}
 
-	private static Object tryEval(final String expr, final ContextStack stackContext) throws ExprLexingException, ExprParsingException, TemplateParsingException
+	private static Object tryEval(final String expr, final ContextStack stackContext) throws ExprParsingException, TemplateParsingException
 	{
-		final ExprParser parser = new ExprParser(expr,stackContext);
+		final ExprParser parser = new ExprParser(new StringReader(expr));
 
-		return parser.parse();
+		try {
+			return parser.parse(stackContext);
+		} catch (ParseException e) {
+			throw new ExprParsingException(e);
+		}
 	}
 }

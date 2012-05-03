@@ -61,7 +61,19 @@ class ExprActions
 		final String sVarName = name.toString();
 		@SuppressWarnings("unchecked")
 		final ArrayList<Object> rSelector = (ArrayList<Object>)selectors;
-
+		/* TESTING */
+//		if (rSelector.isEmpty())
+//		{
+//			try
+//			{
+//				return getVariableOrClass(sVarName);
+//			}
+//			catch (final Throwable e)
+//			{
+//				return sVarName;
+//			}
+//		}
+		/* END TESTING */
 		Object var = getVariableOrClass(sVarName);
 		for (final Object selector : rSelector)
 		{
