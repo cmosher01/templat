@@ -1,1 +1,153 @@
-options{  STATIC = false;}PARSER_BEGIN(ExprParser)package net.sourceforge.templat.expr;import net.sourceforge.templat.parser.context.ContextStack;import net.sourceforge.templat.exception.TemplateParsingException;public class ExprParser{  private ExprActions actions;  public Object parse(final ContextStack stackContext) throws ParseException, TemplateParsingException  {    this.actions = new ExprActions(stackContext);    return Expression();  }}PARSER_END(ExprParser)SKIP :{  " "| "\t"| "\n"| "\r"}TOKEN :{  < DOT : "." >| < COMMA : "," >| < NUM : ([ "0"-"9" ])+ >| < ID : ([ "A"-"Z", "a"-"z", "_" ]) ([ "A"-"Z", "a"-"z", "_", "0"-"9" ])* >| < LBRACK : "[" >| < RBRACK : "]" >| < LPAREN : "(" >| < RPAREN : ")" >| < BANG : "!" >}Object Expression() throws TemplateParsingException :{  Object o;  Object selectors = this.actions.createList();}{  < BANG > o = Expression()  {    return !(Boolean) o;  }| < LPAREN > o = Expression() < RPAREN >  {    return o;  }| o = < NUM >  {    return Integer.valueOf(o.toString());  }| o = Name() selectors = Selectors()  {    return this.actions.applySelectors(o, selectors);  }  < EOF >}Object Selectors() throws TemplateParsingException :{  Object selectors = this.actions.createList();  Object selector;}{  (    selector = Selector()    {      selectors = this.actions.addToList(selector, selectors);    }  )*  {    return selectors;  }}Object Selector() throws TemplateParsingException :{  Object o;  Object o2;}{  < DOT > o = < ID > o2 = Args()  {    return this.actions.createMethodCall(o, o2);  }| < LBRACK > o = Expression() < RBRACK >  {    return this.actions.createArraySubscript(o);  }}Object Args() throws TemplateParsingException :{  Object o;}{  < LPAREN > o = ArgList() < RPAREN >  {    return o;  }}Object ArgList() throws TemplateParsingException :{  Object o = this.actions.createList();  Object o2;}{  [    o2 = Expression()    {      o = this.actions.addToList(o2, o);    }    (      < COMMA > o2 = Expression()      {        o = this.actions.addToList(o2, o);      }    )*  ]  {    return o;  }}Object Name() :{  Object o, o2;}{  o = < ID > // BUG: having this makes the parser get confused with "var.method(arg)"  // (it thinks var.method is Name, and then blows up)  //  (  //    < DOT > o2 = < ID >  //    {  //      o = o + "." + o2;  //    }  //  )*  {    return o;  }}
+options
+{
+  STATIC = false;
+}
+
+PARSER_BEGIN(ExprParser)
+package net.sourceforge.templat.expr;
+import net.sourceforge.templat.parser.context.ContextStack;
+import net.sourceforge.templat.exception.TemplateParsingException;
+
+public class ExprParser
+{
+  private ExprActions actions;
+
+  public Object parse(final ContextStack stackContext) throws ParseException, TemplateParsingException
+  {
+    this.actions = new ExprActions(stackContext);
+    return Expression();
+  }
+}
+
+PARSER_END(ExprParser)
+
+SKIP :
+{
+  " "
+| "\t"
+| "\n"
+| "\r"
+}
+
+TOKEN :
+{
+  < DOT : "." >
+| < COMMA : "," >
+| < NUM : ([ "0"-"9" ])+ >
+| < ID : ([ "A"-"Z", "a"-"z", "_" ]) ([ "A"-"Z", "a"-"z", "_", "0"-"9" ])* >
+| < LBRACK : "[" >
+| < RBRACK : "]" >
+| < LPAREN : "(" >
+| < RPAREN : ")" >
+| < BANG : "!" >
+}
+
+Object Expression() throws TemplateParsingException :
+{
+  Object o;
+  Object selectors = this.actions.createList();
+}
+{
+  < BANG > o = Expression()
+  {
+    return !(Boolean) o;
+  }
+| < LPAREN > o = Expression() < RPAREN >
+  {
+    return o;
+  }
+| o = < NUM >
+  {
+    return Integer.valueOf(o.toString());
+  }
+| o = Name() selectors = Selectors()
+  {
+    return this.actions.applySelectors(o, selectors);
+  }
+  < EOF >
+}
+
+Object Selectors() throws TemplateParsingException :
+{
+  Object selectors = this.actions.createList();
+  Object selector;
+}
+{
+  (
+    selector = Selector()
+    {
+      selectors = this.actions.addToList(selector, selectors);
+    }
+  )*
+  {
+    return selectors;
+  }
+}
+
+Object Selector() throws TemplateParsingException :
+{
+  Object o;
+  Object o2;
+}
+{
+  < DOT > o = < ID > o2 = Args()
+  {
+    return this.actions.createMethodCall(o, o2);
+  }
+| < LBRACK > o = Expression() < RBRACK >
+  {
+    return this.actions.createArraySubscript(o);
+  }
+}
+
+Object Args() throws TemplateParsingException :
+{
+  Object o;
+}
+{
+  < LPAREN > o = ArgList() < RPAREN >
+  {
+    return o;
+  }
+}
+
+Object ArgList() throws TemplateParsingException :
+{
+  Object o = this.actions.createList();
+  Object o2;
+}
+{
+  [
+    o2 = Expression()
+    {
+      o = this.actions.addToList(o2, o);
+    }
+    (
+      < COMMA > o2 = Expression()
+      {
+        o = this.actions.addToList(o2, o);
+      }
+    )*
+  ]
+  {
+    return o;
+  }
+}
+
+Object Name() :
+{
+  Object o, o2;
+}
+{
+  o = < ID > // BUG: having this makes the parser get confused with "var.method(arg)"
+  // (it thinks var.method is Name, and then blows up)
+  //  (
+  //    < DOT > o2 = < ID >
+  //    {
+  //      o = o + "." + o2;
+  //    }
+  //  )*
+  {
+    return o;
+  }
+}
