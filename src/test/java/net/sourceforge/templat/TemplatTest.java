@@ -497,14 +497,12 @@ public class TemplatTest
 		assertTemplate(buildFile("A@B"),buildFile("A@@B"));
 	}
 
-	@Ignore("Multipart names do not work; problem with LL(1) grammar")
 	@Test
 	public void testPackage() throws IOException, TemplateLexingException, TemplateParsingException
 	{
 		assertTemplate(buildFile("true"),buildFile("@java.lang.String.valueOf(true)@"));
 	}
 
-	@Ignore("Multipart names do not work; problem with LL(1) grammar")
 	@Test
 	public void testPackage2() throws IOException, TemplateLexingException, TemplateParsingException
 	{

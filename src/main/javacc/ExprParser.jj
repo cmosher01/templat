@@ -1,6 +1,7 @@
 options
 {
   STATIC = false;
+  JAVA_UNICODE_ESCAPE = true;
 }
 
 PARSER_BEGIN(ExprParser)
@@ -139,14 +140,14 @@ Object Name() :
   Object o, o2;
 }
 {
-  o = < ID > // BUG: having this makes the parser get confused with "var.method(arg)"
-  // (it thinks var.method is Name, and then blows up)
-  //  (
-  //    < DOT > o2 = < ID >
-  //    {
-  //      o = o + "." + o2;
-  //    }
-  //  )*
+  o = < ID >
+  (
+    LOOKAHEAD(< DOT > < ID >, { !(getToken(1).kind == DOT && getToken(2).kind == ID && getToken(3).kind == LPAREN) })
+    < DOT > o2 = < ID >
+    {
+      o = o + "." + o2;
+    }
+  )*
   {
     return o;
   }
