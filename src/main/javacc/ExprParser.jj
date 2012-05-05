@@ -91,24 +91,13 @@ Object Selector() throws TemplateParsingException :
   Object o2;
 }
 {
-  < DOT > o = < ID > o2 = Args()
+  < DOT > o = < ID > < LPAREN > o2 = ArgList() < RPAREN >
   {
     return this.actions.createMethodCall(o, o2);
   }
 | < LBRACK > o = Expression() < RBRACK >
   {
     return this.actions.createArraySubscript(o);
-  }
-}
-
-Object Args() throws TemplateParsingException :
-{
-  Object o;
-}
-{
-  < LPAREN > o = ArgList() < RPAREN >
-  {
-    return o;
   }
 }
 
