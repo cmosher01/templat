@@ -49,22 +49,24 @@ Object Expression() throws TemplateParsingException :
   Object selectors = this.actions.createList();
 }
 {
-  < BANG > o = Expression()
-  {
-    return !(Boolean) o;
-  }
-| < LPAREN > o = Expression() < RPAREN >
-  {
-    return o;
-  }
-| o = < NUM >
-  {
-    return Integer.valueOf(o.toString());
-  }
-| o = Name() selectors = Selectors()
-  {
-    return this.actions.applySelectors(o, selectors);
-  }
+  (
+    < BANG > o = Expression()
+    {
+      return !(Boolean) o;
+    }
+  | < LPAREN > o = Expression() < RPAREN >
+    {
+      return o;
+    }
+  | o = < NUM >
+    {
+      return Integer.valueOf(o.toString());
+    }
+  | o = Name() selectors = Selectors()
+    {
+      return this.actions.applySelectors(o, selectors);
+    }
+  )
   < EOF >
 }
 
@@ -87,57 +89,58 @@ Object Selectors() throws TemplateParsingException :
 
 Object Selector() throws TemplateParsingException :
 {
-  Object o;
-  Object o2;
+  Object method;
+  Object argList;
+  Object subscript;
 }
 {
-  < DOT > o = < ID > < LPAREN > o2 = ArgList() < RPAREN >
+  < DOT > method = < ID > < LPAREN > argList = ArgList() < RPAREN >
   {
-    return this.actions.createMethodCall(o, o2);
+    return this.actions.createMethodCall(method, argList);
   }
-| < LBRACK > o = Expression() < RBRACK >
+| < LBRACK > subscript = Expression() < RBRACK >
   {
-    return this.actions.createArraySubscript(o);
+    return this.actions.createArraySubscript(subscript);
   }
 }
 
 Object ArgList() throws TemplateParsingException :
 {
-  Object o = this.actions.createList();
-  Object o2;
+  Object argList = this.actions.createList();
+  Object expr;
 }
 {
   [
-    o2 = Expression()
+    expr = Expression()
     {
-      o = this.actions.addToList(o2, o);
+      argList = this.actions.addToList(expr, argList);
     }
     (
-      < COMMA > o2 = Expression()
+      < COMMA > expr = Expression()
       {
-        o = this.actions.addToList(o2, o);
+        argList = this.actions.addToList(expr, argList);
       }
     )*
   ]
   {
-    return o;
+    return argList;
   }
 }
 
 Object Name() :
 {
-  Object o, o2;
+  Object name, id;
 }
 {
-  o = < ID >
+  name = < ID >
   (
     LOOKAHEAD(< DOT > < ID >, { !(getToken(1).kind == DOT && getToken(2).kind == ID && getToken(3).kind == LPAREN) })
-    < DOT > o2 = < ID >
+    < DOT > id = < ID >
     {
-      o = o + "." + o2;
+      name = name + "." + id;
     }
   )*
   {
-    return o;
+    return name;
   }
 }
