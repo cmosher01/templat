@@ -52,6 +52,32 @@ of the code is clean, simple, and straightforward.
 
 
 
+== Download
+
+The easiest way to use TemplAT is via maven. Add this to your +pom.xml+ file:
+
+[source,xml]
+--------------------------------------
+<repositories>
+  <repository>
+    <id>mosher.mine.nu</id>
+    <url>http://mosher.mine.nu/nexus/content/repositories/releases</url>
+  </repository>
+</repositories>
+
+...
+
+<dependencies>
+  <dependency>
+    <groupId>net.sourceforge.templat</groupId>
+    <artifactId>templat</artifactId>
+    <version>1.1</version>
+  </dependency>
+</dependencies>
+--------------------------------------
+
+
+
 == Simple Example
 
 Once you have *downloaded* the *templat.jar* file and put it into the *classpath*,
