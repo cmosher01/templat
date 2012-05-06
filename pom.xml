@@ -7,7 +7,16 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sourceforge.templat</groupId>
 	<artifactId>templat</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.1.0-SNAPSHOT</version>
+	<description>Java templating engine</description>
+	<url>http://mosher.mine.nu/templat/</url>
+	<licenses>
+		<license>
+			<name>GPLv3</name>
+			<url>http://www.gnu.org/licenses/gpl-3.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -21,6 +30,9 @@
 			<url>http://mosher.mine.nu/nexus/content/repositories/releases</url>
 		</repository>
 	</distributionManagement>
+	<scm>
+		<developerConnection>scm:git:[fetch=]git://github.com/cmosher01/templat.git[push=]git@github.com:cmosher01/templat.git</developerConnection>
+	</scm>
 	<profiles>
 		<profile>
 			<id>m2eclipse</id>
