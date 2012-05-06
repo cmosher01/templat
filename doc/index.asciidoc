@@ -13,6 +13,10 @@ This software is distributed under the
 http://www.gnu.org/licenses/gpl-3.0-standalone.html[GPLv3]
 license.
 
+The source code is hosted at github: https://github.com/cmosher01/templat[]
+
+
+
 
 
 == Project Goals
