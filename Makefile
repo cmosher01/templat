@@ -1,4 +1,4 @@
-.PHONY: site
+.PHONY: site doc
 
 site: doc
 
