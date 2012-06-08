@@ -3,80 +3,87 @@
  */
 package net.sourceforge.templat.lexer;
 
+
+
 import net.sourceforge.templat.exception.TemplateParsingException;
 import net.sourceforge.templat.expr.Expression;
 import net.sourceforge.templat.parser.TemplateParser;
 import net.sourceforge.templat.parser.context.TemplateParserContext;
 
+
+
 /**
- * <span class="directive">@&nbsp;<span class="keyword">loop</span>&nbsp;<span class="var">variable</span>&nbsp;:&nbsp;<span class="var">count-expression</span>&nbsp;@</span>
- *
+ * "loop" token
  * @author Chris Mosher
  */
 class LoopToken implements TemplateToken
 {
-	private final String tag;
+    private final String tag;
 
-	/**
-	 * @param tag text after loop token: "variable : count"
-	 */
-	public LoopToken(final String tag)
-	{
-		this.tag = tag;
-	}
+    /**
+     * @param tag text after loop token: "variable : count"
+     */
+    public LoopToken(final String tag)
+    {
+        this.tag = tag;
+    }
 
-	@Override
-	public String toString()
-	{
-		return "LOOP: "+this.tag;
-	}
+    @Override
+    public String toString()
+    {
+        return "LOOP: " + this.tag;
+    }
 
-	@Override
-	public void parse(final TemplateParser parser, final Appendable appendTo) throws TemplateParsingException
-	{
-		appendTo.getClass(); // nothing to append here
-		/*
-		 * Parse the loop statement, which is in this format:
-		 * <index-variable> : <loop count>
-		 */
-		final int posColon = this.tag.indexOf(':');
+    @Override
+    public void parse(final TemplateParser parser, final Appendable appendTo) throws TemplateParsingException
+    {
+        /* nothing to append here */
+        appendTo.getClass();
 
-		if (posColon < 0)
-		{
-			throw new TemplateParsingException("Missing colon in loop statement.");
-		}
+        /* @formatter:off */
+        /*
+         * Parse the loop statement, which is in this format:
+         *     <index-variable> : <loop count>
+         */
+         /* @formatter:on */
+        final int posColon = this.tag.indexOf(':');
 
-		final TemplateParserContext ctxNew = new TemplateParserContext();
+        if (posColon < 0)
+        {
+            throw new TemplateParsingException("Missing colon in loop statement.");
+        }
 
-		{
-			final String varIndex = this.tag.substring(0,posColon).trim();
-			ctxNew.addVariable(TemplateParser.VAR_LOOP_INDEX,varIndex);
-			ctxNew.addVariable(varIndex,Integer.valueOf(0));
-		}
+        final TemplateParserContext ctxNew = new TemplateParserContext();
 
-		{
-			final String exprTimes = this.tag.substring(posColon+1).trim();
+        {
+            final String varIndex = this.tag.substring(0, posColon).trim();
+            ctxNew.addVariable(TemplateParser.VAR_LOOP_INDEX, varIndex);
+            ctxNew.addVariable(varIndex, Integer.valueOf(0));
+        }
 
-			final Number numTimes;
-			if (parser.getContext().isEverEqual(TemplateParser.VAR_IF,Boolean.FALSE))
-			{
-				numTimes = Integer.valueOf(0);
-			}
-			else
-			{
-				numTimes = (Number)Expression.eval(exprTimes,parser.getContext());
-			}
-			final int times = numTimes.intValue();
+        {
+            final String exprTimes = this.tag.substring(posColon + 1).trim();
 
-			ctxNew.addVariable(TemplateParser.VAR_LOOP_TIMES,Integer.valueOf(times));
-			if (times <= 0)
-			{
-				ctxNew.addVariable(TemplateParser.VAR_IF,Boolean.FALSE);
-			}
-		}
+            final Number numTimes;
+            if (parser.getContext().isEverEqual(TemplateParser.VAR_IF, Boolean.FALSE))
+            {
+                numTimes = Integer.valueOf(0);
+            }
+            else
+            {
+                numTimes = (Number) Expression.eval(exprTimes, parser.getContext());
+            }
+            final int times = numTimes.intValue();
 
-		parser.getContext().push(ctxNew);
+            ctxNew.addVariable(TemplateParser.VAR_LOOP_TIMES, Integer.valueOf(times));
+            if (times <= 0)
+            {
+                ctxNew.addVariable(TemplateParser.VAR_IF, Boolean.FALSE);
+            }
+        }
 
-		parser.saveParsePosition();
-	}
+        parser.getContext().push(ctxNew);
+
+        parser.saveParsePosition();
+    }
 }
