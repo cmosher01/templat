@@ -23,10 +23,9 @@ class EndIfToken implements TemplateToken
     }
 
     @Override
-    public void parse(final TemplateParser parser, final Appendable appendTo) throws TemplateParsingException
+    public void parse(final TemplateParser parser, @SuppressWarnings("unused") final Appendable appendTo)
+        throws TemplateParsingException
     {
-        /* nothing to append here */
-        appendTo.getClass();
         /* make sure we're in an if-block */
         parser.getContext().current().getValue(TemplateParser.VAR_IF);
         parser.getContext().pop();
