@@ -32,7 +32,8 @@ class ExprActions
 
     public static ArrayList<Object> addToList(final Object arg, final Object arglist)
     {
-        @SuppressWarnings("unchecked") final ArrayList<Object> rArg = (ArrayList<Object>) arglist;
+        @SuppressWarnings("unchecked")
+        final ArrayList<Object> rArg = (ArrayList<Object>) arglist;
         rArg.add(arg);
         return rArg;
     }
@@ -58,7 +59,8 @@ class ExprActions
     public Object applySelectors(final Object name, final Object selectors) throws TemplateParsingException
     {
         final String sVarName = name.toString();
-        @SuppressWarnings("unchecked") final ArrayList<Object> rSelector = (ArrayList<Object>) selectors;
+        @SuppressWarnings("unchecked")
+        final ArrayList<Object> rSelector = (ArrayList<Object>) selectors;
 
         Object var = getVariableOrClass(sVarName);
         for (final Object selector : rSelector)
