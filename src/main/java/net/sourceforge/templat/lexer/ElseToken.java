@@ -41,7 +41,7 @@ class ElseToken implements TemplateToken
         }
     }
 
-    private void tryParse(final TemplateParser parser) throws TemplateParsingException, ClassCastException
+    private static void tryParse(final TemplateParser parser) throws TemplateParsingException, ClassCastException
     {
         boolean conditionIf = ((Boolean) parser.getContext().current().getValue(TemplateParser.VAR_IF)).booleanValue();
         parser.getContext().current().addVariable(TemplateParser.VAR_IF, Boolean.valueOf(!conditionIf));

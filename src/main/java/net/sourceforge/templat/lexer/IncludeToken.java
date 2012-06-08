@@ -78,7 +78,7 @@ class IncludeToken implements TemplateToken
 
     private ArrayList<Object> splitArgs(final ContextStack ctx) throws TemplateParsingException
     {
-        final ArrayList<Object> rArg = new ArrayList<Object>();
+        final ArrayList<Object> rArg = new ArrayList<>();
 
         int parens = 0;
         final StringBuilder cur = new StringBuilder();

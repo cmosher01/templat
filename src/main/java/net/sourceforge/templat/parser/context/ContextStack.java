@@ -19,7 +19,7 @@ import net.sourceforge.templat.exception.TemplateParsingException;
  */
 public class ContextStack
 {
-    private final LinkedList<TemplateParserContext> rCtx = new LinkedList<TemplateParserContext>();
+    private final LinkedList<TemplateParserContext> rCtx = new LinkedList<>();
 
     /**
      * Pushes the given context onto the top of this stack.

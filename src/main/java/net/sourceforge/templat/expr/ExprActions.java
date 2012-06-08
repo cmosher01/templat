@@ -25,19 +25,19 @@ class ExprActions
         this.ctx = stackContext;
     }
 
-    public ArrayList<Object> createList()
+    public static ArrayList<Object> createList()
     {
-        return new ArrayList<Object>();
+        return new ArrayList<>();
     }
 
-    public ArrayList<Object> addToList(final Object arg, final Object arglist)
+    public static ArrayList<Object> addToList(final Object arg, final Object arglist)
     {
         @SuppressWarnings("unchecked") final ArrayList<Object> rArg = (ArrayList<Object>) arglist;
         rArg.add(arg);
         return rArg;
     }
 
-    public ArraySubscript createArraySubscript(final Object subscript) throws TemplateParsingException
+    public static ArraySubscript createArraySubscript(final Object subscript) throws TemplateParsingException
     {
         try
         {
@@ -50,7 +50,7 @@ class ExprActions
     }
 
     @SuppressWarnings("unchecked")
-    public MethodCall createMethodCall(final Object nameMethod, final Object arglist)
+    public static MethodCall createMethodCall(final Object nameMethod, final Object arglist)
     {
         return new MethodCall(nameMethod.toString(), (ArrayList<Object>) arglist);
     }

@@ -625,7 +625,7 @@ public class TemplatTest
     @Test
     public void testTypicalListAccess() throws IOException, TemplateLexingException, TemplateParsingException
     {
-        final List<String> things = new ArrayList<String>();
+        final List<String> things = new ArrayList<>();
         Collections.<String> addAll(things, "A", "B", "C", "D", "E", "F", "G");
         assertTemplate(buildFile("0A1B2C3D4E5F6G"), buildFile("@loop i : arg0.size()@@i@@arg0[i]@@end loop@"), (Object) things);
     }
@@ -633,7 +633,7 @@ public class TemplatTest
     @Test
     public void testTypicalArrayAccess() throws IOException, TemplateLexingException, TemplateParsingException
     {
-        final List<String> things = new ArrayList<String>();
+        final List<String> things = new ArrayList<>();
         Collections.<String> addAll(things, "A", "B", "C", "D", "E", "F", "G");
         assertTemplate(buildFile("0A1B2C3D4E5F6G"), buildFile("@loop i : arg0.size()@@i@@arg0[i]@@end loop@"),
             (Object) things.toArray());
@@ -862,7 +862,7 @@ public class TemplatTest
         return stringWriter.toString();
     }
 
-    private void assertTemplate(final String expected, final String template, final Object... args) throws IOException,
+    private static void assertTemplate(final String expected, final String template, final Object... args) throws IOException,
         TemplateLexingException, TemplateParsingException
     {
         File file = null;
@@ -886,7 +886,7 @@ public class TemplatTest
         }
     }
 
-    private void assertTemplateInclude(final String expected, final String template, final String includedTemplate,
+    private static void assertTemplateInclude(final String expected, final String template, final String includedTemplate,
         final int cArg, final Object... args) throws IOException, TemplateLexingException, TemplateParsingException
     {
         File fileIncluded = null;
@@ -923,7 +923,7 @@ public class TemplatTest
         }
     }
 
-    private File buildTemplateFile(final String template, final int cArg) throws IOException
+    private static File buildTemplateFile(final String template, final int cArg) throws IOException
     {
         final String name = "TEMPLATE" + UUID.randomUUID().toString().replace("-", "_");
         final File file = new File(name + ".tat").getCanonicalFile();

@@ -18,7 +18,7 @@ import net.sourceforge.templat.exception.TemplateParsingException;
  */
 public class TemplateParserContext
 {
-    private final Map<String, Object> variables = new HashMap<String, Object>();
+    private final Map<String, Object> variables = new HashMap<>();
 
     /**
      * @param varName

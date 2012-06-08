@@ -73,7 +73,7 @@ public class Templat
         appendTemplate(this.url, sb);
 
         final TemplateLexer lexer = new TemplateLexer(sb);
-        final List<TemplateToken> rToken = new ArrayList<TemplateToken>();
+        final List<TemplateToken> rToken = new ArrayList<>();
         lexer.lex(rToken);
 
         final TemplateParser parser = new TemplateParser(rToken, Arrays.asList(rArg), this.url);

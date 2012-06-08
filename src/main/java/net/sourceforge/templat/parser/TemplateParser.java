@@ -37,9 +37,9 @@ public class TemplateParser
     /** Internal variable holding the URL of the template */
     public static final String VAR_URL = "@url";
 
-    private final List<TemplateToken> rToken = new ArrayList<TemplateToken>();
+    private final List<TemplateToken> rToken = new ArrayList<>();
 
-    private final LinkedList<Integer> rPosParse = new LinkedList<Integer>();
+    private final LinkedList<Integer> rPosParse = new LinkedList<>();
     private final ContextStack stackContext = new ContextStack();
 
     /**

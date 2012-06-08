@@ -77,7 +77,7 @@ class MethodCall implements Selector
             throw new TemplateParsingException("calling method getClass is not supported.");
         }
 
-        final Map<String, Set<Method>> mapMethods = new HashMap<String, Set<Method>>();
+        final Map<String, Set<Method>> mapMethods = new HashMap<>();
         getMethods(clas, mapMethods);
         final Method methodToInvoke = findMethod(mapMethods);
 
@@ -147,7 +147,7 @@ class MethodCall implements Selector
         return true;
     }
 
-    private static Map<Class<?>, Class<?>> mapPrimitiveToWrapper = new HashMap<Class<?>, Class<?>>();
+    private static Map<Class<?>, Class<?>> mapPrimitiveToWrapper = new HashMap<>();
     static
     {
         MethodCall.mapPrimitiveToWrapper.put(Integer.TYPE, Integer.class);
