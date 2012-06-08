@@ -3,26 +3,24 @@
  */
 package net.sourceforge.templat.expr.exception;
 
+
+
 /**
  * Indicates an exception during lexing an expression.
- *
  * @author Chris Mosher
  */
 public class ExprLexingException extends Exception
 {
-	/**
-	 *
-	 */
-	public ExprLexingException()
-	{
-		super();
-	}
+    public ExprLexingException()
+    {
+        /* nothing needed */
+    }
 
-	/**
-	 * @param e
-	 */
-	public ExprLexingException(final Throwable e)
-	{
-		super(e);
-	}
+    /**
+     * @param e
+     */
+    public ExprLexingException(final Throwable e)
+    {
+        super(e);
+    }
 }
