@@ -61,7 +61,7 @@ public class TemplateLexer
 	/**
 	 * Lexigraphically analyzes this lexer's template into tokens. The resulting
 	 * tokens are appended to the given <code>List</code>.
-	 * 
+	 *
 	 * @param rToken
 	 *            <code>List</code> to append the tokens to
 	 * @throws TemplateLexingException

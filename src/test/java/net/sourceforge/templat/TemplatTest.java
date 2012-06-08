@@ -753,7 +753,7 @@ public class TemplatTest
 
 			final StringBuilder sb = new StringBuilder(256);
 			templat.render(sb,args);
-	
+
 			assertEquals(expected,sb.toString());
 		}
 		finally
@@ -778,10 +778,10 @@ public class TemplatTest
 			file = buildTemplateFile(template.replaceFirst("include XXX","include "+uuidname),args.length);
 
 			final Templat templat = new Templat(file.toURI().toURL());
-	
+
 			final StringBuilder sb = new StringBuilder(256);
 			templat.render(sb,args);
-	
+
 			for (int i = 0; i < NEWLINELENGTH; ++i)
 			{
 				sb.deleteCharAt(sb.length()-1);

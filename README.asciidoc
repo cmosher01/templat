@@ -8,6 +8,6 @@ TemplAT is a text-file template engine, used from a Java application.
 
 http://mosher.mine.nu/templat[]
 
-This software is distributed under the 
+This software is distributed under the
 http://www.gnu.org/licenses/gpl-3.0-standalone.html[GPLv3]
 license.

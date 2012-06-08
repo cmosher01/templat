@@ -55,8 +55,8 @@ class LoopToken implements TemplateToken
 		}
 
 		{
-			final String exprTimes = this.tag.substring(posColon+1).trim();
-	
+			final String exprTimes = this.tag.substring(posColon+1).trim()
+
 			final Number numTimes;
 			if (parser.getContext().isEverEqual(TemplateParser.VAR_IF,Boolean.FALSE))
 			{

@@ -59,7 +59,7 @@ public class Templat
 	 * Renders this template. The arguments, if any, are passed to the template itself,
 	 * and bound to the parameters specified in the template definition. The result of
 	 * parsing the template is appended to the given <code>Appendable</code>.
-	 * 
+	 *
 	 * @param appendTo the <code>Appendable</code> to append the result to
 	 * @param rArg optional argument(s) to pass to the template
 	 * @throws TemplateLexingException

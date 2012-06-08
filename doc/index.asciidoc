@@ -9,7 +9,7 @@ TemplAT is a general-purpose text-file *template engine*, designed to be used
 as an API from *Java* applications or servlets. It is small (39K) and simple,
 yet surprisingly powerful. It does not have any external library dependencies.
 
-This software is distributed under the 
+This software is distributed under the
 http://www.gnu.org/licenses/gpl-3.0-standalone.html[GPLv3]
 license.
 
@@ -37,7 +37,7 @@ libraries.
 Useful::
 TemplAT can be used for generating *HTML* pages by a Java servlet for a web
 server. It could just as easily be used for generating Java, C++, or SQL
-*source code*. It is useful for any text file where you need some kind of 
+*source code*. It is useful for any text file where you need some kind of
 *programming ability* (loops, if-then-else, includes, method calls).
 
 Reliable::
@@ -252,7 +252,7 @@ or +java.util.List+ objects).
 ----
 The +if+ and +end if+ tags, and optional +else+ tag, define a conditional expansion.
 The +boolean-expression+ is evaluated; if the result is true, the +if-body+ is
-(parsed and) expanded to the output. Otherwise, the +else-body+, if it exists, is 
+(parsed and) expanded to the output. Otherwise, the +else-body+, if it exists, is
 (parsed and) expanded to the output. Note that either body (or both) may contain
 template tags and/or plain text areas.
 
@@ -267,7 +267,7 @@ is evaluated as a Java expression that returns an _integer_, and the +loop-body+
 (parsed and) expanded _that many times_ to the output. If the count is less than or
 equal to zero, then the +loop-body+ will not be expanded. Within the +loop-body+,
 the variable may be referenced within any expression in any tag. The variable will
-be a +java.lang.Integer+. It will hold the value _zero_ on the first iteration of the 
+be a +java.lang.Integer+. It will hold the value _zero_ on the first iteration of the
 loop, _one_ on the next iteration, etc., up to _count minus 1_ on the final interation.
 
 === include
@@ -276,10 +276,10 @@ loop, _one_ on the next iteration, etc., up to _count minus 1_ on the final inte
 ----
 The +include+ tag parses and expands another template file. +template-path+ is the
 (optional path and) name of the template to be included. The path is interpreted
-_relative to_ the including template. The file name of the included template will 
+_relative to_ the including template. The file name of the included template will
 be the specified name followed by +.tat+ filetype. Following the +template-path+,
 within parentheses, you must specify the arguments required by the included template.
-These arguments will be bound to the parameters defined by the included template 
+These arguments will be bound to the parameters defined by the included template
 when it is parsed.
 
 === text
@@ -289,7 +289,7 @@ to the output. The _one exception_ is that text cannot contain an _at-sign_ (+@+
 itself (because an at-sign defines the start of a tag). Use _two at-signs_ in a row
 (+@@+) in text to indicate a single at-sign in the rendered output. For example,
 +john@@example.com+ in text within a template would be rendered as +john@example.com+
-in the output. However, +john@example.com+ in the text would result in a syntax error 
+in the output. However, +john@example.com+ in the text would result in a syntax error
 at render time.
 
 

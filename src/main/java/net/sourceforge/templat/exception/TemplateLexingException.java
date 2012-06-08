@@ -11,7 +11,7 @@ package net.sourceforge.templat.exception;
 public class TemplateLexingException extends Exception
 {
 	/**
-	 * 
+	 *
 	 */
 	public TemplateLexingException()
 	{
