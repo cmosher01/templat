@@ -29,7 +29,7 @@
     </repository>
   </distributionManagement>
   <scm>
-    <developerConnection>scm:git:[fetch=]git://github.com/cmosher01/templat.git[push=]git@github.com:cmosher01/templat.git</developerConnection>
+    <developerConnection>scm:git:[fetch=]https://github.com/cmosher01/templat.git[push=]git@github.com:cmosher01/templat.git</developerConnection>
   </scm>
   <build>
     <plugins>
@@ -80,6 +80,18 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.4.2</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.maven.scm</groupId>
+            <artifactId>maven-scm-provider-gitexe</artifactId>
+            <version>1.9</version>
+          </dependency>
+        </dependencies>
       </plugin>
     </plugins>
   </build>
