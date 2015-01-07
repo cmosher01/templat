@@ -4,7 +4,7 @@
   <description />
   <settings>
     <options>
-      <option name="artifactRules" value="target/templat-*-SNAPSHOT.jar&#xA;target/templat-*-SNAPSHOT-sources.jar&#xA;target/templat-*-SNAPSHOT-javadoc.jar" />
+      <option name="artifactRules" value="target/templat-*.jar&#xA;target/templat-*-sources.jar&#xA;target/templat-*-javadoc.jar" />
     </options>
     <parameters />
     <build-runners>
