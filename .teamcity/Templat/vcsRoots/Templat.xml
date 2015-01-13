@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<vcs-root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="f1a6dcc8-2e9f-4cab-a2dc-1de0b4a36b07" type="jetbrains.git" xsi:noNamespaceSchemaLocation="http://www.jetbrains.com/teamcity/schemas/9.0/project-config.xsd">
-  <name>git@github.com:cmosher01/templat.git</name>
+<vcs-root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="5930b8f0-cc0a-443c-81fe-af5caf37e414" type="jetbrains.git" xsi:noNamespaceSchemaLocation="http://www.jetbrains.com/teamcity/schemas/9.0/project-config.xsd">
+  <name>Templat</name>
   <param name="agentCleanFilesPolicy" value="ALL_UNTRACKED" />
   <param name="agentCleanPolicy" value="ON_BRANCH_CHANGE" />
   <param name="authMethod" value="PRIVATE_KEY_DEFAULT" />
@@ -9,6 +9,6 @@
   <param name="submoduleCheckout" value="CHECKOUT" />
   <param name="url" value="git@github.com:cmosher01/templat.git" />
   <param name="useAlternates" value="true" />
-  <param name="username" value="git" />
   <param name="usernameStyle" value="USERID" />
 </vcs-root>
+
