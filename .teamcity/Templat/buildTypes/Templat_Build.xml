@@ -22,7 +22,7 @@
       </runner>
     </build-runners>
     <vcs-settings>
-      <vcs-entry-ref root-id="TemplAT_GitGithubComCmosher01templatGit" />
+      <vcs-entry-ref root-id="Templat" />
     </vcs-settings>
     <requirements />
     <build-triggers>
@@ -35,4 +35,3 @@
     <cleanup />
   </settings>
 </build-type>
-

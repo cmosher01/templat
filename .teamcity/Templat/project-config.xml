@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="135633a9-f928-44b3-ba07-d2c349e3fd6f" xsi:noNamespaceSchemaLocation="http://www.jetbrains.com/teamcity/schemas/9.0/project-config.xsd">
-  <name>TemplAT</name>
+  <name>Templat</name>
   <description>java-based template utility</description>
   <parameters />
   <cleanup />
 </project>
-
