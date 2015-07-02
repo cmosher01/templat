@@ -4,7 +4,8 @@ MAINTAINER Christopher A. Mosher <cmosher01@gmail.com>
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
 	asciidoc \
-	make
+	make \
+	source-highlight
 
 WORKDIR /root/
 
