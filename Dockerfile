@@ -16,4 +16,4 @@ COPY pom.xml ./
 COPY src/ ./src/
 COPY doc/ ./doc/
 
-RUN make >build.log 2>&1
+RUN make 2>&1 | tee build.log
