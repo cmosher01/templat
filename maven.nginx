@@ -1,0 +1,11 @@
+server {
+	listen 80;
+	root /root/.m2/repository;
+	index  index.html;
+
+	server_name maven;
+
+	location / {
+		try_files $uri $uri/ break;
+	}
+}
