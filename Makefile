@@ -1,11 +1,11 @@
-.PHONY: all jar site doc
+.PHONY: all install site doc
 
 MAVEN ?= mvn
 
-all: jar site
+all: install site
 
-jar:
-	$(MAVEN) --batch-mode install
+install:
+	$(MAVEN) --batch-mode $@
 
 site: doc
 

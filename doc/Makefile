@@ -16,5 +16,5 @@ clean :
 	rm -Rf site
 
 site :
-	mkdir -p site
-	cp $(HTMLS) site
+	mkdir -p $@
+	cp $(HTMLS) $@
