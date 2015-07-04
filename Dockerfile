@@ -18,6 +18,7 @@ COPY pom.xml ./
 COPY src/ ./src/
 COPY doc/ ./doc/
 
+COPY nginx.conf /etc/nginx/
 COPY maven.nginx /etc/nginx/sites-available/
 RUN rm /etc/nginx/sites-enabled/default
 RUN ln -s /etc/nginx/sites-available/maven.nginx /etc/nginx/sites-enabled/maven.nginx
@@ -29,4 +30,4 @@ EXPOSE 80
 COPY supervisord.conf /etc/supervisor/conf.d/
 CMD ["supervisord"]
 
-RUN sed -i 's/user www-data;/user root;/' /etc/nginx/nginx.conf
+RUN ln -s /root/.m2/repository /root/doc/site/maven

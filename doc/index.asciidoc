@@ -1,6 +1,6 @@
 TemplAT
 =======
-Christopher A. Mosher <chris@mosher.mine.nu>
+Christopher A. Mosher <cmosher01@gmail.com>
 :toc2:
 
 
@@ -61,7 +61,7 @@ The easiest way to use TemplAT is via maven. Add this to your +pom.xml+ file:
 <repositories>
   <repository>
     <id>mosher.mine.nu</id>
-    <url>http://mosher.mine.nu/nexus/content/repositories/releases</url>
+    <url>http://mosher.mine.nu/maven</url>
   </repository>
 </repositories>
 
@@ -71,7 +71,7 @@ The easiest way to use TemplAT is via maven. Add this to your +pom.xml+ file:
   <dependency>
     <groupId>net.sourceforge.templat</groupId>
     <artifactId>templat</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.1-SNAPSHOT</version>
   </dependency>
 </dependencies>
 --------------------------------------
@@ -85,6 +85,7 @@ you can make a simple example program to demonstrate how TemplAT works. For exam
 *create a text file* called +displayBooks.tat+; this will be our *template*.
 
 +displayBooks.tat+
+[source,java]
 ------------------------------------------------------------
 @template displayBooks(books)@
 We have the following books:
@@ -169,17 +170,20 @@ We have the following books:
 === Template File Syntax
 
 ==== template
+[source,java]
 ----
    @ template template-name( parameter1, parameter2, ... ) @
            template-body
 ----
 
 ==== expression
+[source,java]
 ----
    @ expression @
 ----
 
 ==== if
+[source,java]
 ----
    @ if ( boolean-expression ) @
            if-body
@@ -189,6 +193,7 @@ We have the following books:
 ----
 
 ==== loop
+[source,java]
 ----
    @ loop variable : count-expression @
            loop-body
@@ -196,6 +201,7 @@ We have the following books:
 ----
 
 ==== include
+[source,java]
 ----
    @ include template-path( argument1, argument2, ... ) @
 ----
@@ -220,6 +226,7 @@ tat.render(result, argument1, argument2, ... );
 == Template File
 
 === template
+[source,java]
 ----
    @ template template-name( parameter1, parameter2, ... ) @
            template-body
@@ -233,6 +240,7 @@ is the +template-body+ (the rest of the file), which may contain other tags ( +i
 +loop+ s, +include+ s, or +expression+ s ).
 
 === expression
+[source,java]
 ----
    @ expression @
 ----
@@ -243,6 +251,7 @@ Classes or variables may futher have method calls or subscripts (for arrays
 or +java.util.List+ objects).
 
 === if
+[source,java]
 ----
    @ if ( boolean-expression ) @
            if-body
@@ -257,6 +266,7 @@ The +boolean-expression+ is evaluated; if the result is true, the +if-body+ is
 template tags and/or plain text areas.
 
 === loop
+[source,java]
 ----
    @ loop variable : count-expression @
            loop-body
@@ -271,6 +281,7 @@ be a +java.lang.Integer+. It will hold the value _zero_ on the first iteration o
 loop, _one_ on the next iteration, etc., up to _count minus 1_ on the final interation.
 
 === include
+[source,java]
 ----
    @ include template-path( argument1, argument2, ... ) @
 ----
@@ -323,6 +334,7 @@ void render(Appendable result, Object... arguments)
 
 == Template File Grammar
 
+[source,java]
 ----
  template : tmpldef body
   tmpldef : '@' 'template' '(' [param [',' param ...]] ')' '@'

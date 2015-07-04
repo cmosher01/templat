@@ -3,6 +3,8 @@
 MAVEN ?= mvn
 
 all: jar site
+
+jar:
 	$(MAVEN) --batch-mode install
 
 site: doc
