@@ -31,3 +31,4 @@ COPY supervisord.conf /etc/supervisor/conf.d/
 CMD ["supervisord"]
 
 RUN ln -s /root/.m2/repository /root/doc/site/maven
+RUN ln -s . /root/doc/site/templat

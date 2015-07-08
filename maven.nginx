@@ -1,6 +1,6 @@
 server {
-	listen * default_server;
-	index index.html;
+    listen * default_server;
+    index index.html;
     location / {
         root /root/doc/site;
         try_files $uri $uri/ break;
