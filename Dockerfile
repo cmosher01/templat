@@ -1,34 +1,34 @@
-FROM maven
+FROM java
 
 MAINTAINER Christopher A. Mosher <cmosher01@gmail.com>
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
-	asciidoc \
-	make \
 	nginx \
-	source-highlight \
-	supervisor
+    supervisor
 
-WORKDIR /root/
+CMD ["supervisord"]
+COPY supervisord.conf /etc/supervisor/conf.d/
 
-COPY settings.xml ./.m2/
-
-COPY Makefile ./
-COPY pom.xml ./
-COPY src/ ./src/
-COPY doc/ ./doc/
-
+EXPOSE 80
 COPY nginx.conf /etc/nginx/
 COPY maven.nginx /etc/nginx/sites-available/
 RUN rm /etc/nginx/sites-enabled/default
 RUN ln -s /etc/nginx/sites-available/maven.nginx /etc/nginx/sites-enabled/maven.nginx
 
-RUN make 2>&1 | tee build.log
+WORKDIR /root/
 
-EXPOSE 80
+COPY gradle/ ./
+COPY settings.gradle ./
+COPY build.gradle ./
 
-COPY supervisord.conf /etc/supervisor/conf.d/
-CMD ["supervisord"]
+RUN ./gradlew clean
 
-RUN ln -s /root/.m2/repository /root/doc/site/maven
-RUN ln -s . /root/doc/site/templat
+COPY src/ ./src/
+
+RUN mkdir -p build/reports/logs/
+RUN ./gradlew components 2>&1 | tee build/reports/logs/components.log
+RUN ./gradlew dependencies 2>&1 | tee build/reports/logs/dependencies.log
+RUN ./gradlew asciidoc 2>&1 | tee build/reports/logs/asciidoc.log
+RUN ln -s /root/.m2/repository build/asciidoc/html5/maven
+RUN ln -s . build/asciidoc/html5/templat
+RUN ./gradlew build javadoc install 2>&1 | tee build/reports/logs/build.log
