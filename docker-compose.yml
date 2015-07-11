@@ -1,0 +1,5 @@
+---
+templat:
+  build: .
+  ports:
+    - 80
