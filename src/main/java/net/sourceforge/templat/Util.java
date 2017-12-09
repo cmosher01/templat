@@ -1,4 +1,4 @@
-/*
+package net.sourceforge.templat;/*
  * Created on 2006-10-09
  */
 

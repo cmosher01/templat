@@ -5,7 +5,6 @@ package net.sourceforge.templat;
 
 
 
-import static org.junit.Assert.assertEquals;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -17,12 +16,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
-import net.sourceforge.templat.Templat;
 import net.sourceforge.templat.exception.TemplateLexingException;
 import net.sourceforge.templat.exception.TemplateParsingException;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class TemplatTest
@@ -182,42 +181,48 @@ public class TemplatTest
         assertTemplate(buildFile("AD"), buildFile("A@loop i: arg0@C@end loop@D"), Integer.valueOf(-1));
     }
 
-    @Test(expected = TemplateParsingException.class)
+    @Test
     public void testMissingIf() throws IOException, TemplateLexingException, TemplateParsingException
     {
-        assertTemplate(buildFile(""), buildFile("A@else@B"));
+        assertThrows(TemplateParsingException.class, () ->
+            assertTemplate(buildFile(""), buildFile("A@else@B")));
     }
 
-    @Ignore("Syntax error of else in loop isn't caught")
-    @Test(expected = TemplateParsingException.class)
+    @Disabled("Syntax error of else in loop isn't caught")
+    @Test
     public void testMissingIf2() throws IOException, TemplateLexingException, TemplateParsingException
     {
-        assertTemplate(buildFile("ADE"), buildFile("A@loop i: 0@C@else@D@end loop@E"));
+        assertThrows(TemplateParsingException.class, () ->
+            assertTemplate(buildFile("ADE"), buildFile("A@loop i: 0@C@else@D@end loop@E")));
     }
 
-    @Test(expected = TemplateParsingException.class)
+    @Test
     public void testJustAnEndIf() throws IOException, TemplateLexingException, TemplateParsingException
     {
-        assertTemplate(buildFile(""), buildFile("@end if@"));
+        assertThrows(TemplateParsingException.class, () ->
+            assertTemplate(buildFile(""), buildFile("@end if@")));
     }
 
-    @Test(expected = TemplateParsingException.class)
+    @Test
     public void testJustAnElse() throws IOException, TemplateLexingException, TemplateParsingException
     {
-        assertTemplate(buildFile(""), buildFile("@else@"));
+        assertThrows(TemplateParsingException.class, () ->
+            assertTemplate(buildFile(""), buildFile("@else@")));
     }
 
-    @Test(expected = TemplateParsingException.class)
+    @Test
     public void testJustAnEndLoop() throws IOException, TemplateLexingException, TemplateParsingException
     {
-        assertTemplate(buildFile(""), buildFile("@end loop@"));
+        assertThrows(TemplateParsingException.class, () ->
+            assertTemplate(buildFile(""), buildFile("@end loop@")));
     }
 
-    @Ignore("Syntax error of missing end loop isn't caught")
-    @Test(expected = TemplateParsingException.class)
+    @Disabled("Syntax error of missing end loop isn't caught")
+    @Test
     public void testNoEndLoop() throws IOException, TemplateLexingException, TemplateParsingException
     {
-        assertTemplate(buildFile("ABC"), buildFile("@loop i : 5@ABC"));
+        assertThrows(TemplateParsingException.class, () ->
+            assertTemplate(buildFile("ABC"), buildFile("@loop i : 5@ABC")));
     }
 
     @Test
@@ -265,7 +270,7 @@ public class TemplatTest
         assertTemplate(buildFile("3"), buildFile("@arg0.sum( 1 , 2 )@"), new XYZ());
     }
 
-    @Ignore("Literal negative numbers aren't handled.")
+    @Disabled("Literal negative numbers aren't handled.")
     @Test
     public void testLiteralNegativeNumber() throws IOException, TemplateLexingException, TemplateParsingException
     {
@@ -278,10 +283,11 @@ public class TemplatTest
         assertTemplate(buildFile("A2147483647B"), buildFile("A@2147483647@B"));
     }
 
-    @Test(expected = TemplateParsingException.class)
+    @Test
     public void testLiteralNumberTooBig() throws IOException, TemplateLexingException, TemplateParsingException
     {
-        assertTemplate(buildFile(""), buildFile("A@2147483648@B"));
+        assertThrows(TemplateParsingException.class, () ->
+            assertTemplate(buildFile(""), buildFile("A@2147483648@B")));
     }
 
     @Test
@@ -335,10 +341,11 @@ public class TemplatTest
         assertTemplate(buildFile("A"), buildFile("@arg0.get()@"), new X());
     }
 
-    @Test(expected = TemplateParsingException.class)
+    @Test
     public void testExprMethodBad() throws IOException, TemplateLexingException, TemplateParsingException
     {
-        assertTemplate(buildFile(""), buildFile("@arg0.badget()@"), new X());
+        assertThrows(TemplateParsingException.class, () ->
+            assertTemplate(buildFile(""), buildFile("@arg0.badget()@"), new X()));
     }
 
     @Test
@@ -354,11 +361,11 @@ public class TemplatTest
         assertTemplate(buildFile("A"), buildFile("@arg0[0]@"), Collections.<String> singletonList("A"));
     }
 
-    @Test(expected = TemplateParsingException.class)
+    @Test
     public void testExprArrayIndexOutOfBounds() throws IOException, TemplateLexingException, TemplateParsingException
     {
-        assertTemplate(buildFile("A"), buildFile("@arg0[1]@"), (Object) new String[]
-        { "A" });
+        assertThrows(TemplateParsingException.class, () ->
+            assertTemplate(buildFile("A"), buildFile("@arg0[1]@"), (Object) new String[]{ "A" }));
     }
 
     public static class Y
@@ -476,11 +483,11 @@ public class TemplatTest
         { "A", "B", "C" });
     }
 
-    @Test(expected = TemplateParsingException.class)
+    @Test
     public void testExprArrayLengthBad() throws IOException, TemplateLexingException, TemplateParsingException
     {
-        assertTemplate(buildFile(""), buildFile("@arg0.length(0)@"), (Object) new String[]
-        { "A", "B", "C" });
+        assertThrows(TemplateParsingException.class, () ->
+            assertTemplate(buildFile(""), buildFile("@arg0.length(0)@"), (Object) new String[]{ "A", "B", "C" }));
     }
 
     @Test
@@ -490,11 +497,11 @@ public class TemplatTest
         { "A", "B", "C" });
     }
 
-    @Test(expected = TemplateParsingException.class)
+    @Test
     public void testExprArraySizeBad() throws IOException, TemplateLexingException, TemplateParsingException
     {
-        assertTemplate(buildFile(""), buildFile("@arg0.size(0)@"), (Object) new String[]
-        { "A", "B", "C" });
+        assertThrows(TemplateParsingException.class, () ->
+            assertTemplate(buildFile(""), buildFile("@arg0.size(0)@"), (Object) new String[]{ "A", "B", "C" }));
     }
 
     @Test
@@ -503,10 +510,11 @@ public class TemplatTest
         assertTemplate(buildFile("3"), buildFile("@arg0.length()@"), (Object) Collections.<String> nCopies(3, "A"));
     }
 
-    @Test(expected = TemplateParsingException.class)
+    @Test
     public void testExprListLengthBad() throws IOException, TemplateLexingException, TemplateParsingException
     {
-        assertTemplate(buildFile(""), buildFile("@arg0.length(0)@"), (Object) Collections.<String> nCopies(3, "A"));
+        assertThrows(TemplateParsingException.class, () ->
+            assertTemplate(buildFile(""), buildFile("@arg0.length(0)@"), (Object) Collections.<String> nCopies(3, "A")));
     }
 
     @Test
@@ -515,10 +523,11 @@ public class TemplatTest
         assertTemplate(buildFile("3"), buildFile("@arg0.size()@"), (Object) Collections.<String> nCopies(3, "A"));
     }
 
-    @Test(expected = TemplateParsingException.class)
+    @Test
     public void testExprListSizeBad() throws IOException, TemplateLexingException, TemplateParsingException
     {
-        assertTemplate(buildFile(""), buildFile("@arg0.size(0)@"), (Object) Collections.<String> nCopies(3, "A"));
+        assertThrows(TemplateParsingException.class, () ->
+            assertTemplate(buildFile(""), buildFile("@arg0.size(0)@"), (Object) Collections.<String> nCopies(3, "A")));
     }
 
     public static class Q
@@ -542,28 +551,32 @@ public class TemplatTest
         assertTemplate(buildFile("AB"), buildFile("A@arg0@B"), (Object) null);
     }
 
-    @Test(expected = TemplateParsingException.class)
+    @Test
     public void testExprNullMethod() throws IOException, TemplateLexingException, TemplateParsingException
     {
-        assertTemplate(buildFile(""), buildFile("@arg0.toString()@"), (Object) null);
+        assertThrows(TemplateParsingException.class, () ->
+            assertTemplate(buildFile(""), buildFile("@arg0.toString()@"), (Object) null));
     }
 
-    @Test(expected = TemplateParsingException.class)
+    @Test
     public void testExprNullArray() throws IOException, TemplateLexingException, TemplateParsingException
     {
-        assertTemplate(buildFile(""), buildFile("@arg0[0]@"), (Object) null);
+        assertThrows(TemplateParsingException.class, () ->
+            assertTemplate(buildFile(""), buildFile("@arg0[0]@"), (Object) null));
     }
 
-    @Test(expected = TemplateParsingException.class)
+    @Test
     public void testNullConst() throws IOException, TemplateLexingException, TemplateParsingException
     {
-        assertTemplate(buildFile(""), buildFile("@null.toString()@"));
+        assertThrows(TemplateParsingException.class, () ->
+            assertTemplate(buildFile(""), buildFile("@null.toString()@")));
     }
 
-    @Test(expected = TemplateLexingException.class)
+    @Test
     public void testUnbalancedAt() throws IOException, TemplateLexingException, TemplateParsingException
     {
-        assertTemplate(buildFile(""), buildFile("A@B"));
+        assertThrows(TemplateLexingException.class, () ->
+            assertTemplate(buildFile(""), buildFile("A@B")));
     }
 
     @Test
@@ -584,28 +597,32 @@ public class TemplatTest
         assertTemplate(buildFile("true"), buildFile("@java.lang.Boolean.parseBoolean(java.lang.Boolean.toString(true))@"));
     }
 
-    @Test(expected = TemplateParsingException.class)
+    @Test
     public void testSimpleSyntaxError() throws IOException, TemplateLexingException, TemplateParsingException
     {
-        assertTemplate(buildFile(""), buildFile("@x@"));
+        assertThrows(TemplateParsingException.class, () ->
+            assertTemplate(buildFile(""), buildFile("@x@")));
     }
 
-    @Test(expected = TemplateParsingException.class)
+    @Test
     public void testSimpleSyntaxError2() throws IOException, TemplateLexingException, TemplateParsingException
     {
-        assertTemplate(buildFile(""), buildFile("@x y z@"));
+        assertThrows(TemplateParsingException.class, () ->
+            assertTemplate(buildFile(""), buildFile("@x y z@")));
     }
 
-    @Test(expected = TemplateParsingException.class)
+    @Test
     public void testGetClassNotSupported() throws IOException, TemplateLexingException, TemplateParsingException
     {
-        assertTemplate(buildFile(""), buildFile("@arg0.getClass()@"), new X());
+        assertThrows(TemplateParsingException.class, () ->
+            assertTemplate(buildFile(""), buildFile("@arg0.getClass()@"), new X()));
     }
 
-    @Test(expected = TemplateParsingException.class)
+    @Test
     public void testClassLiteralNotSupported() throws IOException, TemplateLexingException, TemplateParsingException
     {
-        assertTemplate(buildFile("java.lang.String"), buildFile("@java.lang.String.class.getName()@"));
+        assertThrows(TemplateParsingException.class, () ->
+            assertTemplate(buildFile("java.lang.String"), buildFile("@java.lang.String.class.getName()@")));
     }
 
     @Test
@@ -687,17 +704,18 @@ public class TemplatTest
         assertTemplate(buildFile("99"), buildFile("@((((((((((((((((((((99))))))))))))))))))))@"));
     }
 
-    @Ignore("Arabic number doesn't work.")
+    @Disabled("Arabic number doesn't work.")
     @Test
     public void testArabicDigit() throws IOException, TemplateLexingException, TemplateParsingException
     {
         assertTemplate(buildFile("2"), buildFile("@\u0662@"));
     }
 
-    @Test(expected = TemplateParsingException.class)
+    @Test
     public void testNullArg() throws IOException, TemplateLexingException, TemplateParsingException
     {
-        assertTemplate(buildFile(""), buildFile("@java.lang.System.getProperty(null)@"));
+        assertThrows(TemplateParsingException.class, () ->
+            assertTemplate(buildFile(""), buildFile("@java.lang.System.getProperty(null)@")));
     }
 
     public static class Overload
@@ -732,7 +750,7 @@ public class TemplatTest
         }
     }
 
-    @Ignore("It is undefined which overloaded method will be called.")
+    @Disabled("It is undefined which overloaded method will be called.")
     @Test
     public void testOverloadA() throws IOException, TemplateLexingException, TemplateParsingException
     {
@@ -843,10 +861,11 @@ public class TemplatTest
             buildFile("@arg0@@arg1@@arg2@"), 3, xyz, xyz, xyz);
     }
 
-    @Test(expected = TemplateParsingException.class)
+    @Test
     public void testYyerror() throws IOException, TemplateLexingException, TemplateParsingException
     {
-        assertTemplate(buildFile(""), buildFile("line1", "line2", "line3", "line4", "@x12345678.()@"));
+        assertThrows(TemplateParsingException.class, () ->
+            assertTemplate(buildFile(""), buildFile("line1", "line2", "line3", "line4", "@x12345678.()@")));
     }
 
     private static String buildFile(final String... lines) throws IOException

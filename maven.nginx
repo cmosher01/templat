@@ -1,9 +1,0 @@
-server {
-    listen * default_server;
-    index index.html;
-    location / {
-        root /root/build/asciidoc/html5;
-        try_files $uri $uri/ break;
-        autoindex on;
-    }
-}
