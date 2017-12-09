@@ -78,7 +78,7 @@ the resulting text. The `end loop` tag ends the loop block.
 Render the template within a Java program `PrintBooks.java`
 
 ```java
-import java.io.Exception;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import net.sourceforge.templat.Templat;
@@ -97,7 +97,7 @@ public class PrintBooks
         public String getTitle() { return this.title;}
     }
 
-    public static void main(String[] arg) throws Exception
+    public static void main(String... args) throws Exception
     {
         // This is our inventory of books:
         List<Book> books = new ArrayList<>();
@@ -126,8 +126,11 @@ Compiling and running the program produces the following output:
 ```
 $ java -cp .;templat.jar PrintBooks
 We have the following books:
+
     The Jungle Book by Rudyard Kipling.
+
     Frankenstein by Mary Shelley.
+
     The Picture of Dorian Gray by Oscar Wilde.
 ```
 
@@ -137,18 +140,17 @@ We have the following books:
 
 #### Template File Syntax
 
-template
 ```
    @ template template_name( parameter1, parameter2, ... ) @
 
    @ if ( boolean_expression ) @
-           if_body
+         if_body
 [  @ else @
-           else_body  ]
+         else_body  ]
    @ end if @
 
    @ loop variable : count_expression @
-           loop_body
+         loop_body
    @ end loop @
 
    @ include template_path( argument1, argument2, ... ) @
@@ -175,7 +177,7 @@ tat.render(result, argument1, argument2, ... );
 
 ```
    @ template template_name( parameter1, parameter2, ... ) @
-           template_body
+         template_body
 ```
 The `template` tag defines the file as a template to be parsed by the _`Templat`_ class.
 It must be at the start of every template file. `template_name` is the name of this
@@ -186,9 +188,9 @@ is the `template_body` (the rest of the file), which may contain other tags.
 
 ```
    @ if ( boolean_expression ) @
-           if_body
+         if_body
 [  @ else @
-           else_body  ]
+         else_body  ]
    @ end if @
    ```
 The `if` and `end if` tags, and optional `else` tag, define a conditional expansion.
@@ -199,14 +201,14 @@ template tags and/or plain text areas.
 
 ```
    @ loop variable : count_expression @
-           loop_body
+         loop_body
    @ end loop @
 ```
 The `loop` and `end loop` tags define a repeated expansion. The `count_expression`
 is evaluated as a Java expression that returns an _integer_, and the `loop_body` is
 (parsed and) expanded _that many times_ to the output. If the count is less than or
 equal to zero, then the `loop_body` will not be expanded. Within the `loop_body`,
-the variable may be referenced within any expression in any tag. The variable will
+the `variable` may be referenced within any expression in any tag. The `variable` will
 be a `java.lang.Integer`. It will hold the value _zero_ on the first iteration of the
 loop, _one_ on the next iteration, etc., up to _count minus 1_ on the final iteration.
 
