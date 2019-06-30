@@ -1,10 +1,11 @@
 # TemplAT
 
-_TemplAT_ is a text-file template engine, used from Java.
+Copyright © 2005, 2006, 2011, 2012, 2015, Christopher Alan Mosher, Shelton, Connecticut, USA, <cmosher01@gmail.com>.
 
-This software is distributed under the
-[GPLv3](http://www.gnu.org/licenses/gpl-3.0-standalone.html)
-license.
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CVSSQ2BWDCKQ2)
+[![License](https://img.shields.io/github/license/cmosher01/templat.svg)](https://www.gnu.org/licenses/gpl.html)
+
+_TemplAT_ is a text-file template engine, used from Java.
 
 TemplAT is a general-purpose text-file **template engine**, designed to be
 used as an API from **Java** programs. It is small and simple,
@@ -44,13 +45,12 @@ For `gradle` builds:
 
 ```groovy
 repositories {
-    maven {
-        url 'http://mosher.mine.nu/nexus/repository/maven-public/'
-    }
+    mavenCentral()
+    jcenter()
 }
 
 dependencies {
-    compile group: 'net.sourceforge.templat', name: 'templat', version: 'latest.integration'
+    implementation group: 'net.sourceforge.templat', name: 'templat', version: 'latest.integration'
 }
 ```
 
