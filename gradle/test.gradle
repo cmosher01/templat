@@ -1,0 +1,18 @@
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+        showStandardStreams = true
+    }
+
+    /*
+    During tests, make sure nobody unexpectedly uses the system properties and
+    instantiates the XML classes internal to rt.jar (com.sun.org.apache...)
+     */
+    systemProperties = [
+        'jaxp.debug': '1',
+        'javax.xml.parsers.SAXParserFactory': 'nu.mine.mosher.xml.SaxParserFactoryStub',
+        'javax.xml.transform.TransformerFactory': 'nu.mine.mosher.xml.TransformerFactoryStub',
+        'javax.xml.parsers.DocumentBuilderFactory': 'nu.mine.mosher.xml.DocumentBuilderFactoryStub'
+    ]
+}

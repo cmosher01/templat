@@ -4,40 +4,35 @@
 package net.sourceforge.templat.exception;
 
 
-
 /**
  * Represents an exception during parsing.
+ *
  * @author Chris Mosher
  */
-public class TemplateParsingException extends Exception
-{
-    public TemplateParsingException()
-    {
+public class TemplateParsingException extends Exception {
+    public TemplateParsingException() {
         /* nothing needed */
     }
 
     /**
      * @param message error text
-     * @param cause wrapped exception
+     * @param cause   wrapped exception
      */
-    public TemplateParsingException(String message, Throwable cause)
-    {
+    public TemplateParsingException(String message, Throwable cause) {
         super(message, cause);
     }
 
     /**
      * @param message error text
      */
-    public TemplateParsingException(String message)
-    {
+    public TemplateParsingException(String message) {
         super(message);
     }
 
     /**
      * @param cause wrapped exception
      */
-    public TemplateParsingException(Throwable cause)
-    {
+    public TemplateParsingException(Throwable cause) {
         super(cause);
     }
 }

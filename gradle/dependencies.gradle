@@ -1,0 +1,9 @@
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: 'latest.release'
+    testRuntime group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: 'latest.release'
+}

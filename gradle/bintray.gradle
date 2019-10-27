@@ -1,0 +1,40 @@
+// generate bintray.json file (for travis deployment)
+
+import groovy.json.JsonOutput
+
+def githubUser = 'cmosher01'
+
+def bintrayConfigFile = file "${project.buildDir}/bintray.json"
+def groupPath = "${project.group}".replace '.', '/'
+def artPath = "${groupPath}/${project.name}/${project.version}"
+
+task generateBintrayConfigFile {
+    doLast {
+        def bintray = [
+            package: [
+                name: project.name,
+                repo: 'maven',
+                subject: githubUser,
+                vcs_url: "https://github.com/${githubUser}/${project.name}",
+                licenses: ['GPL-3.0']
+            ],
+            version: [name: project.version],
+            files: [
+                [
+                    includePattern: "${project.buildDir}/libs/(.*)",
+                    uploadPattern: "${artPath}/\$1"
+                ], [
+                    includePattern: "${project.buildDir}/publications/maven/pom-default.xml",
+                    uploadPattern: "${artPath}/${project.name}-${project.version}.pom"
+                ]
+            ],
+            publish: true
+        ]
+        def json = JsonOutput.toJson bintray
+        bintrayConfigFile.write json
+    }
+}
+generateBintrayConfigFile.outputs.file bintrayConfigFile
+
+tasks.assemble.dependsOn tasks.generateBintrayConfigFile
+tasks.clean.dependsOn tasks.cleanGenerateBintrayConfigFile

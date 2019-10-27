@@ -1,13 +1,11 @@
 ---
-dist: xenial
 language: java
-before_deploy:
-  - ./gradlew sourcesJar generatePomFileForMavenPublication
+jdk: openjdk8
 deploy:
-  provider: bintray
-  file: bintray.json
-  user: $BINTRAY_USERNAME
-  key: $BINTRAY_API_KEY
-  skip_cleanup: true
-  on:
-    tags: true
+    provider: bintray
+    file: build/bintray.json
+    user: $BINTRAY_USERNAME
+    key: $BINTRAY_API_KEY
+    skip_cleanup: true
+    on:
+        tags: true

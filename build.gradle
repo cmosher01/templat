@@ -1,57 +1,12 @@
-plugins {
-    id 'maven-publish'
-    id 'ca.coglinc.javacc' version '2.4.0'
+def inc(module) {
+    apply from: "${rootProject.projectDir}/gradle/${module}.gradle"
 }
 
-repositories {
-    mavenCentral()
-    jcenter()
-}
-
-apply plugin: 'idea'
-
-idea {
-    module {
-        generatedSourceDirs += file("$buildDir/generated/javacc")
-        excludeDirs -= file(buildDir)
-    }
-}
-
-apply plugin: 'java'
-
-dependencies {
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: 'latest.release'
-    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: 'latest.release'
-}
-
-sourceSets {
-    main {
-        java.srcDir file("$buildDir/generated/javacc")
-    }
-}
-
-test {
-    useJUnitPlatform()
-    testLogging {
-        events "passed", "skipped", "failed"
-        showStandardStreams = true
-    }
-}
-
-task sourcesJar(type: Jar) {
-    from sourceSets.main.allJava
-    archiveClassifier = 'sources'
-}
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            from components.java
-            artifact sourcesJar
-        }
-    }
-}
-
-group = 'net.sourceforge.templat'
-sourceCompatibility = 1.8
-version = '1.3.0'
+inc('version')
+inc('project')
+inc('javacc')
+inc('dependencies')
+inc('test')
+inc('srcjar')
+inc('maven')
+inc('bintray')

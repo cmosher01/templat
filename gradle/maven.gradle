@@ -1,0 +1,11 @@
+apply plugin: MavenPublishPlugin
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+tasks.assemble.dependsOn tasks.generatePomFileForMavenPublication
