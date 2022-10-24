@@ -1,7 +1,0 @@
-apply plugin: JavaLibraryPlugin
-
-group = 'net.sourceforge.templat'
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-}

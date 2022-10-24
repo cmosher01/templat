@@ -1,12 +1,91 @@
-def inc(module) {
-    apply from: "${projectDir}/gradle/${module}.gradle"
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id "ca.coglinc2.javacc" version "3.0.0"
 }
 
-inc('version')
-inc('project')
-inc('javacc')
-inc('dependencies')
-inc('test')
-inc('srcjar')
-inc('maven')
-inc('bintray')
+version = '1.4.0'
+
+group = 'net.sourceforge.templat'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation group: "org.junit.jupiter", name: "junit-jupiter", version: 'latest.release'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of 11
+    }
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+        showStandardStreams = true
+    }
+    /*
+    During tests, make sure nobody unexpectedly uses the system properties and
+    instantiates the XML classes internal to rt.jar (com.sun.org.apache...)
+     */
+    systemProperties = [
+        'jaxp.debug': '1',
+        'javax.xml.parsers.SAXParserFactory': 'nu.mine.mosher.xml.SaxParserFactoryStub',
+        'javax.xml.transform.TransformerFactory': 'nu.mine.mosher.xml.TransformerFactoryStub',
+        'javax.xml.parsers.DocumentBuilderFactory': 'nu.mine.mosher.xml.DocumentBuilderFactoryStub'
+    ]
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            pom {
+                name = 'templat'
+                description = 'Template engine Java library'
+                url = 'https://github.com/cmosher01/templat'
+                inceptionYear = '2018'
+                packaging = 'jar'
+                licenses {
+                    license {
+                        name = 'GNU General Public License v3.0'
+                        url = 'https://www.gnu.org/licenses/gpl-3.0.html'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'cmosher01'
+                        name = 'Christopher Alan Mosher'
+                        email = 'cmosher01@gmail.com'
+                        url = 'https://mosher.mine.nu'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/cmosher01/templat.git'
+                    developerConnection = 'scm:git:ssh://github.com/cmosher01/templat.git'
+                    url = 'http://github.com/cmosher01/templat'
+                }
+            }
+        }
+    }
+}
+
+assemble {
+    dependsOn tasks.generatePomFileForMavenPublication
+}
+
+publishing {
+    repositories {
+        maven {
+            url 'https://maven.pkg.github.com/cmosher01/templat'
+            credentials {
+                username = System.getenv('GITHUB_ACTOR') ?: 'restricted'
+                password = System.getenv('GITHUB_TOKEN') ?: 'restricted'
+            }
+        }
+    }
+}

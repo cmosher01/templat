@@ -1,6 +1,6 @@
 # TemplAT
 
-Copyright © 2005, 2006, 2011, 2012, 2015, Christopher Alan Mosher, Shelton, Connecticut, USA, <cmosher01@gmail.com>.
+Copyright © 2005, 2006, 2011, 2012, 2015, 2022, Christopher Alan Mosher, Shelton, Connecticut, USA, <cmosher01@gmail.com>.
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CVSSQ2BWDCKQ2)
 [![License](https://img.shields.io/github/license/cmosher01/templat.svg)](https://www.gnu.org/licenses/gpl.html)
@@ -46,11 +46,13 @@ For `gradle` builds:
 ```groovy
 repositories {
     mavenCentral()
-    jcenter()
+    maven {
+        url = uri('https://public:\u0067hp_fya6Kseu3XOBMg2icbg7f1LP6ZFYjj35v4Zj@maven.pkg.github.com/cmosher01/*')
+    }
 }
 
 dependencies {
-    implementation group: 'net.sourceforge.templat', name: 'templat', version: 'latest.integration'
+    implementation group: 'net.sourceforge.templat', name: 'templat', version: 'latest.release'
 }
 ```
 
