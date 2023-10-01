@@ -4,7 +4,7 @@ plugins {
     id "ca.coglinc2.javacc" version "3.0.0"
 }
 
-version = '1.4.0'
+version = '1.4.1'
 
 group = 'net.sourceforge.templat'
 
@@ -18,7 +18,7 @@ dependencies {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of 11
+        languageVersion = JavaLanguageVersion.of 17
     }
 }
 
