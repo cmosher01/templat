@@ -25,8 +25,8 @@ class MethodCall implements Selector
     private final ArrayList<Object> rArg;
 
     /**
-     * @param sNameMethod
-     * @param rArg
+     * @param sNameMethod name of method
+     * @param rArg argument data-types
      */
     public MethodCall(final String sNameMethod, final ArrayList<Object> rArg)
     {
@@ -66,7 +66,7 @@ class MethodCall implements Selector
             {
                 return Integer.valueOf(Array.getLength(var));
             }
-            else if (var instanceof List)
+            else
             {
                 return Integer.valueOf(((List<?>) var).size());
             }
@@ -114,7 +114,7 @@ class MethodCall implements Selector
             final String nameMethod = method.getName();
             if (!mapMethod.containsKey(nameMethod))
             {
-                mapMethod.put(nameMethod, new HashSet<Method>());
+                mapMethod.put(nameMethod, new HashSet<>());
             }
             mapMethod.get(nameMethod).add(method);
         }
@@ -147,7 +147,7 @@ class MethodCall implements Selector
         return true;
     }
 
-    private static Map<Class<?>, Class<?>> mapPrimitiveToWrapper = new HashMap<>();
+    private static final Map<Class<?>, Class<?>> mapPrimitiveToWrapper = new HashMap<>();
     static
     {
         MethodCall.mapPrimitiveToWrapper.put(Integer.TYPE, Integer.class);
